@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Teaching Moments - Pair to Peer AI Workflows</title>
+    
+    <!-- OpenGraph Meta Tags -->
+    <meta property="og:title" content="AI Teaching Moments - Capture and Share Team Learning">
+    <meta property="og:description" content="Interactive framework for documenting AI learning experiences. Transform individual successes and failures into reusable team knowledge with CARE framework scoring.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://andreagriffiths11.github.io/pair-to-peer-ai-workflows/teaching-moments.html">
+    <meta property="og:site_name" content="Pair to Peer AI Workflows">
+    <meta name="description" content="Document what worked, what didn't, and why in your AI implementations. Build fluency over dependency with structured learning capture.">
+    <meta name="keywords" content="AI learning, knowledge sharing, team fluency, AI documentation, developer education, CARE framework">
+    <meta name="author" content="Andrea Griffiths">
+    
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline';">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <meta name="referrer" content="same-origin">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" integrity="sha384-YXIh2AJoYu6LZ5p4c6I8MR8WGNvhDGnCbGqOgGRQrY4a0C4A3+JYz+L3lHEKQx2n" crossorigin="anonymous">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-hover: #1d4ed8;
+            --text-primary: #000000;
+            --text-secondary: #374151;
+            --text-muted: #6b7280;
+            --surface: #ffffff;
+            --surface-elevated: #f9fafb;
+            --border-color: #d1d5db;
+            --border-light: #f3f4f6;
+            --success-color: #059669;
+            --warning-color: #d97706;
+            --danger-color: #dc2626;
+            --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--surface-elevated);
+            min-height: 100vh;
+            padding: 1rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--surface);
+            border: 2px solid var(--border-color);
+            box-shadow: var(--shadow);
+        }
+
+        nav {
+            background: var(--surface);
+            padding: 1rem 1.5rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 600;
+            padding: 0.5rem 0;
+            border-bottom: 3px solid transparent;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+
+        header {
+            background: var(--surface);
+            padding: 2rem 1.5rem;
+            border-bottom: 2px solid var(--border-color);
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        header p {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .main-container {
+            padding: 2rem 1.5rem;
+        }
+
+        .template-choice {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .template-card {
+            border: 2px solid var(--border-color);
+            padding: 1.5rem;
+            background: var(--surface);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .template-card:hover {
+            border-color: var(--primary-color);
+            background: var(--surface-elevated);
+        }
+
+        .template-card.selected {
+            border-color: var(--primary-color);
+            background: #eff6ff;
+        }
+
+        .template-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .template-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .template-duration {
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        .form-section {
+            display: none;
+            border: 2px solid var(--border-color);
+            background: var(--surface);
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-section.active {
+            display: block;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-input, .form-textarea, .form-select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--border-color);
+            background: var(--surface);
+            color: var(--text-primary);
+            font-family: inherit;
+            transition: border-color 0.2s ease;
+        }
+
+        .form-input:focus, .form-textarea:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .rating-group {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .rating-option {
+            text-align: center;
+            padding: 0.5rem;
+            border: 2px solid var(--border-color);
+            background: var(--surface);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 600;
+        }
+
+        .rating-option:hover {
+            border-color: var(--primary-color);
+            background: var(--surface-elevated);
+        }
+
+        .rating-option.selected {
+            border-color: var(--primary-color);
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .checkbox {
+            width: 18px;
+            height: 18px;
+            border: 2px solid var(--border-color);
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        .checkbox.checked {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .checkbox.checked::after {
+            content: '✓';
+            position: absolute;
+            top: -2px;
+            left: 2px;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: 2px solid var(--primary-color);
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+        }
+
+        .btn-secondary {
+            background: var(--surface);
+            color: var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .progress-indicator {
+            background: var(--surface-elevated);
+            border: 2px solid var(--border-color);
+            padding: 1rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .progress-text {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-bar {
+            background: var(--border-light);
+            height: 6px;
+            margin: 0.5rem 0;
+        }
+
+        .progress-fill {
+            background: var(--primary-color);
+            height: 100%;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        .output-section {
+            background: var(--surface-elevated);
+            border: 2px solid var(--border-color);
+            padding: 2rem;
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .output-section.active {
+            display: block;
+        }
+
+        .markdown-output {
+            background: var(--surface);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.875rem;
+            white-space: pre-wrap;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 0.5rem;
+            }
+            
+            header {
+                padding: 1.5rem 1rem;
+            }
+            
+            .main-container {
+                padding: 1rem;
+            }
+            
+            nav {
+                padding: 1rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+            
+            .template-choice {
+                grid-template-columns: 1fr;
+            }
+            
+            .rating-group {
+                grid-template-columns: repeat(5, 1fr);
+                gap: 0.25rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <ul>
+                <li><a href="slides.html">🎤 Presentation</a></li>
+                <li><a href="presentation.pdf" target="_blank">📄 PDF</a></li>
+                <li><a href="index.html">Decision Tree</a></li>
+                <li><a href="team-assessment.html">Team Assessment</a></li>
+                <li><a href="teaching-moments.html" class="active">Teaching Moments</a></li>
+                <li><a href="developer-experience.html">Developer Experience</a></li>
+            </ul>
+        </nav>
+
+        <header>
+            <h1>AI Teaching Moments</h1>
+            <p>Capture and share AI learning experiences with your team</p>
+        </header>
+
+        <div class="main-container">
+            <!-- Template Choice -->
+            <div id="templateChoice">
+                <div class="template-choice">
+                    <div class="template-card" onclick="selectTemplate('detailed')">
+                        <div class="template-title">Detailed Learning Entry</div>
+                        <div class="template-description">
+                            Comprehensive documentation with CARE framework scoring, root cause analysis, 
+                            and reusable assets. Perfect for significant learning moments.
+                        </div>
+                        <div class="template-duration">15-20 minutes</div>
+                    </div>
+                    <div class="template-card" onclick="selectTemplate('quick')">
+                        <div class="template-title">Quick Capture</div>
+                        <div class="template-description">
+                            Rapid knowledge capture for immediate insights. Just the essentials: 
+                            what worked, what didn't, and key takeaways.
+                        </div>
+                        <div class="template-duration">5 minutes</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Indicator -->
+            <div class="progress-indicator hidden" id="progressIndicator">
+                <div class="progress-text">Progress: <span id="progressText">0%</span></div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+
+            <!-- Detailed Template Form -->
+            <div class="form-section" id="detailedForm">
+                <div class="section-title">AI Learning Entry</div>
+                
+                <!-- Context Section -->
+                <div class="form-group">
+                    <label class="form-label">Brief Description</label>
+                    <input type="text" class="form-input" id="description" placeholder="e.g., Implementing user authentication with AI assistance">
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                    <div class="form-group">
+                        <label class="form-label">Date</label>
+                        <input type="date" class="form-input" id="date">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Team Member</label>
+                        <input type="text" class="form-input" id="teamMember" placeholder="Your name">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">AI Tool Used</label>
+                        <input type="text" class="form-input" id="aiTool" placeholder="e.g., Claude, ChatGPT, Copilot">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Task Type</label>
+                        <select class="form-select" id="taskType">
+                            <option value="">Select type</option>
+                            <option value="Feature">Feature Development</option>
+                            <option value="Bug Fix">Bug Fix</option>
+                            <option value="Refactor">Refactoring</option>
+                            <option value="Learning">Learning/Research</option>
+                            <option value="Architecture">Architecture</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Complexity Level</label>
+                        <select class="form-select" id="complexity">
+                            <option value="">Select complexity</option>
+                            <option value="Simple">Simple</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Complex">Complex</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- What We Tried -->
+                <div class="form-group">
+                    <label class="form-label">Objective</label>
+                    <textarea class="form-textarea" id="objective" placeholder="What you wanted to achieve..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Approach & Prompt Strategy</label>
+                    <textarea class="form-textarea" id="approach" placeholder="Describe your prompt strategy, AI tool configuration, and approach..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Result & Outcome</label>
+                    <textarea class="form-textarea" id="result" placeholder="What happened - success, partial success, or failure..."></textarea>
+                </div>
+
+                <!-- CARE Framework Scoring -->
+                <div class="form-group">
+                    <label class="form-label">CARE Framework Quality Score</label>
+                    
+                    <div style="margin: 1rem 0;">
+                        <strong>Completeness (1-5):</strong>
+                        <div class="rating-group" data-rating="completeness">
+                            <div class="rating-option" onclick="setRating('completeness', 1)">1</div>
+                            <div class="rating-option" onclick="setRating('completeness', 2)">2</div>
+                            <div class="rating-option" onclick="setRating('completeness', 3)">3</div>
+                            <div class="rating-option" onclick="setRating('completeness', 4)">4</div>
+                            <div class="rating-option" onclick="setRating('completeness', 5)">5</div>
+                        </div>
+                    </div>
+
+                    <div style="margin: 1rem 0;">
+                        <strong>Accuracy (1-5):</strong>
+                        <div class="rating-group" data-rating="accuracy">
+                            <div class="rating-option" onclick="setRating('accuracy', 1)">1</div>
+                            <div class="rating-option" onclick="setRating('accuracy', 2)">2</div>
+                            <div class="rating-option" onclick="setRating('accuracy', 3)">3</div>
+                            <div class="rating-option" onclick="setRating('accuracy', 4)">4</div>
+                            <div class="rating-option" onclick="setRating('accuracy', 5)">5</div>
+                        </div>
+                    </div>
+
+                    <div style="margin: 1rem 0;">
+                        <strong>Relevance (1-5):</strong>
+                        <div class="rating-group" data-rating="relevance">
+                            <div class="rating-option" onclick="setRating('relevance', 1)">1</div>
+                            <div class="rating-option" onclick="setRating('relevance', 2)">2</div>
+                            <div class="rating-option" onclick="setRating('relevance', 3)">3</div>
+                            <div class="rating-option" onclick="setRating('relevance', 4)">4</div>
+                            <div class="rating-option" onclick="setRating('relevance', 5)">5</div>
+                        </div>
+                    </div>
+
+                    <div style="margin: 1rem 0;">
+                        <strong>Efficiency (1-5):</strong>
+                        <div class="rating-group" data-rating="efficiency">
+                            <div class="rating-option" onclick="setRating('efficiency', 1)">1</div>
+                            <div class="rating-option" onclick="setRating('efficiency', 2)">2</div>
+                            <div class="rating-option" onclick="setRating('efficiency', 3)">3</div>
+                            <div class="rating-option" onclick="setRating('efficiency', 4)">4</div>
+                            <div class="rating-option" onclick="setRating('efficiency', 5)">5</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- What Worked Well -->
+                <div class="form-group">
+                    <label class="form-label">What Worked Well</label>
+                    <textarea class="form-textarea" id="whatWorked" placeholder="Effective prompting patterns, context strategies, tool integration, quality outcomes..."></textarea>
+                </div>
+
+                <!-- What Didn't Work -->
+                <div class="form-group">
+                    <label class="form-label">What Didn't Work</label>
+                    <textarea class="form-textarea" id="whatDidnt" placeholder="Ineffective approaches, context issues, quality problems, workflow friction..."></textarea>
+                </div>
+
+                <!-- Lessons Learned -->
+                <div class="form-group">
+                    <label class="form-label">Lessons Learned</label>
+                    <textarea class="form-textarea" id="lessons" placeholder="Key insights for future similar tasks and broader team knowledge..."></textarea>
+                </div>
+
+                <!-- Knowledge Sharing Actions -->
+                <div class="form-group">
+                    <label class="form-label">Knowledge Sharing Actions</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox" onclick="toggleCheckbox('shared-chat')"></div>
+                        <label>Shared in team chat/Slack with summary</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <div class="checkbox" onclick="toggleCheckbox('shared-wiki')"></div>
+                        <label>Added to team wiki/knowledge base</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <div class="checkbox" onclick="toggleCheckbox('shared-meeting')"></div>
+                        <label>Presented in team standup/meeting</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <div class="checkbox" onclick="toggleCheckbox('shared-guidelines')"></div>
+                        <label>Updated team AI guidelines document</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Template Form -->
+            <div class="form-section" id="quickForm">
+                <div class="section-title">Quick AI Learning Capture</div>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+                    <div class="form-group">
+                        <label class="form-label">Date</label>
+                        <input type="date" class="form-input" id="quickDate">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">AI Tool</label>
+                        <input type="text" class="form-input" id="quickTool" placeholder="e.g., Claude">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Task Type</label>
+                        <input type="text" class="form-input" id="quickTask" placeholder="e.g., Bug fix">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">One-line Description</label>
+                    <input type="text" class="form-input" id="quickDescription" placeholder="Brief description of what you learned...">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">💡 What Worked</label>
+                    <textarea class="form-textarea" id="quickWorked" placeholder="Key success factors and effective prompt patterns..." style="min-height: 80px;"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">❌ What Didn't Work</label>
+                    <textarea class="form-textarea" id="quickDidnt" placeholder="Main issues and anti-patterns to avoid..." style="min-height: 80px;"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">🔄 For Next Time</label>
+                    <textarea class="form-textarea" id="quickNext" placeholder="One key improvement to make..." style="min-height: 60px;"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">📤 Shared with Team</label>
+                    <select class="form-select" id="quickShared">
+                        <option value="No">No, not yet</option>
+                        <option value="Yes - Slack">Yes, in Slack</option>
+                        <option value="Yes - Meeting">Yes, in team meeting</option>
+                        <option value="Yes - Wiki">Yes, added to wiki</option>
+                        <option value="Yes - Other">Yes, other method</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button class="btn btn-secondary" onclick="goBack()" id="backBtn">← Choose Different Template</button>
+                <button class="btn btn-primary" onclick="generateOutput()">Generate Learning Document</button>
+                <button class="btn btn-secondary" onclick="saveProgress()">💾 Save Progress</button>
+                <button class="btn btn-secondary" onclick="clearForm()">🔄 Start Over</button>
+            </div>
+
+            <!-- Output Section -->
+            <div class="output-section" id="outputSection">
+                <div class="section-title">Generated Learning Document</div>
+                <p style="margin-bottom: 1rem; color: var(--text-secondary);">
+                    Copy and paste this markdown into your team's knowledge base, wiki, or documentation system.
+                </p>
+                <div class="markdown-output" id="markdownOutput"></div>
+                <div class="action-buttons">
+                    <button class="btn btn-primary" onclick="copyToClipboard()">📋 Copy to Clipboard</button>
+                    <button class="btn btn-secondary" onclick="downloadMarkdown()">📄 Download as .md</button>
+                    <button class="btn btn-secondary" onclick="createNew()">✨ Create New Entry</button>
+                </div>
+            </div>
+        </div>
+
+        <footer style="text-align: center; padding: 2rem 1rem; background: rgba(0,0,0,0.05); margin-top: 2rem;">
+            <p style="margin: 0 0 1rem 0; font-size: 0.9rem; color: var(--text-muted);">
+                Made with ❤️ for educational purposes by 
+                <a href="https://twitter.com/alacolombiadev" target="_blank" rel="noopener noreferrer" 
+                   style="color: var(--primary-color); text-decoration: none; font-weight: 500;">
+                    alacolombiadev
+                </a>
+            </p>
+            <button onclick="clearAllData()" style="
+                background: var(--text-muted); 
+                color: white; 
+                border: none; 
+                padding: 0.5rem 1rem; 
+                font-size: 0.8rem; 
+                cursor: pointer; 
+                border-radius: 4px;
+                font-family: inherit;
+            ">Clear All Data</button>
+        </footer>
+    </div>
+
+    <script>
+        let currentTemplate = null;
+        let ratings = {
+            completeness: 0,
+            accuracy: 0,
+            relevance: 0,
+            efficiency: 0
+        };
+        let checkboxes = {};
+
+        function selectTemplate(type) {
+            currentTemplate = type;
+            
+            // Hide template choice
+            document.getElementById('templateChoice').classList.add('hidden');
+            document.getElementById('progressIndicator').classList.remove('hidden');
+            
+            // Show appropriate form
+            if (type === 'detailed') {
+                document.getElementById('detailedForm').classList.add('active');
+                document.getElementById('date').value = new Date().toISOString().split('T')[0];
+            } else {
+                document.getElementById('quickForm').classList.add('active');
+                document.getElementById('quickDate').value = new Date().toISOString().split('T')[0];
+            }
+            
+            // Initialize checkboxes
+            checkboxes = {};
+            
+            updateProgress();
+        }
+
+        function setRating(category, value) {
+            ratings[category] = value;
+            
+            // Update UI
+            const ratingGroup = document.querySelector(`[data-rating="${category}"]`);
+            const options = ratingGroup.querySelectorAll('.rating-option');
+            options.forEach((option, index) => {
+                option.classList.remove('selected');
+                if (index + 1 <= value) {
+                    option.classList.add('selected');
+                }
+            });
+            
+            updateProgress();
+        }
+
+        function toggleCheckbox(id) {
+            // Initialize if not set
+            if (checkboxes[id] === undefined) {
+                checkboxes[id] = false;
+            }
+            
+            // Toggle state
+            checkboxes[id] = !checkboxes[id];
+            
+            // Update UI
+            const checkbox = event.currentTarget;
+            if (checkbox && checkbox.classList) {
+                checkbox.classList.toggle('checked');
+            }
+            
+            updateProgress();
+        }
+
+        function updateProgress() {
+            if (!currentTemplate) return;
+            
+            let completed = 0;
+            let total = 0;
+            
+            if (currentTemplate === 'detailed') {
+                const fields = ['description', 'teamMember', 'aiTool', 'taskType', 'objective', 'approach', 'result', 'whatWorked', 'whatDidnt', 'lessons'];
+                fields.forEach(field => {
+                    total++;
+                    if (document.getElementById(field).value.trim()) {
+                        completed++;
+                    }
+                });
+                
+                // Add ratings
+                Object.values(ratings).forEach(rating => {
+                    total++;
+                    if (rating > 0) completed++;
+                });
+            } else {
+                const fields = ['quickDescription', 'quickTool', 'quickTask', 'quickWorked', 'quickDidnt', 'quickNext'];
+                fields.forEach(field => {
+                    total++;
+                    if (document.getElementById(field).value.trim()) {
+                        completed++;
+                    }
+                });
+            }
+            
+            const percentage = Math.round((completed / total) * 100);
+            document.getElementById('progressText').textContent = `${percentage}%`;
+            document.getElementById('progressFill').style.width = `${percentage}%`;
+        }
+
+        function generateOutput() {
+            let markdown = '';
+            const today = new Date().toISOString().split('T')[0];
+            
+            if (currentTemplate === 'detailed') {
+                const description = document.getElementById('description').value || '[Description]';
+                const date = document.getElementById('date').value || today;
+                const teamMember = document.getElementById('teamMember').value || '[Name]';
+                const aiTool = document.getElementById('aiTool').value || '[Tool]';
+                const taskType = document.getElementById('taskType').value || '[Type]';
+                const complexity = document.getElementById('complexity').value || '[Level]';
+                const objective = document.getElementById('objective').value || '[Objective]';
+                const approach = document.getElementById('approach').value || '[Approach description]';
+                const result = document.getElementById('result').value || '[Result description]';
+                const whatWorked = document.getElementById('whatWorked').value || '[What worked well]';
+                const whatDidnt = document.getElementById('whatDidnt').value || '[What didn\'t work]';
+                const lessons = document.getElementById('lessons').value || '[Lessons learned]';
+                
+                // Build sharing actions list
+                let sharingActions = '';
+                if (Object.keys(checkboxes).length > 0) {
+                    const labels = {
+                        'shared-chat': 'Shared in team chat/Slack with summary',
+                        'shared-wiki': 'Added to team wiki/knowledge base', 
+                        'shared-meeting': 'Presented in team standup/meeting',
+                        'shared-guidelines': 'Updated team AI guidelines document'
+                    };
+                    
+                    Object.entries(checkboxes).forEach(([key, checked]) => {
+                        sharingActions += `- [${checked ? 'x' : ' '}] ${labels[key] || key}\n`;
+                    });
+                } else {
+                    sharingActions = '- [ ] Not shared yet\n';
+                }
+                
+                markdown = `# AI Learning Entry: ${description}
+
+## Context
+**Date:** ${date}
+**Team Member:** ${teamMember}
+**AI Tool Used:** ${aiTool}
+**Task Type:** ${taskType}
+**Complexity Level:** ${complexity}
+
+## What We Tried
+**Objective:** ${objective}
+
+**Approach:**
+${approach}
+
+**Result:** ${result}
+
+**Quality Score (CARE Framework):**
+- Completeness: ${ratings.completeness || 0}/5
+- Accuracy: ${ratings.accuracy || 0}/5
+- Relevance: ${ratings.relevance || 0}/5
+- Efficiency: ${ratings.efficiency || 0}/5
+
+## What Worked Well
+${whatWorked}
+
+## What Didn't Work
+${whatDidnt}
+
+## Lessons Learned
+${lessons}
+
+## Knowledge Sharing Actions
+${sharingActions}
+---
+*Generated on ${today} using Pair to Peer AI Workflows Teaching Moments tool*`;
+            } else {
+                const quickDescription = document.getElementById('quickDescription').value || '[Description]';
+                const quickDate = document.getElementById('quickDate').value || today;
+                const quickTool = document.getElementById('quickTool').value || '[Tool]';
+                const quickTask = document.getElementById('quickTask').value || '[Task]';
+                const quickWorked = document.getElementById('quickWorked').value || '[What worked]';
+                const quickDidnt = document.getElementById('quickDidnt').value || '[What didn\'t work]';
+                const quickNext = document.getElementById('quickNext').value || '[Improvements]';
+                const quickShared = document.getElementById('quickShared').value || 'No';
+                
+                markdown = `## Quick AI Learning: ${quickDescription}
+**Date:** ${quickDate} | **Tool:** ${quickTool} | **Task:** ${quickTask}
+
+**💡 What Worked:**
+${quickWorked}
+
+**❌ What Didn't:**
+${quickDidnt}
+
+**🔄 For Next Time:**
+${quickNext}
+
+**📤 Shared with team:** ${quickShared}
+
+---
+*Generated on ${today} using Pair to Peer AI Workflows Teaching Moments tool*`;
+            }
+            
+            document.getElementById('markdownOutput').textContent = markdown;
+            document.getElementById('outputSection').classList.add('active');
+            
+            // Scroll to output
+            document.getElementById('outputSection').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function copyToClipboard() {
+            const markdown = document.getElementById('markdownOutput').textContent;
+            navigator.clipboard.writeText(markdown).then(() => {
+                alert('📋 Copied to clipboard!');
+            });
+        }
+
+        function downloadMarkdown() {
+            const markdown = document.getElementById('markdownOutput').textContent;
+            const blob = new Blob([markdown], { type: 'text/markdown' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `ai-learning-${new Date().toISOString().split('T')[0]}.md`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        function saveProgress() {
+            const data = {
+                currentTemplate,
+                ratings,
+                checkboxes,
+                timestamp: new Date().toISOString()
+            };
+            
+            if (currentTemplate === 'detailed') {
+                const fields = ['description', 'date', 'teamMember', 'aiTool', 'taskType', 'complexity', 'objective', 'approach', 'result', 'whatWorked', 'whatDidnt', 'lessons'];
+                fields.forEach(field => {
+                    data[field] = document.getElementById(field).value;
+                });
+            } else {
+                const fields = ['quickDescription', 'quickDate', 'quickTool', 'quickTask', 'quickWorked', 'quickDidnt', 'quickNext', 'quickShared'];
+                fields.forEach(field => {
+                    data[field] = document.getElementById(field).value;
+                });
+            }
+            
+            localStorage.setItem('teachingMomentsData', JSON.stringify(data));
+            alert('💾 Progress saved!');
+        }
+
+        function loadProgress() {
+            const saved = localStorage.getItem('teachingMomentsData');
+            if (saved) {
+                const data = JSON.parse(saved);
+                // Restore data logic here
+                console.log('Loaded saved data:', data);
+            }
+        }
+
+        function goBack() {
+            document.getElementById('templateChoice').classList.remove('hidden');
+            document.getElementById('progressIndicator').classList.add('hidden');
+            document.getElementById('detailedForm').classList.remove('active');
+            document.getElementById('quickForm').classList.remove('active');
+            document.getElementById('outputSection').classList.remove('active');
+            currentTemplate = null;
+        }
+
+        function clearForm() {
+            if (confirm('Clear all form data? This cannot be undone.')) {
+                location.reload();
+            }
+        }
+
+        function createNew() {
+            if (confirm('Create a new learning entry? Current data will be lost.')) {
+                location.reload();
+            }
+        }
+
+        // Auto-save progress
+        setInterval(() => {
+            if (currentTemplate) {
+                updateProgress();
+            }
+        }, 1000);
+
+        // Initialize
+        window.addEventListener('load', loadProgress);
+
+        // Clear all data function
+        function clearAllData() {
+            if (confirm('Are you sure you want to clear all stored data? This will remove any saved progress and cannot be undone.')) {
+                try {
+                    localStorage.clear();
+                    sessionStorage.clear();
+                    alert('All data has been cleared successfully.');
+                    // Reset to initial state
+                    location.reload();
+                } catch (error) {
+                    alert('Error clearing data: ' + error.message);
+                }
+            }
+        }
+    </script>
+</body>
+</html>

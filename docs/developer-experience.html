@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer Experience Health Check - Pair to Peer AI Workflows</title>
+    
+    <!-- OpenGraph Meta Tags -->
+    <meta property="og:title" content="Developer Experience Health Check - AI Workflow Satisfaction Survey">
+    <meta property="og:description" content="Monthly 25-question survey measuring AI tool satisfaction, learning velocity, and trust. Get real-time health indicators and red flag warnings for your team.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://andreagriffiths11.github.io/pair-to-peer-ai-workflows/developer-experience.html">
+    <meta property="og:site_name" content="Pair to Peer AI Workflows">
+    <meta name="description" content="Measure experience over output. Track developer confidence, AI fluency balance, and satisfaction to prevent burnout and skill atrophy.">
+    <meta name="keywords" content="developer experience, AI satisfaction survey, team health, developer productivity, AI dependency assessment">
+    <meta name="author" content="Andrea Griffiths">
+    
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline';">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <meta name="referrer" content="same-origin">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" integrity="sha384-YXIh2AJoYu6LZ5p4c6I8MR8WGNvhDGnCbGqOgGRQrY4a0C4A3+JYz+L3lHEKQx2n" crossorigin="anonymous">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-hover: #1d4ed8;
+            --text-primary: #000000;
+            --text-secondary: #374151;
+            --text-muted: #6b7280;
+            --surface: #ffffff;
+            --surface-elevated: #f9fafb;
+            --border-color: #d1d5db;
+            --border-light: #f3f4f6;
+            --success-color: #059669;
+            --warning-color: #d97706;
+            --danger-color: #dc2626;
+            --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--surface-elevated);
+            min-height: 100vh;
+            padding: 1rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--surface);
+            border: 2px solid var(--border-color);
+            box-shadow: var(--shadow);
+        }
+
+        nav {
+            background: var(--surface);
+            padding: 1rem 1.5rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 600;
+            padding: 0.5rem 0;
+            border-bottom: 3px solid transparent;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+
+        header {
+            background: var(--surface);
+            padding: 2rem 1.5rem;
+            border-bottom: 2px solid var(--border-color);
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        header p {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .main-container {
+            padding: 2rem 1.5rem;
+        }
+
+        .welcome-section {
+            background: var(--surface);
+            border: 2px solid var(--border-color);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .welcome-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .welcome-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .start-btn {
+            padding: 1rem 2rem;
+            background: var(--primary-color);
+            color: white;
+            border: 2px solid var(--primary-color);
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+        }
+
+        .start-btn:hover {
+            background: var(--primary-hover);
+        }
+
+        .progress-section {
+            background: var(--surface-elevated);
+            border: 2px solid var(--border-color);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            display: none;
+        }
+
+        .progress-section.active {
+            display: block;
+        }
+
+        .progress-header {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .progress-title {
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-bar {
+            background: var(--border-light);
+            height: 8px;
+            margin: 1rem 0;
+        }
+
+        .progress-fill {
+            background: var(--primary-color);
+            height: 100%;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        .category-scores {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .category-score {
+            text-align: center;
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            background: var(--surface);
+        }
+
+        .category-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .category-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .healthy { color: var(--success-color); }
+        .at-risk { color: var(--warning-color); }
+        .critical { color: var(--danger-color); }
+
+        .survey-section {
+            background: var(--surface);
+            border: 2px solid var(--border-color);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            display: none;
+        }
+
+        .survey-section.active {
+            display: block;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .question {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            border: 2px solid var(--border-color);
+            background: var(--surface-elevated);
+        }
+
+        .question-text {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            font-size: 1.025rem;
+        }
+
+        .rating-scale {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.5rem;
+        }
+
+        .rating-option {
+            text-align: center;
+            padding: 0.75rem 0.5rem;
+            border: 2px solid var(--border-color);
+            background: var(--surface);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .rating-option:hover {
+            border-color: var(--primary-color);
+            background: var(--surface-elevated);
+        }
+
+        .rating-option.selected {
+            border-color: var(--primary-color);
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .open-response {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            border: 2px solid var(--border-color);
+            background: var(--surface-elevated);
+        }
+
+        .response-label {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+            font-size: 1.025rem;
+        }
+
+        .response-textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--border-color);
+            background: var(--surface);
+            color: var(--text-primary);
+            font-family: inherit;
+            min-height: 100px;
+            resize: vertical;
+            transition: border-color 0.2s ease;
+        }
+
+        .response-textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .open-question {
+            margin-bottom: 2rem;
+        }
+
+        .open-question label {
+            display: block;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+            font-size: 1rem;
+        }
+
+        .open-question textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--border-color);
+            background: var(--surface);
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.9rem;
+            resize: vertical;
+            transition: border-color 0.2s ease;
+        }
+
+        .open-question textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: 2px solid var(--primary-color);
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+        }
+
+        .btn-secondary {
+            background: var(--surface);
+            color: var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .results-section {
+            background: var(--surface-elevated);
+            border: 2px solid var(--border-color);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            display: none;
+        }
+
+        .results-section.active {
+            display: block;
+        }
+
+        .health-status {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 2rem;
+            border: 2px solid var(--border-color);
+            background: var(--surface);
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .recommendations {
+            margin-top: 2rem;
+        }
+
+        .recommendation-item {
+            background: var(--surface);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .export-controls {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .red-flags {
+            background: #fef2f2;
+            border: 2px solid #fecaca;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .red-flags h3 {
+            color: var(--danger-color);
+            margin-bottom: 1rem;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 0.5rem;
+            }
+            
+            header {
+                padding: 1.5rem 1rem;
+            }
+            
+            .main-container {
+                padding: 1rem;
+            }
+            
+            nav {
+                padding: 1rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+            
+            .rating-scale {
+                gap: 0.25rem;
+            }
+            
+            .rating-option {
+                padding: 0.5rem 0.25rem;
+                font-size: 0.8rem;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+            }
+            
+            .category-scores {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <ul>
+                <li><a href="slides.html">🎤 Presentation</a></li>
+                <li><a href="presentation.pdf" target="_blank">📄 PDF</a></li>
+                <li><a href="index.html">Decision Tree</a></li>
+                <li><a href="team-assessment.html">Team Assessment</a></li>
+                <li><a href="teaching-moments.html">Teaching Moments</a></li>
+                <li><a href="developer-experience.html" class="active">Developer Experience</a></li>
+            </ul>
+        </nav>
+
+        <header>
+            <h1>Developer Experience Health Check</h1>
+            <p>Monthly AI workflow survey measuring satisfaction, learning, and quality confidence</p>
+        </header>
+
+        <div class="main-container">
+            <!-- Welcome Section -->
+            <div class="welcome-section" id="welcomeSection">
+                <div class="welcome-title">AI Workflow Health Assessment</div>
+                <div class="welcome-description">
+                    This survey measures the human side of AI adoption—confidence, learning velocity, 
+                    and satisfaction. Takes 8-10 minutes and provides actionable insights for team health.
+                </div>
+                <button class="start-btn" onclick="startSurvey()">Start Health Check</button>
+            </div>
+
+            <!-- Progress Section -->
+            <div class="progress-section" id="progressSection">
+                <div class="progress-header">
+                    <div class="progress-title">Survey Progress: <span id="progressText">0%</span></div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                </div>
+                <div class="category-scores">
+                    <div class="category-score">
+                        <div class="category-value" id="integrationScore">-</div>
+                        <div class="category-label">AI Integration</div>
+                    </div>
+                    <div class="category-score">
+                        <div class="category-value" id="skillScore">-</div>
+                        <div class="category-label">Skill Balance</div>
+                    </div>
+                    <div class="category-score">
+                        <div class="category-value" id="learningScore">-</div>
+                        <div class="category-label">Learning Velocity</div>
+                    </div>
+                    <div class="category-score">
+                        <div class="category-value" id="qualityScore">-</div>
+                        <div class="category-label">Quality Confidence</div>
+                    </div>
+                    <div class="category-score">
+                        <div class="category-value" id="teamScore">-</div>
+                        <div class="category-label">Team Process</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Survey Sections -->
+            <div class="survey-section active" id="section1">
+                <div class="section-title">AI Tool Integration & Satisfaction</div>
+                
+                <div class="question">
+                    <div class="question-text">1. I can easily integrate AI coding tools into my daily workflow</div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="setRating(1, 1)">1<br><small>Strongly Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(1, 2)">2<br><small>Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(1, 3)">3<br><small>Neutral</small></div>
+                        <div class="rating-option" onclick="setRating(1, 4)">4<br><small>Agree</small></div>
+                        <div class="rating-option" onclick="setRating(1, 5)">5<br><small>Strongly Agree</small></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">2. AI tools help me focus on more satisfying work</div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="setRating(2, 1)">1<br><small>Strongly Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(2, 2)">2<br><small>Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(2, 3)">3<br><small>Neutral</small></div>
+                        <div class="rating-option" onclick="setRating(2, 4)">4<br><small>Agree</small></div>
+                        <div class="rating-option" onclick="setRating(2, 5)">5<br><small>Strongly Agree</small></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">3. I trust the suggestions provided by AI coding assistants</div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="setRating(3, 1)">1<br><small>Strongly Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(3, 2)">2<br><small>Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(3, 3)">3<br><small>Neutral</small></div>
+                        <div class="rating-option" onclick="setRating(3, 4)">4<br><small>Agree</small></div>
+                        <div class="rating-option" onclick="setRating(3, 5)">5<br><small>Strongly Agree</small></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">4. AI tools reduce the mental effort required for repetitive tasks</div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="setRating(4, 1)">1<br><small>Strongly Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(4, 2)">2<br><small>Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(4, 3)">3<br><small>Neutral</small></div>
+                        <div class="rating-option" onclick="setRating(4, 4)">4<br><small>Agree</small></div>
+                        <div class="rating-option" onclick="setRating(4, 5)">5<br><small>Strongly Agree</small></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">5. I feel confident reviewing and modifying AI-generated code</div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="setRating(5, 1)">1<br><small>Strongly Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(5, 2)">2<br><small>Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(5, 3)">3<br><small>Neutral</small></div>
+                        <div class="rating-option" onclick="setRating(5, 4)">4<br><small>Agree</small></div>
+                        <div class="rating-option" onclick="setRating(5, 5)">5<br><small>Strongly Agree</small></div>
+                    </div>
+                </div>
+
+                <div class="navigation-buttons">
+                    <button class="btn btn-secondary" disabled>Previous</button>
+                    <button class="btn btn-primary" onclick="nextSection()">Next: Skill Balance →</button>
+                </div>
+            </div>
+
+            <div class="survey-section" id="section2">
+                <div class="section-title">AI Dependency vs. Skill Development Balance</div>
+                
+                <div class="question">
+                    <div class="question-text">6. I'm confident debugging code without AI assistance</div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="setRating(6, 1)">1<br><small>Strongly Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(6, 2)">2<br><small>Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(6, 3)">3<br><small>Neutral</small></div>
+                        <div class="rating-option" onclick="setRating(6, 4)">4<br><small>Agree</small></div>
+                        <div class="rating-option" onclick="setRating(6, 5)">5<br><small>Strongly Agree</small></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">7. I understand the reasoning behind AI-suggested solutions</div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="setRating(7, 1)">1<br><small>Strongly Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(7, 2)">2<br><small>Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(7, 3)">3<br><small>Neutral</small></div>
+                        <div class="rating-option" onclick="setRating(7, 4)">4<br><small>Agree</small></div>
+                        <div class="rating-option" onclick="setRating(7, 5)">5<br><small>Strongly Agree</small></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">8. I can explain AI-generated code to colleagues</div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="setRating(8, 1)">1<br><small>Strongly Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(8, 2)">2<br><small>Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(8, 3)">3<br><small>Neutral</small></div>
+                        <div class="rating-option" onclick="setRating(8, 4)">4<br><small>Agree</small></div>
+                        <div class="rating-option" onclick="setRating(8, 5)">5<br><small>Strongly Agree</small></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">9. I actively research concepts behind AI suggestions</div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="setRating(9, 1)">1<br><small>Strongly Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(9, 2)">2<br><small>Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(9, 3)">3<br><small>Neutral</small></div>
+                        <div class="rating-option" onclick="setRating(9, 4)">4<br><small>Agree</small></div>
+                        <div class="rating-option" onclick="setRating(9, 5)">5<br><small>Strongly Agree</small></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">10. AI helps me learn new technical concepts faster</div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="setRating(10, 1)">1<br><small>Strongly Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(10, 2)">2<br><small>Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(10, 3)">3<br><small>Neutral</small></div>
+                        <div class="rating-option" onclick="setRating(10, 4)">4<br><small>Agree</small></div>
+                        <div class="rating-option" onclick="setRating(10, 5)">5<br><small>Strongly Agree</small></div>
+                    </div>
+                </div>
+
+                <div class="navigation-buttons">
+                    <button class="btn btn-secondary" onclick="prevSection()">← Previous</button>
+                    <button class="btn btn-primary" onclick="nextSection()">Next: Learning Velocity →</button>
+                </div>
+            </div>
+
+            <!-- Section 3: Learning Velocity & Growth -->
+            <div class="survey-section" id="section3">
+                <div class="progress-indicator">
+                    <div class="category-label">Learning Velocity</div>
+                    <div class="question-counter">Questions 11-15 of 25</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">11. I'm developing new skills through AI-assisted work</div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="setRating(11, 1)">1<br><small>Strongly Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(11, 2)">2<br><small>Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(11, 3)">3<br><small>Neutral</small></div>
+                        <div class="rating-option" onclick="setRating(11, 4)">4<br><small>Agree</small></div>
+                        <div class="rating-option" onclick="setRating(11, 5)">5<br><small>Strongly Agree</small></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">12. AI enables me to explore technologies I wouldn't otherwise try</div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="setRating(12, 1)">1<br><small>Strongly Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(12, 2)">2<br><small>Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(12, 3)">3<br><small>Neutral</small></div>
+                        <div class="rating-option" onclick="setRating(12, 4)">4<br><small>Agree</small></div>
+                        <div class="rating-option" onclick="setRating(12, 5)">5<br><small>Strongly Agree</small></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">13. I understand how AI-generated code fits into our architecture</div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="setRating(13, 1)">1<br><small>Strongly Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(13, 2)">2<br><small>Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(13, 3)">3<br><small>Neutral</small></div>
+                        <div class="rating-option" onclick="setRating(13, 4)">4<br><small>Agree</small></div>
+                        <div class="rating-option" onclick="setRating(13, 5)">5<br><small>Strongly Agree</small></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">14. I'm becoming more effective at prompting AI tools</div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="setRating(14, 1)">1<br><small>Strongly Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(14, 2)">2<br><small>Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(14, 3)">3<br><small>Neutral</small></div>
+                        <div class="rating-option" onclick="setRating(14, 4)">4<br><small>Agree</small></div>
+                        <div class="rating-option" onclick="setRating(14, 5)">5<br><small>Strongly Agree</small></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">15. My problem-solving skills are improving with AI assistance</div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="setRating(15, 1)">1<br><small>Strongly Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(15, 2)">2<br><small>Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(15, 3)">3<br><small>Neutral</small></div>
+                        <div class="rating-option" onclick="setRating(15, 4)">4<br><small>Agree</small></div>
+                        <div class="rating-option" onclick="setRating(15, 5)">5<br><small>Strongly Agree</small></div>
+                    </div>
+                </div>
+
+                <div class="navigation-buttons">
+                    <button class="btn btn-secondary" onclick="prevSection()">← Previous</button>
+                    <button class="btn btn-primary" onclick="nextSection()">Next: Code Quality →</button>
+                </div>
+            </div>
+
+            <!-- Section 4: Code Quality Confidence -->
+            <div class="survey-section" id="section4">
+                <div class="progress-indicator">
+                    <div class="category-label">Code Quality Confidence</div>
+                    <div class="question-counter">Questions 16-20 of 25</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">16. I'm confident in the security of AI-generated code after my review</div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="setRating(16, 1)">1<br><small>Strongly Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(16, 2)">2<br><small>Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(16, 3)">3<br><small>Neutral</small></div>
+                        <div class="rating-option" onclick="setRating(16, 4)">4<br><small>Agree</small></div>
+                        <div class="rating-option" onclick="setRating(16, 5)">5<br><small>Strongly Agree</small></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">17. AI-generated code meets our quality standards</div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="setRating(17, 1)">1<br><small>Strongly Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(17, 2)">2<br><small>Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(17, 3)">3<br><small>Neutral</small></div>
+                        <div class="rating-option" onclick="setRating(17, 4)">4<br><small>Agree</small></div>
+                        <div class="rating-option" onclick="setRating(17, 5)">5<br><small>Strongly Agree</small></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">18. Our code review process effectively catches AI-generated issues</div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="setRating(18, 1)">1<br><small>Strongly Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(18, 2)">2<br><small>Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(18, 3)">3<br><small>Neutral</small></div>
+                        <div class="rating-option" onclick="setRating(18, 4)">4<br><small>Agree</small></div>
+                        <div class="rating-option" onclick="setRating(18, 5)">5<br><small>Strongly Agree</small></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">19. I'm comfortable shipping AI-assisted code to production</div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="setRating(19, 1)">1<br><small>Strongly Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(19, 2)">2<br><small>Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(19, 3)">3<br><small>Neutral</small></div>
+                        <div class="rating-option" onclick="setRating(19, 4)">4<br><small>Agree</small></div>
+                        <div class="rating-option" onclick="setRating(19, 5)">5<br><small>Strongly Agree</small></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">20. AI helps improve overall code quality in our projects</div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="setRating(20, 1)">1<br><small>Strongly Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(20, 2)">2<br><small>Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(20, 3)">3<br><small>Neutral</small></div>
+                        <div class="rating-option" onclick="setRating(20, 4)">4<br><small>Agree</small></div>
+                        <div class="rating-option" onclick="setRating(20, 5)">5<br><small>Strongly Agree</small></div>
+                    </div>
+                </div>
+
+                <div class="navigation-buttons">
+                    <button class="btn btn-secondary" onclick="prevSection()">← Previous</button>
+                    <button class="btn btn-primary" onclick="nextSection()">Next: Team Process →</button>
+                </div>
+            </div>
+
+            <!-- Section 5: Team Collaboration & Process -->
+            <div class="survey-section" id="section5">
+                <div class="progress-indicator">
+                    <div class="category-label">Team Collaboration & Process</div>
+                    <div class="question-counter">Questions 21-25 of 25</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">21. My team shares effective AI practices and learnings</div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="setRating(21, 1)">1<br><small>Strongly Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(21, 2)">2<br><small>Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(21, 3)">3<br><small>Neutral</small></div>
+                        <div class="rating-option" onclick="setRating(21, 4)">4<br><small>Agree</small></div>
+                        <div class="rating-option" onclick="setRating(21, 5)">5<br><small>Strongly Agree</small></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">22. We have clear guidelines for AI tool usage</div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="setRating(22, 1)">1<br><small>Strongly Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(22, 2)">2<br><small>Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(22, 3)">3<br><small>Neutral</small></div>
+                        <div class="rating-option" onclick="setRating(22, 4)">4<br><small>Agree</small></div>
+                        <div class="rating-option" onclick="setRating(22, 5)">5<br><small>Strongly Agree</small></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">23. AI tools enhance rather than replace team collaboration</div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="setRating(23, 1)">1<br><small>Strongly Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(23, 2)">2<br><small>Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(23, 3)">3<br><small>Neutral</small></div>
+                        <div class="rating-option" onclick="setRating(23, 4)">4<br><small>Agree</small></div>
+                        <div class="rating-option" onclick="setRating(23, 5)">5<br><small>Strongly Agree</small></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">24. I receive adequate support when AI tools don't work as expected</div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="setRating(24, 1)">1<br><small>Strongly Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(24, 2)">2<br><small>Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(24, 3)">3<br><small>Neutral</small></div>
+                        <div class="rating-option" onclick="setRating(24, 4)">4<br><small>Agree</small></div>
+                        <div class="rating-option" onclick="setRating(24, 5)">5<br><small>Strongly Agree</small></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">25. Our AI workflow integrates well with existing processes</div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="setRating(25, 1)">1<br><small>Strongly Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(25, 2)">2<br><small>Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(25, 3)">3<br><small>Neutral</small></div>
+                        <div class="rating-option" onclick="setRating(25, 4)">4<br><small>Agree</small></div>
+                        <div class="rating-option" onclick="setRating(25, 5)">5<br><small>Strongly Agree</small></div>
+                    </div>
+                </div>
+
+                <div class="navigation-buttons">
+                    <button class="btn btn-secondary" onclick="prevSection()">← Previous</button>
+                    <button class="btn btn-primary" onclick="nextSection()">Next: Open Response →</button>
+                </div>
+            </div>
+
+            <!-- Section 6: Open Response Questions -->
+            <div class="survey-section" id="section6">
+                <div class="progress-indicator">
+                    <div class="category-label">Open Response Questions</div>
+                    <div class="question-counter">Final Questions</div>
+                </div>
+
+                <div class="open-question">
+                    <label for="q26">26. What's your most significant AI success story from the past month?</label>
+                    <textarea id="q26" name="q26" rows="4" placeholder="Share a specific example of how AI helped you succeed..."></textarea>
+                </div>
+
+                <div class="open-question">
+                    <label for="q27">27. What's your biggest frustration or challenge with AI tools?</label>
+                    <textarea id="q27" name="q27" rows="4" placeholder="Describe any difficulties or limitations you've encountered..."></textarea>
+                </div>
+
+                <div class="open-question">
+                    <label for="q28">28. What AI capability or improvement would have the highest impact on your work?</label>
+                    <textarea id="q28" name="q28" rows="4" placeholder="What would make the biggest difference to your productivity or satisfaction?"></textarea>
+                </div>
+
+                <div class="open-question">
+                    <label for="q29">29. How has your relationship with AI tools changed over the past quarter?</label>
+                    <textarea id="q29" name="q29" rows="4" placeholder="Reflect on your evolving feelings, skills, and confidence with AI..."></textarea>
+                </div>
+
+                <div class="navigation-buttons">
+                    <button class="btn btn-secondary" onclick="prevSection()">← Previous</button>
+                    <button class="btn btn-primary" onclick="showResults()">View Results →</button>
+                </div>
+            </div>
+            
+            <!-- Results Section -->
+            <div class="results-section" id="resultsSection">
+                <div class="section-title">Your Developer Experience Health Report</div>
+                
+                <div class="health-status">
+                    <div class="status-badge" id="overallStatus">Complete Survey</div>
+                    <div id="statusDescription"></div>
+                </div>
+
+                <div id="redFlags" class="red-flags hidden">
+                    <h3>⚠️ Red Flag Indicators</h3>
+                    <div id="redFlagsList"></div>
+                </div>
+
+                <div class="recommendations">
+                    <h3>📋 Recommendations</h3>
+                    <div id="recommendationsList"></div>
+                </div>
+
+                <div class="export-controls">
+                    <button class="btn btn-primary" onclick="exportReport()">📊 Export Report</button>
+                    <button class="btn btn-secondary" onclick="saveResponses()">💾 Save Responses</button>
+                    <button class="btn btn-secondary" onclick="resetSurvey()">🔄 Take Again</button>
+                </div>
+            </div>
+        </div>
+
+        <footer style="text-align: center; padding: 2rem 1rem; background: rgba(0,0,0,0.05); margin-top: 2rem;">
+            <p style="margin: 0 0 1rem 0; font-size: 0.9rem; color: var(--text-muted);">
+                Made with ❤️ for educational purposes by 
+                <a href="https://twitter.com/alacolombiadev" target="_blank" rel="noopener noreferrer" 
+                   style="color: var(--primary-color); text-decoration: none; font-weight: 500;">
+                    alacolombiadev
+                </a>
+            </p>
+            <button onclick="clearAllData()" style="
+                background: var(--text-muted); 
+                color: white; 
+                border: none; 
+                padding: 0.5rem 1rem; 
+                font-size: 0.8rem; 
+                cursor: pointer; 
+                border-radius: 4px;
+                font-family: inherit;
+            ">Clear All Data</button>
+        </footer>
+    </div>
+
+    <script>
+        let currentSection = 1;
+        let responses = {};
+        let openResponses = {};
+        const totalSections = 6; // 5 rating sections + 1 open response section
+
+        function startSurvey() {
+            document.getElementById('welcomeSection').classList.add('hidden');
+            document.getElementById('progressSection').classList.add('active');
+            updateProgress();
+        }
+
+        function setRating(questionId, value) {
+            responses[questionId] = value;
+            
+            // Update UI
+            const questionDiv = event.target.closest('.question');
+            const options = questionDiv.querySelectorAll('.rating-option');
+            options.forEach(option => option.classList.remove('selected'));
+            event.target.classList.add('selected');
+            
+            updateProgress();
+            updateCategoryScores();
+        }
+
+        function updateProgress() {
+            const totalQuestions = 25; // Adjust based on actual number
+            const answered = Object.keys(responses).length;
+            const percentage = Math.round((answered / totalQuestions) * 100);
+            
+            document.getElementById('progressText').textContent = `${percentage}%`;
+            document.getElementById('progressFill').style.width = `${percentage}%`;
+        }
+
+        function updateCategoryScores() {
+            // AI Integration: Questions 1-5
+            const integration = calculateCategoryAverage([1, 2, 3, 4, 5]);
+            updateCategoryDisplay('integrationScore', integration);
+            
+            // Skill Balance: Questions 6-10  
+            const skill = calculateCategoryAverage([6, 7, 8, 9, 10]);
+            updateCategoryDisplay('skillScore', skill);
+            
+            // Add other categories as sections are completed...
+        }
+
+        function calculateCategoryAverage(questionIds) {
+            const values = questionIds.map(id => responses[id]).filter(v => v !== undefined);
+            if (values.length === 0) return null;
+            return (values.reduce((sum, v) => sum + v, 0) / values.length).toFixed(1);
+        }
+
+        function updateCategoryDisplay(elementId, score) {
+            const element = document.getElementById(elementId);
+            if (score === null) {
+                element.textContent = '-';
+                element.className = 'category-value';
+            } else {
+                element.textContent = score;
+                if (score >= 3.5) element.className = 'category-value healthy';
+                else if (score >= 2.5) element.className = 'category-value at-risk';
+                else element.className = 'category-value critical';
+            }
+        }
+
+        function nextSection() {
+            if (currentSection < totalSections) {
+                document.getElementById(`section${currentSection}`).classList.remove('active');
+                currentSection++;
+                
+                if (currentSection <= totalSections) {
+                    const nextSectionElement = document.getElementById(`section${currentSection}`);
+                    if (nextSectionElement) {
+                        nextSectionElement.classList.add('active');
+                    } else {
+                        // Show results if no more sections
+                        showResults();
+                    }
+                } else {
+                    showResults();
+                }
+                
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function prevSection() {
+            if (currentSection > 1) {
+                document.getElementById(`section${currentSection}`).classList.remove('active');
+                currentSection--;
+                document.getElementById(`section${currentSection}`).classList.add('active');
+                
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function showResults() {
+            document.getElementById(`section${currentSection}`).classList.remove('active');
+            document.getElementById('resultsSection').classList.add('active');
+            
+            generateHealthReport();
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function generateHealthReport() {
+            const integration = calculateCategoryAverage([1, 2, 3, 4, 5]);
+            const skill = calculateCategoryAverage([6, 7, 8, 9, 10]);
+            
+            // Calculate overall health status
+            const scores = [integration, skill].filter(s => s !== null);
+            if (scores.length === 0) return;
+            
+            const overall = scores.reduce((sum, s) => sum + parseFloat(s), 0) / scores.length;
+            
+            let status, statusClass, description;
+            if (overall >= 4.0) {
+                status = "Excellent Health";
+                statusClass = "healthy";
+                description = "Your AI workflow health is excellent. Share your practices with other teams.";
+            } else if (overall >= 3.5) {
+                status = "Good Health";
+                statusClass = "healthy";
+                description = "Your AI workflows are healthy with minor areas for improvement.";
+            } else if (overall >= 2.5) {
+                status = "At Risk";
+                statusClass = "at-risk";
+                description = "Some areas need attention to maintain healthy AI adoption.";
+            } else {
+                status = "Critical";
+                statusClass = "critical";
+                description = "Immediate intervention required to address AI workflow issues.";
+            }
+            
+            document.getElementById('overallStatus').textContent = status;
+            document.getElementById('overallStatus').className = `status-badge ${statusClass}`;
+            document.getElementById('statusDescription').textContent = description;
+            
+            // Check for red flags
+            checkRedFlags(integration, skill);
+            generateRecommendations(overall);
+        }
+
+        function checkRedFlags(integration, skill) {
+            const redFlags = [];
+            
+            if (integration > 4.0 && skill < 3.0) {
+                redFlags.push("Over-dependence risk: High AI integration but low skill balance");
+            }
+            
+            if (redFlags.length > 0) {
+                document.getElementById('redFlags').classList.remove('hidden');
+                document.getElementById('redFlagsList').innerHTML = redFlags.map(flag => 
+                    `<div class="recommendation-item">${flag}</div>`
+                ).join('');
+            }
+        }
+
+        function generateRecommendations(overall) {
+            let recommendations = [];
+            
+            if (overall >= 4.0) {
+                recommendations.push("Continue current approach and share successful practices");
+                recommendations.push("Consider mentoring other teams in AI adoption");
+            } else if (overall >= 3.0) {
+                recommendations.push("Review specific low-scoring areas for targeted improvements");
+                recommendations.push("Increase knowledge sharing activities within the team");
+            } else if (overall >= 2.0) {
+                recommendations.push("Implement immediate training and support programs");
+                recommendations.push("Evaluate current tools and processes");
+                recommendations.push("Provide one-on-one coaching for struggling team members");
+            } else {
+                recommendations.push("Halt AI adoption expansion until issues are resolved");
+                recommendations.push("Launch comprehensive training program");
+                recommendations.push("Consider tool replacement and leadership escalation");
+            }
+            
+            document.getElementById('recommendationsList').innerHTML = recommendations.map(rec => 
+                `<div class="recommendation-item">• ${rec}</div>`
+            ).join('');
+        }
+
+        function exportReport() {
+            const timestamp = new Date().toLocaleDateString();
+            const report = `Developer Experience Health Check Report
+Generated: ${timestamp}
+
+Category Scores:
+• AI Integration: ${document.getElementById('integrationScore').textContent}/5.0
+• Skill Balance: ${document.getElementById('skillScore').textContent}/5.0
+• Learning Velocity: ${document.getElementById('learningScore').textContent}/5.0
+• Quality Confidence: ${document.getElementById('qualityScore').textContent}/5.0
+• Team Process: ${document.getElementById('teamScore').textContent}/5.0
+
+Overall Status: ${document.getElementById('overallStatus').textContent}
+
+Generated by: Pair to Peer AI Workflows Developer Experience Tool`;
+
+            const blob = new Blob([report], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `dx-health-check-${timestamp.replace(/\//g, '-')}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        function saveResponses() {
+            localStorage.setItem('dxHealthResponses', JSON.stringify({
+                responses,
+                openResponses,
+                timestamp: new Date().toISOString()
+            }));
+            alert('💾 Responses saved!');
+        }
+
+        function resetSurvey() {
+            if (confirm('Reset all responses? This cannot be undone.')) {
+                location.reload();
+            }
+        }
+
+        // Auto-update progress
+        setInterval(updateProgress, 1000);
+
+        // Clear all data function
+        function clearAllData() {
+            if (confirm('Are you sure you want to clear all stored data? This will remove any saved progress and cannot be undone.')) {
+                try {
+                    localStorage.clear();
+                    sessionStorage.clear();
+                    alert('All data has been cleared successfully.');
+                    // Reset to initial state
+                    location.reload();
+                } catch (error) {
+                    alert('Error clearing data: ' + error.message);
+                }
+            }
+        }
+    </script>
+</body>
+</html>

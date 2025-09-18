@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-First Decision Tree - Pair to Peer AI Workflows</title>
+    
+    <!-- OpenGraph Meta Tags -->
+    <meta property="og:title" content="AI-First Decision Tree - When to Use AI vs Human-First Approaches">
+    <meta property="og:description" content="Interactive decision tree for determining when to use AI for code generation vs. human-first approaches. Part of the 'From Pair to Peer' framework for engineering teams.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://andreagriffiths11.github.io/pair-to-peer-ai-workflows/">
+    <meta property="og:site_name" content="Pair to Peer AI Workflows">
+    <meta name="description" content="Interactive guide for determining when to use AI in software development. Based on proven patterns from 50+ real-world implementations.">
+    <meta name="keywords" content="AI development, software engineering, team management, AI workflows, GitHub, developer productivity">
+    <meta name="author" content="Andrea Griffiths">
+    
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline';">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <meta name="referrer" content="same-origin">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" integrity="sha384-YXIh2AJoYu6LZ5p4c6I8MR8WGNvhDGnCbGqOgGRQrY4a0C4A3+JYz+L3lHEKQx2n" crossorigin="anonymous">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-hover: #1d4ed8;
+            --text-primary: #000000;
+            --text-secondary: #1f2937;
+            --text-muted: #6b7280;
+            --surface: #ffffff;
+            --surface-elevated: #f9fafb;
+            --border-color: #e5e7eb;
+            --border-light: #f3f4f6;
+            --success-color: #059669;
+            --warning-color: #d97706;
+            --danger-color: #dc2626;
+            --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--surface-elevated);
+            min-height: 100vh;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1024px;
+            margin: 0 auto;
+            background: var(--surface);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+        }
+
+        nav {
+            background: var(--surface);
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            padding: 0.5rem 0;
+            border-bottom: 2px solid transparent;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+
+        header {
+            background: var(--surface);
+            padding: 4rem 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        header h1 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        header p {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+        }
+
+        .decision-tree {
+            padding: 3rem 2rem;
+        }
+
+        .progress-bar {
+            background: var(--border-light);
+            height: 4px;
+            margin-bottom: 3rem;
+        }
+
+        .progress-fill {
+            background: var(--primary-color);
+            height: 100%;
+            width: 0%;
+        }
+
+        .node {
+            background: var(--surface);
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .node:hover {
+            border-color: var(--primary-color);
+        }
+
+        .node.active {
+            border-color: var(--primary-color);
+            background: var(--surface-elevated);
+        }
+
+        .node.result {
+            border-color: transparent;
+            color: white;
+            font-weight: 500;
+        }
+
+        .node.result.ai-first {
+            background: var(--success-color);
+        }
+
+        .node.result.ai-assisted {
+            background: var(--warning-color);
+        }
+
+        .node.result.human-first {
+            background: var(--danger-color);
+        }
+
+        .question {
+            font-weight: 600;
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .node.result .question {
+            color: white;
+        }
+
+        .options {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .option {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem 1.5rem;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .option:hover {
+            background: var(--primary-hover);
+        }
+
+        .reset-btn {
+            background: var(--text-secondary);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            cursor: pointer;
+            margin: 2rem auto;
+            display: block;
+            font-weight: 600;
+        }
+
+        .reset-btn:hover {
+            background: var(--text-primary);
+        }
+
+        .criteria-matrix {
+            margin-top: 3rem;
+            background: var(--surface-elevated);
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .criteria-matrix h3 {
+            margin-bottom: 2rem;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background: var(--surface-elevated);
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        td {
+            background: var(--surface);
+            color: var(--text-secondary);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem 0.5rem;
+            }
+            
+            header {
+                padding: 3rem 1rem;
+            }
+            
+            .decision-tree {
+                padding: 2rem 1rem;
+            }
+            
+            nav {
+                padding: 1rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .options {
+                flex-direction: column;
+            }
+            
+            .criteria-matrix {
+                padding: 1rem;
+            }
+            
+            table {
+                font-size: 0.9rem;
+            }
+            
+            th, td {
+                padding: 0.75rem 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <ul>
+                <li><a href="slides.html">🎤 Presentation</a></li>
+                <li><a href="presentation.pdf" target="_blank">📄 PDF</a></li>
+                <li><a href="index.html" class="active">Decision Tree</a></li>
+                <li><a href="team-assessment.html">Team Assessment</a></li>
+                <li><a href="teaching-moments.html">Teaching Moments</a></li>
+                <li><a href="developer-experience.html">Developer Experience</a></li>
+            </ul>
+        </nav>
+
+        <header>
+            <h1>AI-First Decision Tree</h1>
+            <p>Interactive guide for determining when to use AI in software development</p>
+        </header>
+
+        <div class="decision-tree">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+
+            <!-- Start Node -->
+            <div class="node active" id="start">
+                <div class="question">New Development Task</div>
+                <p>Let's determine the best approach for your development task.</p>
+                <div class="options">
+                    <button class="option" onclick="showNode('task-definition')">Start Assessment</button>
+                </div>
+            </div>
+
+            <!-- Task Definition -->
+            <div class="node hidden" id="task-definition">
+                <div class="question">Is this a well-defined task with existing patterns?</div>
+                <div class="options">
+                    <button class="option" onclick="showNode('novel-complex')">No - It's novel/unclear</button>
+                    <button class="option" onclick="showNode('security-check')">Yes - Clear and familiar</button>
+                </div>
+            </div>
+
+            <!-- Novel/Complex Branch -->
+            <div class="node hidden" id="novel-complex">
+                <div class="question">Is it novel/complex requiring new architectural decisions?</div>
+                <div class="options">
+                    <button class="option" onclick="showResult('human-first', 'Novel/complex architecture requires human expertise first')">Yes - Novel architecture</button>
+                    <button class="option" onclick="showResult('mixed', 'Use AI for exploration, human for structure')">No - Moderate complexity</button>
+                </div>
+            </div>
+
+            <!-- Security Check -->
+            <div class="node hidden" id="security-check">
+                <div class="question">Does it involve sensitive data or security-critical functions?</div>
+                <div class="options">
+                    <button class="option" onclick="showNode('security-options')">Yes - Security critical</button>
+                    <button class="option" onclick="showNode('complexity-assessment')">No - Standard functionality</button>
+                </div>
+            </div>
+
+            <!-- Security Options -->
+            <div class="node hidden" id="security-options">
+                <div class="question">Choose your security approach:</div>
+                <div class="options">
+                    <button class="option" onclick="showResult('local-ai', 'Use local AI models for security')">Use Local AI Models</button>
+                    <button class="option" onclick="showResult('enhanced-review', 'Enhanced security review process')">Enhanced Security Review</button>
+                </div>
+            </div>
+
+            <!-- Complexity Assessment -->
+            <div class="node hidden" id="complexity-assessment">
+                <div class="question">Task Complexity Assessment:</div>
+                <div class="options">
+                    <button class="option" onclick="showResult('ai-first', 'Perfect for AI generation - boilerplate, CRUD, tests')">Simple/Repetitive</button>
+                    <button class="option" onclick="showResult('ai-assisted', 'AI can help with business logic and integrations')">Medium Complexity</button>
+                    <button class="option" onclick="showResult('human-first', 'Complex architecture needs human-first approach')">Complex Architecture</button>
+                </div>
+            </div>
+
+            <!-- Results -->
+            <div class="node result ai-first hidden" id="result-ai-first">
+                <div class="question">AI-FIRST Approach Recommended</div>
+                <p><strong>High suitability for AI generation</strong></p>
+                <p>This task is well-suited for AI to handle the initial implementation. AI can effectively generate boilerplate code, CRUD operations, tests, and other repetitive patterns.</p>
+            </div>
+
+            <div class="node result ai-assisted hidden" id="result-ai-assisted">
+                <div class="question">AI-ASSISTED Approach Recommended</div>
+                <p><strong>Collaborative approach works best</strong></p>
+                <p>Use AI to accelerate development while maintaining human oversight for business logic, integrations, and architectural decisions.</p>
+            </div>
+
+            <div class="node result human-first hidden" id="result-human-first">
+                <div class="question">HUMAN-FIRST Approach Recommended</div>
+                <p><strong>Human expertise should lead</strong></p>
+                <p>This task requires human expertise for novel algorithms, complex architecture, or security-critical functionality. Use AI for research assistance.</p>
+            </div>
+
+            <div class="node result hidden" id="result-mixed">
+                <div class="question">MIXED Approach Recommended</div>
+                <p><strong>Balanced exploration and structure</strong></p>
+                <p>Use AI for exploration and research, but rely on human expertise for structural and architectural decisions.</p>
+            </div>
+
+            <div class="node result hidden" id="result-local-ai">
+                <div class="question">LOCAL AI Recommended</div>
+                <p><strong>Security-conscious AI usage</strong></p>
+                <p>Use local AI models to maintain data privacy while still benefiting from AI assistance in development.</p>
+            </div>
+
+            <div class="node result hidden" id="result-enhanced-review">
+                <div class="question">ENHANCED REVIEW Process</div>
+                <p><strong>Extra security validation required</strong></p>
+                <p>Standard AI assistance with mandatory security team review and enhanced testing protocols.</p>
+            </div>
+
+            <button class="reset-btn hidden" id="resetBtn" onclick="resetTree()">Start Over</button>
+
+            <!-- Decision Criteria Matrix -->
+            <div class="criteria-matrix">
+                <h3>Decision Criteria Matrix</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Factor</th>
+                            <th>AI-First</th>
+                            <th>AI-Assisted</th>
+                            <th>Human-First</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Code Complexity</strong></td>
+                            <td>Simple patterns, boilerplate</td>
+                            <td>Standard business logic</td>
+                            <td>Novel algorithms, complex architecture</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Security Risk</strong></td>
+                            <td>Low (UI, docs, tests)</td>
+                            <td>Medium (business logic)</td>
+                            <td>High (auth, payments, crypto)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Team Experience</strong></td>
+                            <td>Senior devs who can review</td>
+                            <td>Mixed experience teams</td>
+                            <td>Junior devs learning concepts</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Context Available</strong></td>
+                            <td>Similar code exists in codebase</td>
+                            <td>Some existing patterns</td>
+                            <td>No precedent or patterns</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Time Constraints</strong></td>
+                            <td>Tight deadlines, standard work</td>
+                            <td>Balanced delivery timeline</td>
+                            <td>Learning/exploration priority</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <footer style="text-align: center; padding: 2rem 1rem; background: rgba(0,0,0,0.05); margin-top: 2rem;">
+            <p style="margin: 0 0 1rem 0; font-size: 0.9rem; color: var(--text-muted);">
+                Made with ❤️ for educational purposes by 
+                <a href="https://twitter.com/alacolombiadev" target="_blank" rel="noopener noreferrer" 
+                   style="color: var(--primary-color); text-decoration: none; font-weight: 500;">
+                    alacolombiadev
+                </a>
+            </p>
+            <button onclick="clearAllData()" style="
+                background: var(--text-muted); 
+                color: white; 
+                border: none; 
+                padding: 0.5rem 1rem; 
+                font-size: 0.8rem; 
+                cursor: pointer; 
+                border-radius: 4px;
+                font-family: inherit;
+            ">Clear All Data</button>
+        </footer>
+    </div>
+
+    <script>
+        let currentStep = 0;
+        const totalSteps = 5;
+
+        function updateProgress() {
+            const progressPercent = (currentStep / totalSteps) * 100;
+            document.getElementById('progressFill').style.width = progressPercent + '%';
+        }
+
+        function hideAllNodes() {
+            const nodes = document.querySelectorAll('.node');
+            nodes.forEach(node => {
+                node.classList.add('hidden');
+                node.classList.remove('active');
+            });
+        }
+
+        function showNode(nodeId) {
+            hideAllNodes();
+            const node = document.getElementById(nodeId);
+            node.classList.remove('hidden');
+            node.classList.add('active');
+            currentStep++;
+            updateProgress();
+            
+            node.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function showResult(resultType, description) {
+            hideAllNodes();
+            
+            let resultNode;
+            switch(resultType) {
+                case 'ai-first':
+                    resultNode = document.getElementById('result-ai-first');
+                    break;
+                case 'ai-assisted':
+                    resultNode = document.getElementById('result-ai-assisted');
+                    break;
+                case 'human-first':
+                    resultNode = document.getElementById('result-human-first');
+                    break;
+                case 'mixed':
+                    resultNode = document.getElementById('result-mixed');
+                    break;
+                case 'local-ai':
+                    resultNode = document.getElementById('result-local-ai');
+                    break;
+                case 'enhanced-review':
+                    resultNode = document.getElementById('result-enhanced-review');
+                    break;
+            }
+            
+            if (resultNode) {
+                resultNode.classList.remove('hidden');
+                resultNode.classList.add('active');
+            }
+            
+            currentStep = totalSteps;
+            updateProgress();
+            
+            document.getElementById('resetBtn').classList.remove('hidden');
+            resultNode.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function resetTree() {
+            hideAllNodes();
+            currentStep = 0;
+            updateProgress();
+            
+            const startNode = document.getElementById('start');
+            startNode.classList.remove('hidden');
+            startNode.classList.add('active');
+            
+            document.getElementById('resetBtn').classList.add('hidden');
+            startNode.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        updateProgress();
+
+        // Clear all data function
+        function clearAllData() {
+            if (confirm('Are you sure you want to clear all stored data? This will remove any saved progress and cannot be undone.')) {
+                try {
+                    localStorage.clear();
+                    sessionStorage.clear();
+                    alert('All data has been cleared successfully.');
+                    // Reset to initial state
+                    resetTree();
+                } catch (error) {
+                    alert('Error clearing data: ' + error.message);
+                }
+            }
+        }
+    </script>
+</body>
+</html>

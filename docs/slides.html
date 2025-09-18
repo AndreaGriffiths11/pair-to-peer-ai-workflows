@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>From Pair to Peer: Leading Teams in the Age of Agentic AI - Slides</title>
+    
+    <!-- OpenGraph Meta Tags -->
+    <meta property="og:title" content="From Pair to Peer: Leading Teams in the Age of Agentic AI - Presentation">
+    <meta property="og:description" content="Interactive presentation on three proven patterns for successful AI team leadership. Based on analysis of 50+ real-world implementations.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://andreagriffiths11.github.io/pair-to-peer-ai-workflows/slides.html">
+    <meta property="og:site_name" content="Pair to Peer AI Workflows">
+    <meta name="description" content="Presentation by Andrea Griffiths on leading engineering teams in the age of agentic AI.">
+    <meta name="keywords" content="AI leadership, software engineering, team management, AI workflows, GitHub, presentation">
+    <meta name="author" content="Andrea Griffiths">
+    
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline';">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <meta name="referrer" content="same-origin">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" integrity="sha384-YXIh2AJoYu6LZ5p4c6I8MR8WGNvhDGnCbGqOgGRQrY4a0C4A3+JYz+L3lHEKQx2n" crossorigin="anonymous">
+    
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-hover: #1d4ed8;
+            --text-primary: #000000;
+            --text-secondary: #374151;
+            --text-muted: #6b7280;
+            --surface: #ffffff;
+            --surface-elevated: #f8fafc;
+            --border-color: #d1d5db;
+            --success-color: #059669;
+            --warning-color: #d97706;
+            --danger-color: #dc2626;
+            --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--surface-elevated);
+            overflow: hidden;
+        }
+
+        .presentation-container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide {
+            display: none;
+            flex: 1;
+            padding: 4rem;
+            background: var(--surface);
+            position: relative;
+            overflow-y: auto;
+        }
+
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .slide-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: var(--text-primary);
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            line-height: 1.3;
+        }
+
+        h3 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            font-weight: 500;
+        }
+
+        .slide-text {
+            font-size: 1.5rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .slide-text.center {
+            text-align: center;
+        }
+
+        .bullet-points {
+            text-align: left;
+            margin: 2rem 0;
+        }
+
+        .bullet-points li {
+            font-size: 1.4rem;
+            margin: 1rem 0;
+            padding-left: 1rem;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, rgba(37, 99, 235, 0.2) 0%, rgba(37, 99, 235, 0.1) 100%);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .big-number {
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 2rem 0;
+        }
+
+        .pattern-card {
+            background: var(--surface-elevated);
+            border: 2px solid var(--border-color);
+            padding: 2rem;
+            margin: 1rem 0;
+            border-radius: 12px;
+            text-align: left;
+        }
+
+        .pattern-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .pattern-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .takeaway {
+            background: var(--primary-color);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-top: 2rem;
+        }
+
+        .research-citation {
+            background: var(--surface-elevated);
+            border-left: 4px solid var(--primary-color);
+            padding: 1rem 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .tool-link {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 1rem;
+            transition: background 0.2s ease;
+        }
+
+        .tool-link:hover {
+            background: var(--primary-hover);
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: var(--surface);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .nav-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: background 0.2s ease;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            background: var(--primary-hover);
+        }
+
+        .nav-btn:disabled {
+            background: var(--text-muted);
+            cursor: not-allowed;
+        }
+
+        .slide-counter {
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .speaker-notes {
+            position: fixed;
+            bottom: 1rem;
+            right: 1rem;
+            background: var(--surface);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            max-width: 300px;
+            max-height: 200px;
+            overflow-y: auto;
+            display: none;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            box-shadow: var(--shadow);
+        }
+
+        .presentation-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: var(--surface-elevated);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .view-options {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .view-label {
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-right: 5px;
+        }
+
+        .view-btn {
+            padding: 6px 12px;
+            border: 1px solid var(--border-color);
+            background: var(--surface);
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-block;
+        }
+
+        .view-btn:hover {
+            background: var(--surface-elevated);
+            border-color: var(--primary-color);
+        }
+
+        .view-btn.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .download-btn {
+            color: var(--primary-color);
+        }
+
+        .download-btn:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+
+        .title-slide {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
+            color: white;
+        }
+
+        .title-slide h1,
+        .title-slide .subtitle {
+            color: white;
+        }
+
+        .author-info {
+            margin-top: 3rem;
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 2rem 1rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .slide-text {
+                font-size: 1.2rem;
+            }
+            
+            .bullet-points li {
+                font-size: 1.1rem;
+            }
+            
+            .navigation {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <div class="presentation-header">
+            <div class="view-options">
+                <span class="view-label">View:</span>
+                <button class="view-btn active" onclick="setActiveView(this)">Interactive</button>
+                <a href="presentation.pdf" class="view-btn download-btn" target="_blank">PDF Download</a>
+            </div>
+        </div>
+        
+        <!-- Slide 1: Title -->
+        <div class="slide active title-slide">
+            <div class="slide-content">
+                <h1>From Pair to Peer</h1>
+                <div class="subtitle">Leading Teams in the Age of Agentic AI</div>
+                <div class="author-info">
+                    <div><strong>Andrea Griffiths</strong></div>
+                    <div>Senior Developer Advocate, GitHub</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Opening Hook -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>What Nobody's Talking About</h2>
+                <div class="slide-text">
+                    <p>Over the last two years, something fascinating has been happening across thousands of organizations:</p>
+                    <p class="highlight">The exact same productivity tool producing completely opposite results, depending on how it's used.</p>
+                </div>
+                <div class="bullet-points">
+                    <ul>
+                        <li>Some teams: shipping 30% faster with higher code quality</li>
+                        <li>Other teams: debugging AI hallucinations at 2am</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: The Challenge -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>The Challenge</h2>
+                <div class="slide-text center">
+                    <p>We've gone from AI as autocomplete to AI as agents that can write, test, and deploy code.</p>
+                    <p class="highlight">Your org chart now includes digital teammates, and nobody taught us how to manage that relationship.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: What We'll Cover -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>What We'll Cover Today</h2>
+                <div class="bullet-points">
+                    <ul>
+                        <li><strong>Three patterns</strong> that separate winners from chaos</li>
+                        <li><strong>A framework</strong> you can implement this week</li>
+                        <li><strong>What this looks like</strong> day-to-day</li>
+                    </ul>
+                </div>
+                <div class="slide-text center">
+                    <p class="highlight">We're not just adopting tools. We're defining what software development looks like for the next decade.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: From Pair to Peer -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>From Pair Programming to Peer Collaboration</h2>
+                <div class="slide-text">
+                    <p>We all know pair programming: Two developers, one keyboard, learning from each other.</p>
+                    <p>But your "pair" might now be Claude, Copilot, or some other AI that never takes coffee breaks and has strong opinions about your variable names.</p>
+                    <p class="highlight">Same tool. Different leadership approach. Completely different outcomes.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: The Evolution -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>Phase 1 → Phase 2</h2>
+                <div class="pattern-card">
+                    <div class="pattern-title">Phase 1: Human First</div>
+                    <p>You and your AI tool, working together. Copilot suggests, you decide.</p>
+                </div>
+                <div class="pattern-card">
+                    <div class="pattern-title">Phase 2: Human Plus Agents</div>
+                    <p>You can orchestrate multiple AI agents. They don't just suggest - they execute.</p>
+                </div>
+                <div class="slide-text center">
+                    <p>Developers who figure out how to orchestrate agents are unlocking maximum flow state.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Market Reality -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>The Market Reality</h2>
+                <div class="research-citation">
+                    <strong>Deloitte:</strong> 25% of companies will run agentic AI pilots this year. That doubles to 50% by 2027.
+                </div>
+                <div class="slide-text">
+                    <p><strong>The key finding:</strong> 60% of AI leaders say their biggest challenge isn't algorithms. It's integration with legacy systems and managing risk.</p>
+                    <p class="highlight">Translation: The bottleneck isn't the AI. It's us.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Three Patterns Title -->
+        <div class="slide">
+            <div class="slide-content">
+                <h1>Three Patterns That Work</h1>
+                <div class="slide-text center">
+                    <p>Based on analysis of hundreds of teams implementing AI tools</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Pattern 1 -->
+        <div class="slide">
+            <div class="slide-content">
+                <div class="pattern-card">
+                    <div class="pattern-number">Pattern 1</div>
+                    <div class="pattern-title">Standards Before Speed</div>
+                    <div class="slide-text">
+                        <p>The fastest failing teams jump straight to productivity metrics. The successful ones start with a plan and clear standards.</p>
+                        <p>These teams invest up front in documentation that's so clear both humans and AIs can follow it.</p>
+                    </div>
+                    <div class="research-citation">
+                        McKinsey: teams with clear governance standards saw 37% higher adoption success and 41% fewer security problems.
+                    </div>
+                    <div class="takeaway">Takeaway: Standards before speed</div>
+                </div>
+                <a href="team-assessment.html" class="tool-link">→ Team Assessment Tool</a>
+                <a href="index.html" class="tool-link">→ AI-First Decision Tree</a>
+            </div>
+        </div>
+
+        <!-- Slide 10: Pattern 2 -->
+        <div class="slide">
+            <div class="slide-content">
+                <div class="pattern-card">
+                    <div class="pattern-number">Pattern 2</div>
+                    <div class="pattern-title">Measure Experience, Not Just Output</div>
+                    <div class="slide-text">
+                        <p>Some teams ship 30% faster, but commit logs fill up with vague messages like "copilot suggestion." Underneath the speed is rising fragility.</p>
+                        <p>Leaders who notice this start using monthly developer experience surveys:</p>
+                    </div>
+                    <div class="bullet-points">
+                        <ul>
+                            <li>Are you learning, or just moving pixels faster?</li>
+                            <li>Do you trust the AI's code suggestions?</li>
+                            <li>Are you more or less confident in the codebase?</li>
+                        </ul>
+                    </div>
+                    <div class="takeaway">Takeaway: Measure developers, not just deliverables</div>
+                </div>
+                <a href="developer-experience.html" class="tool-link">→ Developer Experience Health Check</a>
+            </div>
+        </div>
+
+        <!-- Slide 11: Pattern 3 -->
+        <div class="slide">
+            <div class="slide-content">
+                <div class="pattern-card">
+                    <div class="pattern-number">Pattern 3</div>
+                    <div class="pattern-title">Fluency Beats Dependency</div>
+                    <div class="slide-text">
+                        <p>GitHub's enterprise playbook describes "communities of practice" as core for building AI fluency rather than dependency.</p>
+                        <p>These are structured forums where developers routinely share "aha" moments and successful AI workflows.</p>
+                    </div>
+                    <div class="research-citation">
+                        Accenture: teams with structured knowledge sharing see up to 40% better outcomes
+                    </div>
+                    <div class="takeaway">Takeaway: Teams that enable open AI knowledge sharing become more adaptable and resilient</div>
+                </div>
+                <a href="teaching-moments.html" class="tool-link">→ Teaching Moments Framework</a>
+            </div>
+        </div>
+
+        <!-- Slide 12: Technical Reality -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>The Technical Reality</h2>
+                <div class="slide-text">
+                    <p>AI is an amplifier - a force multiplier. But writing code is only 20% of a developer's day.</p>
+                    <p><strong>For developers:</strong> AI gets you to 70% fast. But the final 30% - the edge cases, the integrations - that's where things break.</p>
+                    <p><strong>For leaders:</strong> More AI-generated code doesn't mean less work. It means more to review, test, secure, and operate.</p>
+                    <p class="highlight">Vulnerabilities are rising tenfold when AI code isn't governed properly.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 13: Implementation Framework -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>What You Can Do This Week</h2>
+                <div class="pattern-card">
+                    <div class="pattern-title">For Leaders</div>
+                    <ul>
+                        <li>Document your code review checklist</li>
+                        <li>Add one new metric: "AI-generated lines reverted"</li>
+                    </ul>
+                </div>
+                <div class="pattern-card">
+                    <div class="pattern-title">For Developers</div>
+                    <ul>
+                        <li>Try the "AI First Draft" pattern on a real feature</li>
+                        <li>Practice domain fluency: learn system architecture</li>
+                    </ul>
+                </div>
+                <div class="pattern-card">
+                    <div class="pattern-title">For Teams</div>
+                    <ul>
+                        <li>Track developer satisfaction, learning velocity, and quality</li>
+                        <li>Remember: Microsoft research shows 11 weeks for real gains</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 14: Interactive Tools -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>Interactive Tools Available Now</h2>
+                <div class="slide-text center">
+                    <p>Everything we've discussed is available as interactive tools you can use immediately:</p>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin: 2rem 0;">
+                    <a href="index.html" class="tool-link">🤖 Decision Tree</a>
+                    <a href="team-assessment.html" class="tool-link">📊 Team Assessment</a>
+                    <a href="teaching-moments.html" class="tool-link">📝 Teaching Moments</a>
+                    <a href="developer-experience.html" class="tool-link">❤️ Developer Experience</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 15: Conclusion -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>The Future We're Building</h2>
+                <div class="slide-text center">
+                    <p>We're not just adopting new tools. We're actively defining what software development will look like for the next decade.</p>
+                    <p>The teams who get this right will create work environments where human creativity and AI efficiency amplify each other.</p>
+                    <p class="highlight">But only if we remember: behind every AI agent, there's a human deciding how and why to deploy it.</p>
+                    <p><strong>Let's build that future - together.</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 16: Thank You -->
+        <div class="slide title-slide">
+            <div class="slide-content">
+                <h1>Thank You</h1>
+                <div class="subtitle">Questions?</div>
+                <div class="author-info">
+                    <div><strong>Andrea Griffiths</strong></div>
+                    <div>@alacolombiadev</div>
+                    <div style="margin-top: 2rem;">
+                        <a href="https://andreagriffiths11.github.io/pair-to-peer-ai-workflows/" style="color: white; text-decoration: underline;">
+                            Interactive Tools & Framework
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="navigation">
+            <button class="nav-btn" id="prevBtn" onclick="previousSlide()" disabled>← Previous</button>
+            <div class="slide-counter">
+                <span id="currentSlide">1</span> / <span id="totalSlides">16</span>
+            </div>
+            <button class="nav-btn" id="nextBtn" onclick="nextSlide()">Next →</button>
+        </div>
+
+        <div class="speaker-notes" id="speakerNotes">
+            <div id="notesContent">Speaker notes will appear here</div>
+        </div>
+    </div>
+
+    <script>
+        let currentSlideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        
+        document.getElementById('totalSlides').textContent = totalSlides;
+
+        const speakerNotes = [
+            "Welcome and introduce yourself. Set the stage for the problem.",
+            "Hook the audience with the contradiction - same tools, different outcomes.",
+            "Establish the core challenge - digital teammates without management training.",
+            "Set clear expectations for what they'll learn today.",
+            "Connect to familiar concept of pair programming to make AI collaboration relatable.",
+            "Show the evolution from simple assistance to agent orchestration.",
+            "Ground the discussion in real market data and research.",
+            "Transition to the core content - the three patterns.",
+            "Pattern 1: Emphasize that speed without standards leads to chaos.",
+            "Pattern 2: Focus on sustainable velocity vs. unsustainable speed.",
+            "Pattern 3: Knowledge sharing prevents over-dependence on AI experts.",
+            "Acknowledge that even with good patterns, AI work is still complex.",
+            "Give concrete, actionable steps they can implement immediately.",
+            "Show the tools in action - this makes everything tangible.",
+            "Connect back to the bigger picture and vision.",
+            "Thank the audience and open for questions."
+        ];
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[index].classList.add('active');
+            
+            document.getElementById('currentSlide').textContent = index + 1;
+            document.getElementById('prevBtn').disabled = index === 0;
+            document.getElementById('nextBtn').disabled = index === totalSlides - 1;
+            
+            // Update speaker notes
+            document.getElementById('notesContent').textContent = speakerNotes[index] || "No notes for this slide.";
+        }
+
+        function nextSlide() {
+            if (currentSlideIndex < totalSlides - 1) {
+                currentSlideIndex++;
+                showSlide(currentSlideIndex);
+            }
+        }
+
+        function previousSlide() {
+            if (currentSlideIndex > 0) {
+                currentSlideIndex--;
+                showSlide(currentSlideIndex);
+            }
+        }
+
+        function setActiveView(button) {
+            // Remove active class from all view buttons
+            document.querySelectorAll('.view-btn').forEach(btn => {
+                if (btn.tagName === 'BUTTON') {
+                    btn.classList.remove('active');
+                }
+            });
+            // Add active class to clicked button
+            button.classList.add('active');
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                previousSlide();
+            }
+        });
+
+        // Initialize
+        showSlide(0);
+
+        // Clear all data function
+        function clearAllData() {
+            if (confirm('Are you sure you want to clear all stored data? This will remove any saved progress and cannot be undone.')) {
+                try {
+                    localStorage.clear();
+                    sessionStorage.clear();
+                    alert('All data has been cleared successfully.');
+                } catch (error) {
+                    alert('Error clearing data: ' + error.message);
+                }
+            }
+        }
+    </script>
+</body>
+</html>

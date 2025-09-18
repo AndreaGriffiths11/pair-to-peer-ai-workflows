@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Maturity Assessment - Pair to Peer AI Workflows</title>
+    
+    <!-- OpenGraph Meta Tags -->
+    <meta property="og:title" content="AI Team Maturity Assessment - Standards, Experience & Fluency">
+    <meta property="og:description" content="5-minute interactive scorecard to evaluate your team's AI implementation across three critical dimensions. Get personalized action plans and benchmark against successful teams.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://andreagriffiths11.github.io/pair-to-peer-ai-workflows/team-assessment.html">
+    <meta property="og:site_name" content="Pair to Peer AI Workflows">
+    <meta name="description" content="Interactive AI implementation maturity assessment with real-time scoring. Identify which of three proven patterns your team needs to improve.">
+    <meta name="keywords" content="AI team assessment, software engineering maturity, AI governance, developer experience, team productivity">
+    <meta name="author" content="Andrea Griffiths">
+    
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline';">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <meta name="referrer" content="same-origin">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" integrity="sha384-YXIh2AJoYu6LZ5p4c6I8MR8WGNvhDGnCbGqOgGRQrY4a0C4A3+JYz+L3lHEKQx2n" crossorigin="anonymous">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-hover: #1d4ed8;
+            --text-primary: #000000;
+            --text-secondary: #374151;
+            --text-muted: #6b7280;
+            --surface: #ffffff;
+            --surface-elevated: #f8fafc;
+            --border-color: #d1d5db;
+            --border-light: #f3f4f6;
+            --success-color: #059669;
+            --warning-color: #d97706;
+            --danger-color: #dc2626;
+            --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--surface-elevated);
+            min-height: 100vh;
+            padding: 1rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--surface);
+            border: 2px solid var(--border-color);
+            box-shadow: var(--shadow);
+        }
+
+        nav {
+            background: var(--surface);
+            padding: 1rem 1.5rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 600;
+            padding: 0.5rem 0;
+            border-bottom: 3px solid transparent;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+
+        header {
+            background: var(--surface);
+            padding: 2rem 1.5rem;
+            border-bottom: 2px solid var(--border-color);
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        header p {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .assessment-container {
+            padding: 2rem 1.5rem;
+        }
+
+        /* Score Dashboard - Always Visible */
+        .score-dashboard {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: var(--surface-elevated);
+            border: 2px solid var(--border-color);
+        }
+
+        .score-main {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .score-main .score-value {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .score-main .score-label {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .score-dimensions {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .dashboard-header {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .dashboard-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .dashboard-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .score-card {
+            text-align: center;
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            background: var(--surface);
+        }
+
+        .score-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .score-label {
+            font-weight: 600;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            line-height: 1.4;
+        }
+
+        /* Welcome Section */
+        .welcome-section {
+            background: var(--surface);
+            border: 2px solid var(--border-color);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .welcome-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .welcome-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .start-btn {
+            padding: 1rem 2rem;
+            background: var(--primary-color);
+            color: white;
+            border: 2px solid var(--primary-color);
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+        }
+
+        .start-btn:hover {
+            background: var(--primary-hover);
+        }
+
+        /* Step Navigation */
+        .step-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            padding: 1rem;
+            background: var(--surface);
+            border: 2px solid var(--border-color);
+        }
+
+        .step-nav-title {
+            width: 100%;
+            text-align: center;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            font-size: 1.125rem;
+        }
+
+        .step-btn {
+            padding: 0.75rem 1.5rem;
+            border: 2px solid var(--border-color);
+            background: var(--surface);
+            color: var(--text-secondary);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .step-btn.active {
+            border-color: var(--primary-color);
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .step-btn.completed {
+            border-color: var(--success-color);
+            background: var(--success-color);
+            color: white;
+        }
+
+        .step-btn.completed::after {
+            content: "✓";
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--success-color);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .step-btn:hover:not(.active) {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        /* Step Content */
+        .step-content {
+            display: none;
+        }
+
+        .step-content.active {
+            display: block;
+        }
+
+        .dimension-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            text-align: center;
+        }
+
+        .assessment-item {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            border: 2px solid var(--border-color);
+            background: var(--surface);
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .item-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .item-weight {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border-color);
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .rating-scale {
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .rating-option {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            border: 2px solid var(--border-color);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: var(--surface);
+        }
+
+        .rating-option:hover {
+            border-color: var(--primary-color);
+            background: var(--surface-elevated);
+        }
+
+        .rating-option.selected {
+            border-color: var(--primary-color);
+            background: #eff6ff;
+        }
+
+        .rating-radio {
+            width: 18px;
+            height: 18px;
+            border: 2px solid var(--border-color);
+            border-radius: 50%;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .rating-option.selected .rating-radio {
+            border-color: var(--primary-color);
+        }
+
+        .rating-option.selected .rating-radio::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 10px;
+            height: 10px;
+            background: var(--primary-color);
+            border-radius: 50%;
+        }
+
+        .rating-content {
+            flex: 1;
+        }
+
+        .rating-level {
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .rating-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Navigation Buttons */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: 2px solid var(--primary-color);
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+        }
+
+        .btn-secondary {
+            background: var(--surface);
+            color: var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Results */
+        .results-section {
+            background: var(--surface-elevated);
+            border: 2px solid var(--border-color);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .maturity-level {
+            margin-bottom: 2rem;
+        }
+
+        .maturity-badge {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            font-weight: 700;
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+        }
+
+        .level-1 { background: var(--danger-color); color: white; }
+        .level-2 { background: var(--warning-color); color: white; }
+        .level-3 { background: var(--primary-color); color: white; }
+        .level-4 { background: var(--success-color); color: white; }
+        .level-5 { background: var(--text-primary); color: white; }
+
+        .export-controls {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 0.5rem;
+            }
+            
+            header {
+                padding: 1.5rem 1rem;
+            }
+            
+            .assessment-container {
+                padding: 1rem;
+            }
+            
+            nav {
+                padding: 1rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+            
+            .step-nav {
+                flex-direction: column;
+            }
+            
+            .item-header {
+                flex-direction: column;
+                gap: 0.5rem;
+                align-items: flex-start;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <ul>
+                <li><a href="slides.html">🎤 Presentation</a></li>
+                <li><a href="presentation.pdf" target="_blank">📄 PDF</a></li>
+                <li><a href="index.html">Decision Tree</a></li>
+                <li><a href="team-assessment.html" class="active">Team Assessment</a></li>
+                <li><a href="teaching-moments.html">Teaching Moments</a></li>
+                <li><a href="developer-experience.html">Developer Experience</a></li>
+            </ul>
+        </nav>
+
+        <header>
+            <h1>Team Maturity Assessment</h1>
+            <p>Interactive AI implementation scorecard with real-time scoring</p>
+        </header>
+
+        <div class="assessment-container">
+            <!-- Welcome Section -->
+            <div class="welcome-section" id="welcomeSection">
+                <div class="welcome-title">AI Implementation Maturity Assessment</div>
+                <div class="welcome-description">
+                    Evaluate your team's AI adoption across three critical dimensions: Standards-First approach, 
+                    Experience-focused metrics, and AI Fluency building. This assessment takes 5-10 minutes 
+                    and provides personalized action plans.
+                </div>
+                <button class="start-btn" onclick="startAssessment()">Start Assessment</button>
+            </div>
+
+            <!-- Score Dashboard - Always Visible -->
+            <div class="score-dashboard hidden" id="scoreDashboard">
+                <div class="dashboard-header">
+                    <div class="dashboard-title">Your Progress</div>
+                    <div class="dashboard-subtitle">Scores update in real-time as you complete each section</div>
+                </div>
+                
+                <div class="score-main">
+                    <div class="score-value" id="totalScore">0.0</div>
+                    <div class="score-label">Overall Maturity Score</div>
+                </div>
+
+                <div class="score-dimensions">
+                    <div class="score-card">
+                        <div class="score-value" id="standardsScore">0.0</div>
+                        <div class="score-label">Standards-First<br><small>(40% weight)</small></div>
+                    </div>
+                    <div class="score-card">
+                        <div class="score-value" id="experienceScore">0.0</div>
+                        <div class="score-label">Experience Metrics<br><small>(35% weight)</small></div>
+                    </div>
+                    <div class="score-card">
+                        <div class="score-value" id="fluencyScore">0.0</div>
+                        <div class="score-label">AI Fluency<br><small>(25% weight)</small></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step Navigation -->
+            <div class="step-nav hidden" id="stepNav">
+                <div class="step-nav-title">Assessment Progress</div>
+                <button class="step-btn active" onclick="showStep(1)">1. Standards-First</button>
+                <button class="step-btn" onclick="showStep(2)">2. Experience Metrics</button>
+                <button class="step-btn" onclick="showStep(3)">3. AI Fluency</button>
+                <button class="step-btn" onclick="showStep(4)">4. Results</button>
+            </div>
+
+            <!-- Step 1: Standards-First -->
+            <div class="step-content hidden" id="step1">
+                <div class="dimension-title">Standards-First Approach (40% Weight)</div>
+                
+                <!-- AI Governance -->
+                <div class="assessment-item">
+                    <div class="item-header">
+                        <div class="item-title">AI Governance & Policy</div>
+                        <div class="item-weight">10% Weight</div>
+                    </div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="selectRating('governance', 1)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 1: Initial</div>
+                                <div class="rating-description">No formal AI usage guidelines</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('governance', 2)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 2: Developing</div>
+                                <div class="rating-description">Basic usage rules and restrictions</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('governance', 3)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 3: Defined</div>
+                                <div class="rating-description">Documented AI governance policy with approval processes</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('governance', 4)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 4: Managed</div>
+                                <div class="rating-description">Comprehensive policy with monitoring and compliance tracking</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('governance', 5)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 5: Optimized</div>
+                                <div class="rating-description">Industry-leading governance with continuous policy evolution</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Code Review Standards -->
+                <div class="assessment-item">
+                    <div class="item-header">
+                        <div class="item-title">Code Review Standards</div>
+                        <div class="item-weight">15% Weight</div>
+                    </div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="selectRating('codeReview', 1)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 1: Initial</div>
+                                <div class="rating-description">No special review process for AI-generated code</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('codeReview', 2)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 2: Developing</div>
+                                <div class="rating-description">Informal review with awareness of AI usage</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('codeReview', 3)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 3: Defined</div>
+                                <div class="rating-description">Structured review checklist for AI-generated code</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('codeReview', 4)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 4: Managed</div>
+                                <div class="rating-description">Risk-based review tiers with automated quality gates</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('codeReview', 5)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 5: Optimized</div>
+                                <div class="rating-description">AI-enhanced review process with continuous quality monitoring</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Security Framework -->
+                <div class="assessment-item">
+                    <div class="item-header">
+                        <div class="item-title">Security Framework</div>
+                        <div class="item-weight">15% Weight</div>
+                    </div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="selectRating('security', 1)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 1: Initial</div>
+                                <div class="rating-description">No AI-specific security considerations</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('security', 2)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 2: Developing</div>
+                                <div class="rating-description">Basic awareness of AI security risks</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('security', 3)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 3: Defined</div>
+                                <div class="rating-description">Security scanning integrated for AI-generated code</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('security', 4)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 4: Managed</div>
+                                <div class="rating-description">Comprehensive security framework with risk classification</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('security', 5)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 5: Optimized</div>
+                                <div class="rating-description">Advanced threat detection and automated security remediation</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nav-buttons">
+                    <button class="btn btn-secondary" disabled>Previous</button>
+                    <button class="btn btn-primary" onclick="nextStep()">Next: Experience Metrics</button>
+                </div>
+            </div>
+
+            <!-- Step 2: Experience Metrics -->
+            <div class="step-content" id="step2">
+                <div class="dimension-title">Experience-Focused Metrics (35% Weight)</div>
+                
+                <!-- Developer Satisfaction -->
+                <div class="assessment-item">
+                    <div class="item-header">
+                        <div class="item-title">Developer Satisfaction</div>
+                        <div class="item-weight">10% Weight</div>
+                    </div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="selectRating('devSatisfaction', 1)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 1: Initial</div>
+                                <div class="rating-description">No measurement of AI impact on developer experience</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('devSatisfaction', 2)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 2: Developing</div>
+                                <div class="rating-description">Informal feedback on AI tool usage</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('devSatisfaction', 3)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 3: Defined</div>
+                                <div class="rating-description">Regular surveys measuring AI workflow satisfaction</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('devSatisfaction', 4)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 4: Managed</div>
+                                <div class="rating-description">Comprehensive DX metrics with action response framework</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('devSatisfaction', 5)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 5: Optimized</div>
+                                <div class="rating-description">Predictive analytics and proactive experience optimization</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Productivity Measurement -->
+                <div class="assessment-item">
+                    <div class="item-header">
+                        <div class="item-title">Productivity Measurement</div>
+                        <div class="item-weight">15% Weight</div>
+                    </div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="selectRating('productivity', 1)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 1: Initial</div>
+                                <div class="rating-description">No measurement of AI productivity impact</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('productivity', 2)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 2: Developing</div>
+                                <div class="rating-description">Basic time tracking for AI-assisted tasks</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('productivity', 3)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 3: Defined</div>
+                                <div class="rating-description">Structured metrics on development velocity and quality</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('productivity', 4)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 4: Managed</div>
+                                <div class="rating-description">Comprehensive ROI analysis with business value correlation</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('productivity', 5)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 5: Optimized</div>
+                                <div class="rating-description">Advanced analytics with predictive productivity insights</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Learning & Growth -->
+                <div class="assessment-item">
+                    <div class="item-header">
+                        <div class="item-title">Learning & Growth Tracking</div>
+                        <div class="item-weight">10% Weight</div>
+                    </div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="selectRating('learning', 1)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 1: Initial</div>
+                                <div class="rating-description">No tracking of skill development with AI tools</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('learning', 2)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 2: Developing</div>
+                                <div class="rating-description">Informal observation of team AI competency growth</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('learning', 3)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 3: Defined</div>
+                                <div class="rating-description">Structured assessment of AI fluency and dependency balance</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('learning', 4)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 4: Managed</div>
+                                <div class="rating-description">Comprehensive learning paths with progression tracking</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('learning', 5)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 5: Optimized</div>
+                                <div class="rating-description">Personalized AI skill development with career integration</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nav-buttons">
+                    <button class="btn btn-secondary" onclick="prevStep()">Previous: Standards</button>
+                    <button class="btn btn-primary" onclick="nextStep()">Next: AI Fluency</button>
+                </div>
+            </div>
+
+            <!-- Step 3: AI Fluency -->
+            <div class="step-content" id="step3">
+                <div class="dimension-title">AI Fluency Building (25% Weight)</div>
+                
+                <!-- Team Training -->
+                <div class="assessment-item">
+                    <div class="item-header">
+                        <div class="item-title">Team Training & Education</div>
+                        <div class="item-weight">10% Weight</div>
+                    </div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="selectRating('training', 1)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 1: Initial</div>
+                                <div class="rating-description">No formal AI training program</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('training', 2)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 2: Developing</div>
+                                <div class="rating-description">Basic AI tool tutorials and onboarding</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('training', 3)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 3: Defined</div>
+                                <div class="rating-description">Structured training curriculum with skill assessments</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('training', 4)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 4: Managed</div>
+                                <div class="rating-description">Comprehensive education program with certification</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('training', 5)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 5: Optimized</div>
+                                <div class="rating-description">Continuous learning ecosystem with peer teaching</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Knowledge Management -->
+                <div class="assessment-item">
+                    <div class="item-header">
+                        <div class="item-title">Knowledge Management</div>
+                        <div class="item-weight">8% Weight</div>
+                    </div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="selectRating('knowledge', 1)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 1: Initial</div>
+                                <div class="rating-description">No organized capture of AI learnings</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('knowledge', 2)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 2: Developing</div>
+                                <div class="rating-description">Ad-hoc sharing of AI tips and tricks</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('knowledge', 3)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 3: Defined</div>
+                                <div class="rating-description">Structured documentation of AI best practices</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('knowledge', 4)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 4: Managed</div>
+                                <div class="rating-description">Searchable knowledge base with automated insights</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('knowledge', 5)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 5: Optimized</div>
+                                <div class="rating-description">AI-powered knowledge discovery and recommendation</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Innovation & Experimentation -->
+                <div class="assessment-item">
+                    <div class="item-header">
+                        <div class="item-title">Innovation & Experimentation</div>
+                        <div class="item-weight">7% Weight</div>
+                    </div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="selectRating('innovation', 1)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 1: Initial</div>
+                                <div class="rating-description">Conservative AI usage limited to basic tasks</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('innovation', 2)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 2: Developing</div>
+                                <div class="rating-description">Some experimentation with advanced AI capabilities</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('innovation', 3)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 3: Defined</div>
+                                <div class="rating-description">Structured innovation program exploring AI applications</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('innovation', 4)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 4: Managed</div>
+                                <div class="rating-description">Regular hackathons and innovation cycles with AI focus</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('innovation', 5)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 5: Optimized</div>
+                                <div class="rating-description">Leading-edge AI research and development capabilities</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nav-buttons">
+                    <button class="btn btn-secondary" onclick="prevStep()">Previous: Experience</button>
+                    <button class="btn btn-primary" onclick="nextStep()">View Results</button>
+                </div>
+            </div>
+
+            <!-- Step 4: Results -->
+            <div class="step-content" id="step4">
+                <div class="results-section">
+                    <div class="dimension-title">Your Assessment Results</div>
+                    
+                    <div class="maturity-level">
+                        <div class="maturity-badge" id="maturityBadge">Complete Assessment</div>
+                        <div id="maturityDescription"></div>
+                    </div>
+
+                    <div class="export-controls">
+                        <button class="btn btn-primary" onclick="exportResults()">Export Results</button>
+                        <button class="btn btn-secondary" onclick="saveProgress()">Save Progress</button>
+                        <button class="btn btn-secondary" onclick="resetAssessment()">Start Over</button>
+                    </div>
+
+                    <div class="nav-buttons">
+                        <button class="btn btn-secondary" onclick="prevStep()">Previous: AI Fluency</button>
+                        <button class="btn btn-primary" onclick="showStep(1)">Take Again</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer style="text-align: center; padding: 2rem 1rem; background: rgba(0,0,0,0.05); margin-top: 2rem;">
+            <p style="margin: 0 0 1rem 0; font-size: 0.9rem; color: var(--text-muted);">
+                Made with ❤️ for educational purposes by 
+                <a href="https://twitter.com/alacolombiadev" target="_blank" rel="noopener noreferrer" 
+                   style="color: var(--primary-color); text-decoration: none; font-weight: 500;">
+                    alacolombiadev
+                </a>
+            </p>
+            <button onclick="clearAllData()" style="
+                background: var(--text-muted); 
+                color: white; 
+                border: none; 
+                padding: 0.5rem 1rem; 
+                font-size: 0.8rem; 
+                cursor: pointer; 
+                border-radius: 4px;
+                font-family: inherit;
+            ">Clear All Data</button>
+        </footer>
+    </div>
+
+    <script>
+        // Assessment state
+        const assessmentData = {
+            governance: 0,
+            codeReview: 0,
+            security: 0,
+            devSatisfaction: 0,
+            productivity: 0,
+            learning: 0,
+            training: 0,
+            knowledge: 0,
+            innovation: 0
+        };
+
+        let currentStep = 0; // 0 = welcome, 1-4 = steps
+        let assessmentStarted = false;
+
+        // Weights for scoring calculation
+        const weights = {
+            governance: 0.10,
+            codeReview: 0.15,
+            security: 0.15,
+            devSatisfaction: 0.10,
+            productivity: 0.15,
+            learning: 0.10,
+            training: 0.10,
+            knowledge: 0.08,
+            innovation: 0.07
+        };
+
+        const dimensionWeights = {
+            standards: 0.40,
+            experience: 0.35,
+            fluency: 0.25
+        };
+
+        function startAssessment() {
+            assessmentStarted = true;
+            document.getElementById('welcomeSection').classList.add('hidden');
+            document.getElementById('scoreDashboard').classList.remove('hidden');
+            document.getElementById('stepNav').classList.remove('hidden');
+            showStep(1);
+        }
+
+        function showStep(stepNumber) {
+            if (!assessmentStarted && stepNumber > 0) {
+                startAssessment();
+                return;
+            }
+
+            // Update step navigation
+            document.querySelectorAll('.step-btn').forEach((btn, index) => {
+                btn.classList.remove('active');
+                if (index + 1 === stepNumber) {
+                    btn.classList.add('active');
+                }
+                // Mark completed steps
+                if (index + 1 < stepNumber) {
+                    btn.classList.add('completed');
+                } else {
+                    btn.classList.remove('completed');
+                }
+            });
+
+            // Show/hide step content
+            document.querySelectorAll('.step-content').forEach((content, index) => {
+                content.classList.remove('active');
+                if (index + 1 === stepNumber) {
+                    content.classList.add('active');
+                }
+            });
+
+            currentStep = stepNumber;
+
+            if (stepNumber === 4) {
+                updateResults();
+            }
+
+            // Scroll to top of the page smoothly
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        function nextStep() {
+            if (currentStep < 4) {
+                showStep(currentStep + 1);
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 1) {
+                showStep(currentStep - 1);
+            }
+        }
+
+        function selectRating(category, level) {
+            // Remove previous selection
+            const categoryOptions = document.querySelectorAll(`[onclick*="${category}"]`);
+            categoryOptions.forEach(option => option.classList.remove('selected'));
+            
+            // Add selection to clicked option
+            event.target.closest('.rating-option').classList.add('selected');
+            
+            // Update data
+            assessmentData[category] = level;
+            
+            // Recalculate scores
+            updateScores();
+            saveToLocalStorage();
+        }
+
+        function updateScores() {
+            // Calculate dimension scores
+            const standardsScore = (
+                (assessmentData.governance * weights.governance) +
+                (assessmentData.codeReview * weights.codeReview) +
+                (assessmentData.security * weights.security)
+            ) / (weights.governance + weights.codeReview + weights.security);
+
+            const experienceScore = (
+                (assessmentData.devSatisfaction * weights.devSatisfaction) +
+                (assessmentData.productivity * weights.productivity) +
+                (assessmentData.learning * weights.learning)
+            ) / (weights.devSatisfaction + weights.productivity + weights.learning);
+
+            const fluencyScore = (
+                (assessmentData.training * weights.training) +
+                (assessmentData.knowledge * weights.knowledge) +
+                (assessmentData.innovation * weights.innovation)
+            ) / (weights.training + weights.knowledge + weights.innovation);
+
+            // Calculate total weighted score
+            const totalScore = (
+                (standardsScore * dimensionWeights.standards) +
+                (experienceScore * dimensionWeights.experience) +
+                (fluencyScore * dimensionWeights.fluency)
+            );
+
+            // Update UI
+            document.getElementById('totalScore').textContent = totalScore.toFixed(1);
+            document.getElementById('standardsScore').textContent = standardsScore.toFixed(1);
+            document.getElementById('experienceScore').textContent = experienceScore.toFixed(1);
+            document.getElementById('fluencyScore').textContent = fluencyScore.toFixed(1);
+        }
+
+        function updateResults() {
+            const totalScore = parseFloat(document.getElementById('totalScore').textContent);
+            
+            if (totalScore === 0) return;
+
+            const badge = document.getElementById('maturityBadge');
+            const description = document.getElementById('maturityDescription');
+
+            let level, levelClass, levelDescription;
+
+            if (totalScore >= 1.0 && totalScore <= 2.0) {
+                level = "Level 1: Initial";
+                levelClass = "level-1";
+                levelDescription = "Ad-hoc AI usage, minimal structure, reactive approach";
+            } else if (totalScore > 2.0 && totalScore <= 3.0) {
+                level = "Level 2: Developing";
+                levelClass = "level-2";
+                levelDescription = "Basic processes in place, learning actively, some measurement";
+            } else if (totalScore > 3.0 && totalScore <= 3.8) {
+                level = "Level 3: Defined";
+                levelClass = "level-3";
+                levelDescription = "Structured processes, documented standards, regular measurement";
+            } else if (totalScore > 3.8 && totalScore <= 4.5) {
+                level = "Level 4: Managed";
+                levelClass = "level-4";
+                levelDescription = "Optimized workflows, data-driven decisions, measurable outcomes";
+            } else if (totalScore > 4.5) {
+                level = "Level 5: Optimized";
+                levelClass = "level-5";
+                levelDescription = "Continuous improvement, industry leadership, innovation focus";
+            }
+
+            badge.textContent = level;
+            badge.className = `maturity-badge ${levelClass}`;
+            description.textContent = levelDescription;
+        }
+
+        function saveToLocalStorage() {
+            localStorage.setItem('teamAssessmentData', JSON.stringify(assessmentData));
+            localStorage.setItem('teamAssessmentTimestamp', new Date().toISOString());
+        }
+
+        function loadFromLocalStorage() {
+            const savedData = localStorage.getItem('teamAssessmentData');
+            if (savedData) {
+                const data = JSON.parse(savedData);
+                Object.assign(assessmentData, data);
+                
+                // Restore UI selections
+                Object.entries(assessmentData).forEach(([category, level]) => {
+                    if (level > 0) {
+                        const option = document.querySelector(`[onclick*="${category}, ${level}"]`);
+                        if (option) {
+                            option.classList.add('selected');
+                        }
+                    }
+                });
+                
+                updateScores();
+            }
+        }
+
+        function saveProgress() {
+            saveToLocalStorage();
+            alert('✅ Progress saved!');
+        }
+
+        function exportResults() {
+            const totalScore = parseFloat(document.getElementById('totalScore').textContent);
+            const timestamp = new Date().toLocaleDateString();
+            
+            const report = `AI Implementation Maturity Assessment Report
+Generated: ${timestamp}
+
+Overall Score: ${totalScore}/5.0
+
+Dimension Scores:
+• Standards-First: ${document.getElementById('standardsScore').textContent}/5.0 (40% weight)
+• Experience Metrics: ${document.getElementById('experienceScore').textContent}/5.0 (35% weight)  
+• AI Fluency: ${document.getElementById('fluencyScore').textContent}/5.0 (25% weight)
+
+Maturity Level: ${document.getElementById('maturityBadge').textContent}
+
+Generated by: Pair to Peer AI Workflows Assessment Tool`;
+
+            const blob = new Blob([report], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `ai-maturity-assessment-${timestamp.replace(/\//g, '-')}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        function resetAssessment() {
+            if (confirm('Reset all responses?')) {
+                Object.keys(assessmentData).forEach(key => {
+                    assessmentData[key] = 0;
+                });
+                
+                document.querySelectorAll('.rating-option.selected').forEach(option => {
+                    option.classList.remove('selected');
+                });
+                
+                localStorage.removeItem('teamAssessmentData');
+                updateScores();
+                showStep(1);
+            }
+        }
+
+        // Initialize
+        window.addEventListener('load', () => {
+            loadFromLocalStorage();
+        });
+
+        // Clear all data function
+        function clearAllData() {
+            if (confirm('Are you sure you want to clear all stored data? This will remove any saved progress and cannot be undone.')) {
+                try {
+                    localStorage.clear();
+                    sessionStorage.clear();
+                    alert('All data has been cleared successfully.');
+                    // Reset to initial state
+                    resetAssessment();
+                } catch (error) {
+                    alert('Error clearing data: ' + error.message);
+                }
+            }
+        }
+    </script>
+</body>
+</html>
