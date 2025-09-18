@@ -65,12 +65,6 @@ Teams that win create "communities of practice" where AI discoveries are shared 
 - **[📝 Teaching Moments](https://andreagriffiths11.github.io/pair-to-peer-ai-workflows/teaching-moments.html)** - Capture and share AI learning experiences  
 - **[❤️ Developer Experience](https://andreagriffiths11.github.io/pair-to-peer-ai-workflows/developer-experience.html)** - Monthly health check survey
 
-### All Templates & Guides
-- **[📚 Templates Directory](templates/)** - Complete collection of frameworks and checklists
-- **[📖 Implementation Guide](docs/implementation-guide.md)** - Step-by-step deployment roadmap
-- **[📖 Getting Started Guide](docs/getting-started.md)** - 5-minute quick start for busy teams
-- **[📈 Case Studies](docs/case-studies.md)** - Real examples of teams implementing these patterns
-
 ## 💡 What to Expect
 
 **Week 1-2:** Your team might resist the "extra overhead." That's normal—these processes prevent the technical debt that kills AI adoption.
@@ -81,7 +75,7 @@ Teams that win create "communities of practice" where AI discoveries are shared 
 
 **Month 6:** You're the team other engineers want to join. Human creativity + AI efficiency becomes your competitive advantage.
 
-**Remember the 11-week learning curve:** Real productivity gains take time. Plan for gradual improvement, not instant transformation.
+**Remember the [11-week learning curve](https://news.microsoft.com/en-cee/2024/04/29/11-minutes-a-day-adds-up-to-10-hours-saved-in-11-weeks-results-of-a-study-on-the-impact-of-ai/):** Real productivity gains take time. Plan for gradual improvement, not instant transformation.
 
 ## 🎤 From the Talk
 
