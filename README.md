@@ -83,12 +83,6 @@ This repository contains the practical resources from **"From Pair to Peer: Lead
 
 **Key insight:** We're not just adopting tools—we're defining what software development looks like for the next decade. The teams who get this right will create environments where human creativity and AI efficiency amplify each other.
 
-**[📖 Full talk content and speaker notes](docs/talk.md)**
-
-## 🤝 About & Contact
-
-**Created by:** [Andrea Griffiths](https://twitter.com/alacolombiadev), GitHub  
-**Based on:** Analysis of 50+ real-world AI implementations from startups to Fortune 500  
 **License:** Apache-2.0 - Use, adapt, and share freely
 
 **The goal isn't to go faster with AI. It's to get better at the parts humans are uniquely good at—system design, architectural decisions, and complex problem-solving.**
