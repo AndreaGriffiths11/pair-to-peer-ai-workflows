@@ -77,10 +77,6 @@ Teams that win create "communities of practice" where AI discoveries are shared 
 
 **Remember the [11-week learning curve](https://news.microsoft.com/en-cee/2024/04/29/11-minutes-a-day-adds-up-to-10-hours-saved-in-11-weeks-results-of-a-study-on-the-impact-of-ai/):** Real productivity gains take time. Plan for gradual improvement, not instant transformation.
 
-## 🎤 From the Talk
-
-This repository contains the practical resources from **"From Pair to Peer: Leading Teams in the Age of Agentic AI"** by Andrea Griffiths.
-
 **Key insight:** We're not just adopting tools—we're defining what software development looks like for the next decade. The teams who get this right will create environments where human creativity and AI efficiency amplify each other.
 
 **License:** Apache-2.0 - Use, adapt, and share freely
