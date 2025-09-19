@@ -4,6 +4,9 @@
 
 ```
 START: New Development Task
+├─ Constitutional Check: Does this violate team principles?
+│  ├─ YES → [HUMAN-FIRST] Enhanced review required
+│  └─ NO → Continue to task assessment
 ├─ Is this a well-defined task with existing patterns?
 │  ├─ NO → Is it novel/complex requiring new architectural decisions?
 │  │  ├─ YES → [HUMAN-FIRST] Start from scratch with AI assistance for research
@@ -29,6 +32,13 @@ START: New Development Task
 | **Time Constraints** | Tight deadlines, standard work | Balanced delivery timeline | Learning/exploration priority |
 
 ## Risk Assessment Checklist
+
+**Constitutional Compliance Check:**
+- [ ] **Security**: Does this touch auth, payments, or sensitive data? (If yes, human-first + security review)
+- [ ] **Architecture**: Is this following documented patterns? (If no, architect approval needed)
+- [ ] **Quality**: Can we achieve 80% test coverage? (If no, adjust scope or approach)
+- [ ] **Knowledge**: Will team understand this implementation? (If no, documentation required)
+- [ ] **Transparency**: Are AI contributions clearly trackable? (Always required)
 
 **Before Using AI Generation:**
 - [ ] Is this code handling sensitive data? (If yes, use local models or enhanced review)

@@ -14,14 +14,20 @@
 
 ## Session Structure: PDCA Framework
 
-### PLAN (7-15 minutes)
+### PLAN (7-15 minutes) - SpecKit Structure
 ```markdown
-## Planning Phase
+## SPECIFY Phase (2-3 minutes)
+- [ ] Constitutional compliance check (security, architecture, quality principles)
+- [ ] Define clear success criteria and acceptance tests
+- [ ] Document any non-negotiable constraints or requirements
+
+## PLAN Phase (5-12 minutes)
 - [ ] Load project context files (.cursorrules, CLAUDE.md, etc.)
 - [ ] Review coding standards and architectural patterns
 - [ ] Create detailed execution strategy with explicit checkpoints
 - [ ] Set up AI with project-specific instructions
 - [ ] Define human-AI role assignments (driver/navigator)
+- [ ] Create feature branch for experimentation
 
 Context Template:
 ```
@@ -34,15 +40,18 @@ Quality Requirements: [Testing, performance, security]
 
 ### DO (30 minutes - 2.5 hours)
 ```markdown
-## Implementation Phase
+## TASKS Phase (Incremental Implementation)
 Checkpoint intervals: Every 30 minutes for long sessions
 
-Active Development Pattern:
-1. Generate code in incremental chunks (50-100 lines)
-2. Review and validate each chunk before proceeding
-3. Maintain human oversight of business logic decisions
-4. Document AI reasoning for complex implementations
-5. Run tests continuously, not just at session end
+Specification-Driven Development Pattern:
+1. Break features into specification-backed tasks
+2. Generate code in incremental chunks (50-100 lines)
+3. Validate against specification after each chunk
+4. Review and validate each chunk before proceeding
+5. Maintain human oversight of business logic decisions
+6. Document AI reasoning for complex implementations
+7. Run tests continuously, not just at session end
+8. Keep reusable context for similar future tasks
 
 Quality Check Questions:
 - Does this code follow our established patterns?
@@ -53,13 +62,14 @@ Quality Check Questions:
 
 ### CHECK (2-5 minutes per checkpoint)
 ```markdown
-## Validation Phase
-- [ ] Code functionality matches requirements
-- [ ] Security patterns properly implemented  
-- [ ] Performance considerations addressed
-- [ ] Test coverage adequate
-- [ ] Documentation updated as needed
-- [ ] No obvious bugs or edge cases missed
+## Validation Phase - Constitutional Compliance
+- [ ] **Specification Alignment**: Code functionality matches requirements and specifications
+- [ ] **Constitutional Security**: Security patterns properly implemented per team principles
+- [ ] **Performance**: Performance considerations addressed
+- [ ] **Quality Standards**: Test coverage meets constitutional minimums (80%)
+- [ ] **Knowledge Transfer**: Documentation updated, AI reasoning captured
+- [ ] **Transparency**: No obvious bugs or edge cases missed
+- [ ] **Reusable Context**: Patterns documented for future similar tasks
 ```
 
 ### ACT (5-10 minutes)

@@ -26,8 +26,11 @@ This template helps teams document and share AI learning experiences, following 
 
 **First Draft Assessment:**
 - **70/30 Split:** [Was this in the "easy 70%" or "complex 30%" of implementation?]
+- **Constitutional Compliance:** [How well did this follow team principles?]
+- **Specification Quality:** [How clear were the requirements/specifications?]
 - **Architecture Impact:** [How did this affect system architecture/design?]
 - **Security Implications:** [Any security considerations/scans needed]
+- **Reusable Context Created:** [What patterns can be reused for similar tasks?]
 
 **Approach 1:**
 - **Prompt Strategy:** [Exact prompt or approach description]
@@ -76,8 +79,10 @@ This template helps teams document and share AI learning experiences, following 
 - [Anti-patterns to avoid]
 
 ## Reusable Assets Created
+- [ ] **Specification Template:** [Reusable requirement pattern for similar features]
 - [ ] **Prompt Template:** [Link or embed reusable prompt]
 - [ ] **Context Setup:** [Reusable context configuration]
+- [ ] **Constitutional Checklist:** [Team principles validation for this domain]
 - [ ] **Quality Checklist:** [Specific validation steps for this type of task]
 - [ ] **Process Improvement:** [Workflow enhancement for team adoption]
 
