@@ -716,9 +716,6 @@
                 document.getElementById('quickDate').value = new Date().toISOString().split('T')[0];
             }
             
-            // Initialize checkboxes
-            checkboxes = {};
-            
             updateProgress();
         }
 
@@ -739,20 +736,9 @@
         }
 
         function toggleCheckbox(id) {
-            // Initialize if not set
-            if (checkboxes[id] === undefined) {
-                checkboxes[id] = false;
-            }
-            
-            // Toggle state
             checkboxes[id] = !checkboxes[id];
-            
-            // Update UI
-            const checkbox = event.currentTarget;
-            if (checkbox && checkbox.classList) {
-                checkbox.classList.toggle('checked');
-            }
-            
+            const checkbox = event.target;
+            checkbox.classList.toggle('checked');
             updateProgress();
         }
 
@@ -796,95 +782,65 @@
             const today = new Date().toISOString().split('T')[0];
             
             if (currentTemplate === 'detailed') {
-                const description = document.getElementById('description').value || '[Description]';
-                const date = document.getElementById('date').value || today;
-                const teamMember = document.getElementById('teamMember').value || '[Name]';
-                const aiTool = document.getElementById('aiTool').value || '[Tool]';
-                const taskType = document.getElementById('taskType').value || '[Type]';
-                const complexity = document.getElementById('complexity').value || '[Level]';
-                const objective = document.getElementById('objective').value || '[Objective]';
-                const approach = document.getElementById('approach').value || '[Approach description]';
-                const result = document.getElementById('result').value || '[Result description]';
-                const whatWorked = document.getElementById('whatWorked').value || '[What worked well]';
-                const whatDidnt = document.getElementById('whatDidnt').value || '[What didn\'t work]';
-                const lessons = document.getElementById('lessons').value || '[Lessons learned]';
-                
-                // Build sharing actions list
-                let sharingActions = '';
-                if (Object.keys(checkboxes).length > 0) {
-                    const labels = {
-                        'shared-chat': 'Shared in team chat/Slack with summary',
-                        'shared-wiki': 'Added to team wiki/knowledge base', 
-                        'shared-meeting': 'Presented in team standup/meeting',
-                        'shared-guidelines': 'Updated team AI guidelines document'
-                    };
-                    
-                    Object.entries(checkboxes).forEach(([key, checked]) => {
-                        sharingActions += `- [${checked ? 'x' : ' '}] ${labels[key] || key}\n`;
-                    });
-                } else {
-                    sharingActions = '- [ ] Not shared yet\n';
-                }
-                
-                markdown = `# AI Learning Entry: ${description}
+                markdown = `# AI Learning Entry: ${document.getElementById('description').value || '[Description]'}
 
 ## Context
-**Date:** ${date}
-**Team Member:** ${teamMember}
-**AI Tool Used:** ${aiTool}
-**Task Type:** ${taskType}
-**Complexity Level:** ${complexity}
+**Date:** ${document.getElementById('date').value || today}
+**Team Member:** ${document.getElementById('teamMember').value || '[Name]'}
+**AI Tool Used:** ${document.getElementById('aiTool').value || '[Tool]'}
+**Task Type:** ${document.getElementById('taskType').value || '[Type]'}
+**Complexity Level:** ${document.getElementById('complexity').value || '[Level]'}
 
 ## What We Tried
-**Objective:** ${objective}
+**Objective:** ${document.getElementById('objective').value || '[Objective]'}
 
 **Approach:**
-${approach}
+${document.getElementById('approach').value || '[Approach description]'}
 
-**Result:** ${result}
+**Result:** ${document.getElementById('result').value || '[Result description]'}
 
 **Quality Score (CARE Framework):**
-- Completeness: ${ratings.completeness || 0}/5
-- Accuracy: ${ratings.accuracy || 0}/5
-- Relevance: ${ratings.relevance || 0}/5
-- Efficiency: ${ratings.efficiency || 0}/5
+- Completeness: ${ratings.completeness}/5
+- Accuracy: ${ratings.accuracy}/5
+- Relevance: ${ratings.relevance}/5
+- Efficiency: ${ratings.efficiency}/5
 
 ## What Worked Well
-${whatWorked}
+${document.getElementById('whatWorked').value || '[What worked well]'}
 
 ## What Didn't Work
-${whatDidnt}
+${document.getElementById('whatDidnt').value || '[What didn\\'t work]'}
 
 ## Lessons Learned
-${lessons}
+${document.getElementById('lessons').value || '[Lessons learned]'}
 
 ## Knowledge Sharing Actions
-${sharingActions}
+${Object.entries(checkboxes).map(([key, checked]) => {
+    const labels = {
+        'shared-chat': 'Shared in team chat/Slack with summary',
+        'shared-wiki': 'Added to team wiki/knowledge base', 
+        'shared-meeting': 'Presented in team standup/meeting',
+        'shared-guidelines': 'Updated team AI guidelines document'
+    };
+    return `- [${checked ? 'x' : ' '}] ${labels[key] || key}`;
+}).join('\\n')}
+
 ---
 *Generated on ${today} using Pair to Peer AI Workflows Teaching Moments tool*`;
             } else {
-                const quickDescription = document.getElementById('quickDescription').value || '[Description]';
-                const quickDate = document.getElementById('quickDate').value || today;
-                const quickTool = document.getElementById('quickTool').value || '[Tool]';
-                const quickTask = document.getElementById('quickTask').value || '[Task]';
-                const quickWorked = document.getElementById('quickWorked').value || '[What worked]';
-                const quickDidnt = document.getElementById('quickDidnt').value || '[What didn\'t work]';
-                const quickNext = document.getElementById('quickNext').value || '[Improvements]';
-                const quickShared = document.getElementById('quickShared').value || 'No';
-                
-                markdown = `## Quick AI Learning: ${quickDescription}
-**Date:** ${quickDate} | **Tool:** ${quickTool} | **Task:** ${quickTask}
+                markdown = `## Quick AI Learning: ${document.getElementById('quickDescription').value || '[Description]'}
+**Date:** ${document.getElementById('quickDate').value || today} | **Tool:** ${document.getElementById('quickTool').value || '[Tool]'} | **Task:** ${document.getElementById('quickTask').value || '[Task]'}
 
 **💡 What Worked:**
-${quickWorked}
+${document.getElementById('quickWorked').value || '[What worked]'}
 
 **❌ What Didn't:**
-${quickDidnt}
+${document.getElementById('quickDidnt').value || '[What didn\\'t work]'}
 
 **🔄 For Next Time:**
-${quickNext}
+${document.getElementById('quickNext').value || '[Improvements]'}
 
-**📤 Shared with team:** ${quickShared}
+**📤 Shared with team:** ${document.getElementById('quickShared').value}
 
 ---
 *Generated on ${today} using Pair to Peer AI Workflows Teaching Moments tool*`;
