@@ -483,6 +483,76 @@
                 grid-template-columns: repeat(2, 1fr);
             }
         }
+
+        .ai-analysis-section {
+            margin-top: 2rem;
+            padding: 2rem;
+            border: 2px solid var(--primary-color);
+            background: var(--surface-elevated);
+            border-radius: 8px;
+        }
+
+        .analysis-status {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .analysis-loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            padding: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .loading-spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border-color);
+            border-top: 2px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .ai-insights {
+            background: var(--surface);
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            border-radius: 6px;
+            margin-top: 1rem;
+        }
+
+        .ai-insights h4 {
+            margin-top: 0;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        #aiInsightsContent {
+            line-height: 1.6;
+            color: var(--text-primary);
+            white-space: pre-wrap;
+        }
+
+        #aiInsightsContent strong {
+            color: var(--primary-color);
+        }
+
+        #aiInsightsContent ul, #aiInsightsContent ol {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+
+        #aiInsightsContent li {
+            margin-bottom: 0.5rem;
+        }
     </style>
 </head>
 <body>
@@ -906,6 +976,11 @@
                     <textarea id="q29" name="q29" rows="4" placeholder="Reflect on your evolving feelings, skills, and confidence with AI..."></textarea>
                 </div>
 
+                <div class="open-question">
+                    <label for="openFeedback">30. Additional Comments & Suggestions</label>
+                    <textarea id="openFeedback" name="openFeedback" rows="6" placeholder="Share any additional thoughts, suggestions, or experiences that weren't covered in the previous questions. This is your space for open-ended feedback about your developer experience with AI tools..."></textarea>
+                </div>
+
                 <div class="navigation-buttons">
                     <button class="btn btn-secondary" onclick="prevSection()">← Previous</button>
                     <button class="btn btn-primary" onclick="showResults()">View Results →</button>
@@ -924,6 +999,21 @@
                 <div id="redFlags" class="red-flags hidden">
                     <h3>⚠️ Red Flag Indicators</h3>
                     <div id="redFlagsList"></div>
+                </div>
+
+                <div class="ai-analysis-section" id="aiAnalysisSection">
+                    <h3>🤖 AI-Powered Analysis</h3>
+                    <div class="analysis-status" id="analysisStatus">
+                        <button class="btn btn-primary" onclick="runAIAnalysis()">🔍 Generate AI Insights</button>
+                        <div class="analysis-loading hidden" id="analysisLoading">
+                            <div class="loading-spinner"></div>
+                            <span>Analyzing your responses with AI...</span>
+                        </div>
+                    </div>
+                    <div class="ai-insights hidden" id="aiInsights">
+                        <h4>💡 AI Insights & Patterns</h4>
+                        <div id="aiInsightsContent"></div>
+                    </div>
                 </div>
 
                 <div class="recommendations">
@@ -1059,6 +1149,9 @@
         }
 
         function showResults() {
+            // Collect open responses before showing results
+            collectOpenResponses();
+            
             document.getElementById(`section${currentSection}`).classList.remove('active');
             document.getElementById('resultsSection').classList.add('active');
             
@@ -1069,11 +1162,22 @@
         }
 
         function generateHealthReport() {
+            // Calculate all category averages
             const integration = calculateCategoryAverage([1, 2, 3, 4, 5]);
             const skill = calculateCategoryAverage([6, 7, 8, 9, 10]);
+            const learning = calculateCategoryAverage([11, 12, 13, 14, 15]);
+            const quality = calculateCategoryAverage([16, 17, 18, 19, 20]);
+            const team = calculateCategoryAverage([21, 22, 23, 24, 25]);
+            
+            // Update category displays
+            updateCategoryDisplay('integrationScore', integration);
+            updateCategoryDisplay('skillScore', skill);
+            updateCategoryDisplay('learningScore', learning);
+            updateCategoryDisplay('qualityScore', quality);
+            updateCategoryDisplay('teamScore', team);
             
             // Calculate overall health status
-            const scores = [integration, skill].filter(s => s !== null);
+            const scores = [integration, skill, learning, quality, team].filter(s => s !== null);
             if (scores.length === 0) return;
             
             const overall = scores.reduce((sum, s) => sum + parseFloat(s), 0) / scores.length;
@@ -1102,15 +1206,27 @@
             document.getElementById('statusDescription').textContent = description;
             
             // Check for red flags
-            checkRedFlags(integration, skill);
+            checkRedFlags(integration, skill, learning, quality, team);
             generateRecommendations(overall);
         }
 
-        function checkRedFlags(integration, skill) {
+        function checkRedFlags(integration, skill, learning, quality, team) {
             const redFlags = [];
             
             if (integration > 4.0 && skill < 3.0) {
                 redFlags.push("Over-dependence risk: High AI integration but low skill balance");
+            }
+            
+            if (quality < 3.0) {
+                redFlags.push("Security/quality risk: Low confidence in AI-generated code quality");
+            }
+            
+            if (learning < 2.5) {
+                redFlags.push("Skill development stagnation: Very low learning velocity");
+            }
+            
+            if (team < 2.5) {
+                redFlags.push("Team collaboration issues: Poor AI workflow integration");
             }
             
             if (redFlags.length > 0) {
@@ -1189,6 +1305,94 @@ Generated by: Pair to Peer AI Workflows Developer Experience Tool`;
 
         // Auto-update progress
         setInterval(updateProgress, 1000);
+
+        // Collect open responses from textarea elements
+        function collectOpenResponses() {
+            openResponses = {
+                'AI Success Story': document.getElementById('q26').value,
+                'Biggest Frustration': document.getElementById('q27').value,
+                'High Impact Improvement': document.getElementById('q28').value,
+                'Relationship Change': document.getElementById('q29').value,
+                'Additional Comments': document.getElementById('openFeedback').value
+            };
+        }
+
+        // Run AI Analysis using the analysis service
+        async function runAIAnalysis() {
+            // Collect latest responses
+            collectOpenResponses();
+            
+            // Show loading state
+            document.getElementById('analysisStatus').style.display = 'none';
+            document.getElementById('analysisLoading').classList.remove('hidden');
+            
+            try {
+                // Prepare data for analysis
+                const analysisData = {
+                    scores: responses,
+                    openResponses: openResponses
+                };
+                
+                // Call the analysis service (default to localhost:3001)
+                const analysisServiceUrl = 'http://localhost:3001/api/analyze';
+                
+                const response = await fetch(analysisServiceUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(analysisData)
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`Analysis service error: ${response.status}`);
+                }
+                
+                const result = await response.json();
+                
+                // Display AI insights
+                displayAIInsights(result);
+                
+            } catch (error) {
+                console.error('AI Analysis failed:', error);
+                
+                // Show fallback message
+                document.getElementById('aiInsightsContent').innerHTML = `
+                    <strong>⚠️ AI Analysis Unavailable</strong><br><br>
+                    The AI analysis service is currently unavailable. This could be because:<br>
+                    • The analysis service is not running (start with: npm start)<br>
+                    • GITHUB_TOKEN environment variable is not set<br>
+                    • Network connectivity issues<br><br>
+                    <em>Your quantitative scores and basic recommendations are still available above.</em><br><br>
+                    <strong>Error:</strong> ${error.message}
+                `;
+                
+                document.getElementById('aiInsights').classList.remove('hidden');
+            } finally {
+                // Hide loading state
+                document.getElementById('analysisLoading').classList.add('hidden');
+            }
+        }
+
+        // Display AI insights in the results
+        function displayAIInsights(analysisResult) {
+            const insightsContent = document.getElementById('aiInsightsContent');
+            
+            // Format the AI insights for better readability
+            let formattedInsights = analysisResult.aiInsights;
+            
+            // Add analysis metadata
+            const metadata = `
+                <div style="border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; margin-bottom: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);">
+                    <strong>Analysis Generated:</strong> ${new Date(analysisResult.analysis.timestamp).toLocaleString()}<br>
+                    <strong>Model:</strong> ${analysisResult.analysis.model}<br>
+                    <strong>Overall Score:</strong> ${analysisResult.overallScore.toFixed(1)}/5.0
+                </div>
+            `;
+            
+            insightsContent.innerHTML = metadata + formattedInsights;
+            document.getElementById('aiInsights').classList.remove('hidden');
+        }
 
         // Clear all data function
         function clearAllData() {
