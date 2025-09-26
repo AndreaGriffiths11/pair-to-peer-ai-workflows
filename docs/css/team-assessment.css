@@ -1,0 +1,346 @@
+/* Team Assessment Specific Styles */
+
+.container {
+    max-width: 900px;
+    border: 2px solid var(--border-color);
+}
+
+nav {
+    padding: 1rem 1.5rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+nav a {
+    font-weight: 600;
+    border-bottom: 3px solid transparent;
+}
+
+header {
+    padding: 2rem 1.5rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+    text-align: center;
+}
+
+header p {
+    font-size: 1.125rem;
+    color: var(--text-secondary);
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.assessment-container {
+    padding: 3rem 2rem;
+}
+
+.intro-card {
+    background: var(--surface);
+    border: 2px solid var(--border-color);
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 700px;
+    text-align: center;
+}
+
+.intro-card h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+}
+
+.intro-card p {
+    font-size: 1.125rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+}
+
+.start-btn {
+    background: var(--primary-color);
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1.125rem;
+    border-radius: 8px;
+    font-family: inherit;
+}
+
+.start-btn:hover {
+    background: var(--primary-hover);
+}
+
+.start-btn:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+.question-card {
+    background: var(--surface);
+    border: 2px solid var(--border-color);
+    padding: 2rem;
+    margin: 1.5rem 0;
+    display: none;
+}
+
+.question-card.active {
+    display: block;
+}
+
+.question-number {
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.question-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+}
+
+.question-options {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.option-btn {
+    background: var(--surface-elevated);
+    border: 2px solid var(--border-color);
+    padding: 1rem;
+    cursor: pointer;
+    text-align: left;
+    font-size: 1rem;
+    color: var(--text-secondary);
+    transition: all 0.2s;
+    font-family: inherit;
+}
+
+.option-btn:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    background: var(--surface);
+}
+
+.option-btn:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+.option-btn.selected {
+    border-color: var(--primary-color);
+    background: var(--primary-color);
+    color: white;
+    font-weight: 500;
+}
+
+.nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-btn {
+    background: var(--primary-color);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-family: inherit;
+}
+
+.nav-btn:hover:not(:disabled) {
+    background: var(--primary-hover);
+}
+
+.nav-btn:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+.nav-btn:disabled {
+    background: var(--text-muted);
+    cursor: not-allowed;
+}
+
+.nav-btn.secondary {
+    background: var(--text-secondary);
+}
+
+.nav-btn.secondary:hover:not(:disabled) {
+    background: var(--text-primary);
+}
+
+.progress-indicator {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.results-card {
+    background: var(--surface);
+    border: 2px solid var(--border-color);
+    padding: 3rem 2rem;
+    margin: 2rem 0;
+    text-align: center;
+    display: none;
+}
+
+.results-card.active {
+    display: block;
+}
+
+.maturity-score {
+    font-size: 3rem;
+    font-weight: 700;
+    margin: 1rem 0;
+}
+
+.maturity-score.beginner {
+    color: var(--danger-color);
+}
+
+.maturity-score.intermediate {
+    color: var(--warning-color);
+}
+
+.maturity-score.advanced {
+    color: var(--success-color);
+}
+
+.maturity-level {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+}
+
+.dimension-scores {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.dimension-card {
+    background: var(--surface-elevated);
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+}
+
+.dimension-title {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.dimension-score {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.dimension-description {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.recommendations {
+    text-align: left;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.recommendations h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.recommendation-item {
+    background: var(--surface-elevated);
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-left: 4px solid var(--primary-color);
+}
+
+.recommendation-title {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.restart-btn {
+    background: var(--text-secondary);
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 2rem;
+    font-family: inherit;
+}
+
+.restart-btn:hover {
+    background: var(--text-primary);
+}
+
+.restart-btn:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 0.5rem;
+    }
+
+    header {
+        padding: 2rem 1rem;
+    }
+
+    header h1 {
+        font-size: 2rem;
+    }
+
+    .assessment-container {
+        padding: 2rem 1rem;
+    }
+
+    .intro-card, .question-card, .results-card {
+        padding: 1.5rem;
+    }
+
+    .dimension-scores {
+        grid-template-columns: 1fr;
+    }
+
+    .mobile-progress-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: rgba(0,0,0,0.1);
+        z-index: 1000;
+    }
+
+    .progress-indicator-mobile {
+        height: 100%;
+        background: var(--primary-color);
+        width: 0%;
+        transition: width 0.2s;
+    }
+}

@@ -1,0 +1,42 @@
+# System Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE and Editor Files
+.vscode/
+.idea/
+*.swp
+*.swo
+.claude/
+
+# Node.js (if added back)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# Environment and Config
+.env
+.env.local
+.env.production
+*.pem
+
+# Temporary Files
+*.tmp
+*.temp
+*.log
+analysis-results.json
+
+# Private speaker notes (keep personal notes out of repo)
+docs/speaker-notes.js
+speaker-notes.js
+
+# Build artifacts
+dist/
+build/

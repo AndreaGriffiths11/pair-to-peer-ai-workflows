@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-First Decision Tree - Pair to Peer AI Workflows</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/modern-theme.css">
+
+    <style>
+        /* Clean Enhanced Decision Tree */
+        .decision-tree {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Result Card */
+        .result-card {
+            background: var(--surface-elevated);
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .result-card.has-result {
+            border-color: var(--accent);
+        }
+
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .result-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--fg);
+            margin: 0;
+        }
+
+        .result-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        .result-badge.ai-first { background: var(--accent-2); color: var(--bg); }
+        .result-badge.ai-assisted { background: var(--accent); color: var(--bg); }
+        .result-badge.human-first { background: var(--warning-color); color: var(--bg); }
+
+        .result-explanation {
+            color: var(--muted);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .result-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        /* Questions */
+        .question-group {
+            background: var(--surface-elevated);
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .question-group.active {
+            border-color: var(--accent);
+        }
+
+        .question {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--fg);
+            margin-bottom: 1.5rem;
+        }
+
+        .option {
+            background: var(--surface);
+            border: 2px solid var(--border-color);
+            color: var(--fg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            text-align: left;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        .option:hover {
+            border-color: var(--accent);
+            background: rgba(110, 231, 255, 0.05);
+            transform: translateY(-1px);
+        }
+
+        .option:active {
+            transform: translateY(0);
+        }
+
+        .option.selected {
+            border-color: var(--accent);
+            background: rgba(110, 231, 255, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .option.processing {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .result-actions {
+            margin-top: 1rem;
+        }
+
+        .option-title {
+            display: block;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .option-desc {
+            display: block;
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        /* Matrix */
+        .criteria-matrix {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .decision-matrix {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--surface);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .decision-matrix th {
+            background: var(--surface-elevated);
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .decision-matrix td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .approach-header {
+            text-align: center;
+        }
+
+        .highlighted {
+            background: rgba(110, 231, 255, 0.1);
+            border-left: 3px solid var(--accent);
+        }
+
+        /* Progress */
+        .progress-bar {
+            background: rgba(255, 255, 255, 0.1);
+            height: 4px;
+            border-radius: 2px;
+            margin-bottom: 2rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--accent-2));
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        /* Utilities */
+        .hidden { display: none !important; }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .decision-tree { padding: 1rem; }
+            .result-card, .question-group, .criteria-matrix { padding: 1.5rem; }
+            .result-header { flex-direction: column; align-items: flex-start; }
+            .result-actions { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="desktop-nav" role="navigation" aria-label="Main navigation">
+            <ul>
+                <li><a href="slides.html">📖 About</a></li>
+                <li><a href="index.html" class="active" aria-current="page">Decision Tree</a></li>
+                <li><a href="team-assessment.html">Team Assessment</a></li>
+                <li><a href="teaching-moments.html">Teaching Moments</a></li>
+                <li><a href="developer-experience.html">Developer Experience</a></li>
+            </ul>
+        </nav>
+
+        <nav class="mobile-nav" role="navigation" aria-label="Mobile navigation">
+            <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span class="hamburger-icon"></span>
+            </button>
+            <div class="mobile-menu">
+                <a href="slides.html">📖 About</a>
+                <a href="index.html" class="active" aria-current="page">Decision Tree</a>
+                <a href="team-assessment.html">Team Assessment</a>
+                <a href="teaching-moments.html">Teaching Moments</a>
+                <a href="developer-experience.html">Developer Experience</a>
+            </div>
+        </nav>
+
+        <header role="banner">
+            <h1>AI-First Decision Tree</h1>
+            <p>Quick assessment to determine the best AI approach for your development task</p>
+        </header>
+
+        <main role="main" class="decision-tree">
+            <!-- Result Card -->
+            <div class="result-card" id="resultCard">
+                <div class="result-header">
+                    <h2 class="result-title" id="resultTitle">Answer questions to get your recommendation</h2>
+                    <div class="result-badge" id="resultBadge"></div>
+                </div>
+                <div class="result-explanation" id="resultExplanation">
+                    Start the assessment below to see which approach fits your development task.
+                </div>
+                <div class="result-actions hidden" id="resultActions">
+                    <button type="button" class="btn btn-secondary" id="resetBtn">🔄 Start Over</button>
+                </div>
+            </div>
+
+            <!-- Progress -->
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+
+            <!-- Question 1: Complexity -->
+            <div class="question-group active" id="question1" data-question="complexity">
+                <h3 class="question">What's the complexity of your task?</h3>
+                <button class="option" data-value="simple" data-approach="ai-first">
+                    <span class="option-title">Simple/Repetitive</span>
+                    <span class="option-desc">CRUD operations, boilerplate code, standard tests</span>
+                </button>
+                <button class="option" data-value="medium" data-approach="ai-assisted">
+                    <span class="option-title">Business Logic</span>
+                    <span class="option-desc">API integrations, data processing, standard features</span>
+                </button>
+                <button class="option" data-value="complex" data-approach="human-first">
+                    <span class="option-title">Architecture/Novel</span>
+                    <span class="option-desc">New algorithms, system design, complex integrations</span>
+                </button>
+            </div>
+
+            <div class="question-group hidden" id="question2" data-question="security">
+                <h3 class="question">What's the security risk level?</h3>
+                <button class="option" data-value="low" data-approach="ai-first">
+                    <span class="option-title">Low Risk</span>
+                    <span class="option-desc">UI components, documentation, tests</span>
+                </button>
+                <button class="option" data-value="medium" data-approach="ai-assisted">
+                    <span class="option-title">Standard Risk</span>
+                    <span class="option-desc">Business logic, data processing</span>
+                </button>
+                <button class="option" data-value="high" data-approach="human-first">
+                    <span class="option-title">High Risk</span>
+                    <span class="option-desc">Authentication, payments, sensitive data</span>
+                </button>
+            </div>
+
+            <!-- Question 3: Team Experience -->
+            <div class="question-group hidden" id="question3" data-question="experience">
+                <h3 class="question">What's your team's experience with AI tools?</h3>
+                <button class="option" data-value="senior" data-approach="ai-first">
+                    <span class="option-title">Senior Team</span>
+                    <span class="option-desc">Experienced with AI tools and code review</span>
+                </button>
+                <button class="option" data-value="mixed" data-approach="ai-assisted">
+                    <span class="option-title">Mixed Experience</span>
+                    <span class="option-desc">Some team members familiar with AI tools</span>
+                </button>
+                <button class="option" data-value="junior" data-approach="human-first">
+                    <span class="option-title">Learning Team</span>
+                    <span class="option-desc">Still building familiarity with AI tools</span>
+                </button>
+            </div>
+
+            <!-- Decision Matrix -->
+            <div class="criteria-matrix" id="criteriaMatrix">
+                <h3>Decision Framework</h3>
+                <p id="matrixIntro">Complete the assessment above to see how your answers map to our proven decision framework.</p>
+
+                <table class="decision-matrix" id="decisionMatrix">
+                    <thead>
+                        <tr>
+                            <th>Factor</th>
+                            <th class="approach-header ai-first-col">AI-First</th>
+                            <th class="approach-header ai-assisted-col">AI-Assisted</th>
+                            <th class="approach-header human-first-col">Human-First</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>Code Complexity</th>
+                            <td class="ai-first-col">Simple patterns, boilerplate</td>
+                            <td class="ai-assisted-col">Standard business logic</td>
+                            <td class="human-first-col">Novel algorithms, complex architecture</td>
+                        </tr>
+                        <tr>
+                            <th>Security Risk</th>
+                            <td class="ai-first-col">Low (UI, docs, tests)</td>
+                            <td class="ai-assisted-col">Medium (business logic)</td>
+                            <td class="human-first-col">High (auth, payments, crypto)</td>
+                        </tr>
+                        <tr>
+                            <th>Team Experience</th>
+                            <td class="ai-first-col">Senior devs who can review</td>
+                            <td class="ai-assisted-col">Mixed experience teams</td>
+                            <td class="human-first-col">Junior devs learning concepts</td>
+                        </tr>
+                        <tr>
+                            <th>Context Available</th>
+                            <td class="ai-first-col">Similar code exists in codebase</td>
+                            <td class="ai-assisted-col">Some existing patterns</td>
+                            <td class="human-first-col">No precedent or patterns</td>
+                        </tr>
+                        <tr>
+                            <th>Time Constraints</th>
+                            <td class="ai-first-col">Tight deadlines, standard work</td>
+                            <td class="ai-assisted-col">Balanced delivery timeline</td>
+                            <td class="human-first-col">Learning/exploration priority</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Simple, clean implementation
+        class SimpleDecisionTree {
+            constructor() {
+                this.answers = {};
+                this.currentQuestion = 1;
+                this.totalQuestions = 3;
+                this.init();
+            }
+
+            init() {
+                this.attachEventListeners();
+                this.loadFromURL();
+            }
+
+            attachEventListeners() {
+                // Option buttons - use currentTarget to always get the button, not the clicked span inside
+                document.querySelectorAll('.option').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        // Use currentTarget to get the actual button, not the clicked element inside it
+                        this.handleAnswer(e.currentTarget);
+                    });
+                });
+
+                // Action buttons
+                const resetBtn = document.getElementById('resetBtn');
+                if (resetBtn) {
+                    resetBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        this.reset();
+                    });
+                } else {
+                    console.warn('Reset button not found');
+                }
+            }
+
+            handleAnswer(button) {
+                console.log('handleAnswer called with:', button);
+
+                // Validate button and data
+                if (!button) {
+                    console.error('No button provided to handleAnswer');
+                    return;
+                }
+
+                // Add visual feedback immediately
+                button.style.opacity = '0.7';
+                setTimeout(() => button.style.opacity = '1', 150);
+
+                const questionGroup = button.closest('.question-group');
+                if (!questionGroup) {
+                    console.error('Button not inside a question-group');
+                    return;
+                }
+
+                const question = questionGroup.dataset.question;
+                const value = button.dataset.value;
+                const approach = button.dataset.approach;
+
+                console.log('Button data:', { question, value, approach });
+
+                // Validate required data
+                if (!question || !value || !approach) {
+                    console.error('Missing required data:', { question, value, approach });
+                    console.log('Button HTML:', button.outerHTML);
+                    return;
+                }
+
+                // Prevent double-clicking
+                if (button.classList.contains('processing')) {
+                    console.log('Button already being processed');
+                    return;
+                }
+                button.classList.add('processing');
+
+                try {
+                    // Store answer
+                    this.answers[question] = { value, approach };
+                    console.log('Answer stored:', question, { value, approach });
+                    console.log('All answers so far:', this.answers);
+
+                    // Update UI
+                    this.updateSelection(questionGroup, button);
+                    this.updateResult();
+                    this.updateProgress();
+                    this.updateURL();
+
+                    // Move to next question with a slight delay for visual feedback
+                    setTimeout(() => {
+                        this.nextQuestion();
+                        button.classList.remove('processing');
+                    }, 200);
+
+                } catch (error) {
+                    console.error('Error in handleAnswer:', error);
+                    button.classList.remove('processing');
+                }
+            }
+
+            updateSelection(questionGroup, selectedButton) {
+                questionGroup.querySelectorAll('.option').forEach(btn => {
+                    btn.classList.remove('selected');
+                });
+                selectedButton.classList.add('selected');
+            }
+
+            updateResult() {
+                try {
+                    const result = this.calculateResult();
+
+                    // Validate DOM elements exist
+                    const resultCard = document.getElementById('resultCard');
+                    const resultTitle = document.getElementById('resultTitle');
+                    const resultBadge = document.getElementById('resultBadge');
+                    const resultExplanation = document.getElementById('resultExplanation');
+                    const matrixIntro = document.getElementById('matrixIntro');
+
+                    if (!resultCard || !resultTitle || !resultBadge || !resultExplanation) {
+                        console.error('Missing required DOM elements for result display');
+                        return;
+                    }
+
+                    // Ensure result has valid data
+                    if (!result || !result.approach || !result.explanation) {
+                        console.error('Invalid result from calculateResult:', result);
+                        return;
+                    }
+
+                    if (Object.keys(this.answers).length === this.totalQuestions) {
+                        resultCard.classList.add('has-result');
+                        resultTitle.textContent = 'Your Recommendation';
+
+                        // Safely handle approach text
+                        const approachText = result.approach.replace('-', ' ').toUpperCase();
+                        resultBadge.textContent = approachText;
+                        resultBadge.className = `result-badge ${result.approach}`;
+                        resultExplanation.textContent = result.explanation;
+
+                        // Show actions
+                        const resultActions = document.getElementById('resultActions');
+                        if (resultActions) {
+                            resultActions.classList.remove('hidden');
+                        }
+
+                        // Highlight matrix
+                        this.highlightMatrix(result.approach);
+
+                        // Update matrix intro safely
+                        if (matrixIntro) {
+                            matrixIntro.textContent =
+                                `Your answers suggest an ${result.approach.replace('-', ' ').toUpperCase()} approach. The highlighted column shows factors that match your situation.`;
+                        }
+                    } else {
+                        resultTitle.textContent = 'Assessment in Progress...';
+                        resultBadge.textContent = '';
+                        resultBadge.className = 'result-badge';
+                        resultExplanation.textContent = 'Continue answering questions to see your recommendation.';
+                    }
+                } catch (error) {
+                    console.error('Error updating result:', error);
+
+                    // Fallback error display
+                    const resultTitle = document.getElementById('resultTitle');
+                    const resultExplanation = document.getElementById('resultExplanation');
+
+                    if (resultTitle) resultTitle.textContent = 'Error';
+                    if (resultExplanation) resultExplanation.textContent = 'Please refresh the page and try again.';
+                }
+            }
+
+            calculateResult() {
+                // Validate we have answers
+                if (!this.answers || Object.keys(this.answers).length === 0) {
+                    console.warn('No answers to calculate result from');
+                    return {
+                        approach: 'ai-assisted',
+                        explanation: 'Please answer the questions to get a recommendation.'
+                    };
+                }
+
+                // Extract approaches, filtering out any undefined values
+                const approaches = Object.values(this.answers)
+                    .filter(answer => answer && answer.approach)
+                    .map(a => a.approach);
+
+                if (approaches.length === 0) {
+                    console.warn('No valid approaches found in answers');
+                    return {
+                        approach: 'ai-assisted',
+                        explanation: 'Please answer the questions to get a recommendation.'
+                    };
+                }
+
+                // Count approaches
+                const counts = approaches.reduce((acc, approach) => {
+                    if (approach) {
+                        acc[approach] = (acc[approach] || 0) + 1;
+                    }
+                    return acc;
+                }, {});
+
+                console.log('Approach counts:', counts);
+
+                // Find the most common approach
+                const countValues = Object.values(counts);
+                if (countValues.length === 0) {
+                    return {
+                        approach: 'ai-assisted',
+                        explanation: 'Unable to determine recommendation. Please try again.'
+                    };
+                }
+
+                const maxCount = Math.max(...countValues);
+                const result = Object.keys(counts).find(key => counts[key] === maxCount);
+
+                const explanations = {
+                    'ai-first': 'Perfect for AI generation - your task has low complexity, low security risk, and experienced team oversight.',
+                    'ai-assisted': 'AI can accelerate development while you maintain control over business logic and architecture decisions.',
+                    'human-first': 'Human expertise should lead due to complexity, security requirements, or team learning needs. Use AI for research assistance.'
+                };
+
+                // Fallback to ai-assisted if result is undefined
+                const finalApproach = result || 'ai-assisted';
+                const finalExplanation = explanations[finalApproach] || 'Unable to generate explanation. Please try the assessment again.';
+
+                console.log('Final result:', { approach: finalApproach, explanation: finalExplanation });
+
+                return {
+                    approach: finalApproach,
+                    explanation: finalExplanation
+                };
+            }
+
+            highlightMatrix(approach) {
+                // Clear previous highlights
+                document.querySelectorAll('.highlighted').forEach(el => {
+                    el.classList.remove('highlighted');
+                });
+
+                // Highlight target approach
+                document.querySelectorAll(`.${approach}-col`).forEach(el => {
+                    el.classList.add('highlighted');
+                });
+            }
+
+            nextQuestion() {
+                if (this.currentQuestion < this.totalQuestions) {
+                    this.currentQuestion++;
+                    const current = document.getElementById(`question${this.currentQuestion - 1}`);
+                    const next = document.getElementById(`question${this.currentQuestion}`);
+
+                    current.classList.remove('active');
+                    current.classList.add('hidden');
+                    next.classList.remove('hidden');
+                    next.classList.add('active');
+                }
+            }
+
+            updateProgress() {
+                const progress = (Object.keys(this.answers).length / this.totalQuestions) * 100;
+                document.getElementById('progressFill').style.width = `${progress}%`;
+            }
+
+            updateURL() {
+                const params = new URLSearchParams();
+                Object.entries(this.answers).forEach(([question, answer]) => {
+                    params.set(question, answer.value);
+                });
+                const newURL = `${window.location.pathname}${params.toString() ? '?' + params.toString() : ''}`;
+                window.history.replaceState({}, '', newURL);
+            }
+
+            loadFromURL() {
+                const params = new URLSearchParams(window.location.search);
+                params.forEach((value, question) => {
+                    if (['complexity', 'security', 'experience'].includes(question)) {
+                        const questionGroup = document.querySelector(`[data-question="${question}"]`);
+                        const button = questionGroup?.querySelector(`[data-value="${value}"]`);
+                        if (button) {
+                            this.handleAnswer(button);
+                        }
+                    }
+                });
+            }
+
+            reset() {
+                this.answers = {};
+                this.currentQuestion = 1;
+
+                // Reset UI
+                document.querySelectorAll('.question-group').forEach((group, index) => {
+                    if (index === 0) {
+                        group.classList.add('active');
+                        group.classList.remove('hidden');
+                    } else {
+                        group.classList.remove('active');
+                        group.classList.add('hidden');
+                    }
+                    group.querySelectorAll('.option').forEach(btn => {
+                        btn.classList.remove('selected');
+                    });
+                });
+
+                // Reset result
+                const resultCard = document.getElementById('resultCard');
+                resultCard.classList.remove('has-result');
+                document.getElementById('resultTitle').textContent = 'Answer questions to get your recommendation';
+                document.getElementById('resultBadge').textContent = '';
+                document.getElementById('resultBadge').className = 'result-badge';
+                document.getElementById('resultExplanation').textContent = 'Start the assessment below to see which approach fits your development task.';
+                document.getElementById('resultActions').classList.add('hidden');
+
+                // Reset matrix
+                document.querySelectorAll('.highlighted').forEach(el => {
+                    el.classList.remove('highlighted');
+                });
+                document.getElementById('matrixIntro').textContent = 'Complete the assessment above to see how your answers map to our proven decision framework.';
+
+                // Reset progress
+                this.updateProgress();
+
+                // Clear URL
+                window.history.replaceState({}, '', window.location.pathname);
+            }
+        }
+
+        // Initialize when DOM loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new SimpleDecisionTree();
+        });
+    </script>
+    <script type="module" src="js/navigation.js"></script>
+
+    <footer role="contentinfo">
+        <p>
+            Made with ❤️ for education by
+            <a href="https://twitter.com/alacolombiadev" target="_blank" rel="noopener noreferrer">
+                Andrea Griffiths @alacolombiadev
+            </a>
+        </p>
+    </footer>
+</body>
+</html>

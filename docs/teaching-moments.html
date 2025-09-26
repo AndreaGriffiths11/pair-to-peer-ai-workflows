@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Teaching Moments - Pair to Peer AI Workflows</title>
+    
+    <!-- OpenGraph Meta Tags -->
+    <meta property="og:title" content="AI Teaching Moments - Capture and Share Team Learning">
+    <meta property="og:description" content="Interactive framework for documenting AI learning experiences. Transform individual successes and failures into reusable team knowledge with CARE framework scoring.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://andreagriffiths11.github.io/pair-to-peer-ai-workflows/teaching-moments.html">
+    <meta property="og:site_name" content="Pair to Peer AI Workflows">
+    <meta name="description" content="Document what worked, what didn't, and why in your AI implementations. Build fluency over dependency with structured learning capture.">
+    <meta name="keywords" content="AI learning, knowledge sharing, team fluency, AI documentation, developer education, CARE framework">
+    <meta name="author" content="Andrea Griffiths">
+    
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline';">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <meta name="referrer" content="same-origin">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.ico">
+    <link rel="apple-touch-icon" href="favicon.ico">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/modern-theme.css">
+    <link rel="stylesheet" href="css/interactive-components.css">
+</head>
+<body>
+    <!-- Mobile progress bar -->
+    <div class="mobile-progress-bar">
+        <div class="progress-indicator" id="mobileProgressIndicator"></div>
+    </div>
+    
+    <!-- Back to top button -->
+    <button id="backToTop" class="back-to-top-btn" aria-label="Back to top">↑</button>
+    
+    <div class="container">
+        <nav class="desktop-nav" role="navigation" aria-label="Main navigation">
+            <ul>
+                <li><a href="slides.html">📖 About</a></li>
+                <li><a href="index.html">Decision Tree</a></li>
+                <li><a href="team-assessment.html">Team Assessment</a></li>
+                <li><a href="teaching-moments.html" class="active" aria-current="page">Teaching Moments</a></li>
+                <li><a href="developer-experience.html">Developer Experience</a></li>
+            </ul>
+        </nav>
+        
+        <nav class="mobile-nav" role="navigation" aria-label="Mobile navigation">
+            <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span class="hamburger-icon"></span>
+            </button>
+            <div class="mobile-menu">
+                <a href="slides.html">📖 About</a>
+                <a href="index.html">Decision Tree</a>
+                <a href="team-assessment.html">Team Assessment</a>
+                <a href="teaching-moments.html" class="active" aria-current="page">Teaching Moments</a>
+                <a href="developer-experience.html">Developer Experience</a>
+            </div>
+        </nav>
+
+        <header role="banner">
+            <h1>AI Teaching Moments</h1>
+            <p>Capture and share AI learning experiences with your team</p>
+        </header>
+
+        <main role="main">
+            <!-- Template Choice -->
+            <div id="templateChoice">
+                <div class="template-choice">
+                    <div class="template-card" onclick="selectTemplate('detailed')">
+                        <div class="template-title">Detailed Learning Entry</div>
+                        <div class="template-description">
+                            Comprehensive documentation with CARE framework scoring, root cause analysis, 
+                            and reusable assets. Perfect for significant learning moments.
+                        </div>
+                        <div class="template-duration">15-20 minutes</div>
+                    </div>
+                    <div class="template-card" onclick="selectTemplate('quick')">
+                        <div class="template-title">Quick Capture</div>
+                        <div class="template-description">
+                            Rapid knowledge capture for immediate insights. Just the essentials: 
+                            what worked, what didn't, and key takeaways.
+                        </div>
+                        <div class="template-duration">5 minutes</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Indicator -->
+            <div class="progress-indicator hidden" id="progressIndicator">
+                <div class="progress-text">Progress: <span id="progressText">0%</span></div>
+                <div class="section-indicator">
+                    Section <span id="currentSectionNum">1</span> of <span id="totalSectionsNum">3</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+
+            <!-- Detailed Template Form - Section 1: Context -->
+            <div class="form-section hidden" id="detailedSection1">
+                <div class="section-title">Context & Basic Information</div>
+                
+                <div class="form-group">
+                    <label class="form-label">Brief Description</label>
+                    <input type="text" class="form-input" id="description" placeholder="e.g., Implementing user authentication with AI assistance">
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                    <div class="form-group">
+                        <label class="form-label">Date</label>
+                        <input type="date" class="form-input" id="date">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Team Member</label>
+                        <input type="text" class="form-input" id="teamMember" placeholder="Your name">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">AI Tool Used</label>
+                        <input type="text" class="form-input" id="aiTool" placeholder="e.g., Copilot CLI, Claude, ChatGPT">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Task Type</label>
+                        <select class="form-select" id="taskType">
+                            <option value="">Select type</option>
+                            <option value="Feature">Feature Development</option>
+                            <option value="Bug Fix">Bug Fix</option>
+                            <option value="Refactor">Refactoring</option>
+                            <option value="Learning">Learning/Research</option>
+                            <option value="Architecture">Architecture</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Complexity Level</label>
+                        <select class="form-select" id="complexity">
+                            <option value="">Select complexity</option>
+                            <option value="Simple">Simple</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Complex">Complex</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Objective</label>
+                    <textarea class="form-textarea" id="objective" placeholder="What you wanted to achieve..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Approach & Prompt Strategy</label>
+                    <textarea class="form-textarea" id="approach" placeholder="Describe your prompt strategy, AI tool configuration, and approach..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Result & Outcome</label>
+                    <textarea class="form-textarea" id="result" placeholder="What happened - success, partial success, or failure..."></textarea>
+                </div>
+
+                <div class="navigation-buttons">
+                    <button class="btn btn-secondary" onclick="goBack()">← Back to Template Choice</button>
+                    <button class="btn btn-primary" onclick="nextDetailedSection()">Next: CARE Assessment →</button>
+                </div>
+            </div>
+
+            <!-- Detailed Template Form - Section 2: CARE Assessment -->
+            <div class="form-section hidden" id="detailedSection2">
+                <div class="section-title">Quality Assessment & Analysis</div>
+                
+                <!-- CARE Framework Scoring -->
+                <div class="form-group">
+                    <label class="form-label">CARE Framework Quality Score</label>
+                    
+                    <div style="margin: 1rem 0;">
+                        <strong>Completeness (1-5):</strong>
+                        <div class="rating-group" data-rating="completeness">
+                            <div class="rating-option" onclick="setRating('completeness', 1)">1</div>
+                            <div class="rating-option" onclick="setRating('completeness', 2)">2</div>
+                            <div class="rating-option" onclick="setRating('completeness', 3)">3</div>
+                            <div class="rating-option" onclick="setRating('completeness', 4)">4</div>
+                            <div class="rating-option" onclick="setRating('completeness', 5)">5</div>
+                        </div>
+                    </div>
+
+                    <div style="margin: 1rem 0;">
+                        <strong>Accuracy (1-5):</strong>
+                        <div class="rating-group" data-rating="accuracy">
+                            <div class="rating-option" onclick="setRating('accuracy', 1)">1</div>
+                            <div class="rating-option" onclick="setRating('accuracy', 2)">2</div>
+                            <div class="rating-option" onclick="setRating('accuracy', 3)">3</div>
+                            <div class="rating-option" onclick="setRating('accuracy', 4)">4</div>
+                            <div class="rating-option" onclick="setRating('accuracy', 5)">5</div>
+                        </div>
+                    </div>
+
+                    <div style="margin: 1rem 0;">
+                        <strong>Relevance (1-5):</strong>
+                        <div class="rating-group" data-rating="relevance">
+                            <div class="rating-option" onclick="setRating('relevance', 1)">1</div>
+                            <div class="rating-option" onclick="setRating('relevance', 2)">2</div>
+                            <div class="rating-option" onclick="setRating('relevance', 3)">3</div>
+                            <div class="rating-option" onclick="setRating('relevance', 4)">4</div>
+                            <div class="rating-option" onclick="setRating('relevance', 5)">5</div>
+                        </div>
+                    </div>
+
+                    <div style="margin: 1rem 0;">
+                        <strong>Efficiency (1-5):</strong>
+                        <div class="rating-group" data-rating="efficiency">
+                            <div class="rating-option" onclick="setRating('efficiency', 1)">1</div>
+                            <div class="rating-option" onclick="setRating('efficiency', 2)">2</div>
+                            <div class="rating-option" onclick="setRating('efficiency', 3)">3</div>
+                            <div class="rating-option" onclick="setRating('efficiency', 4)">4</div>
+                            <div class="rating-option" onclick="setRating('efficiency', 5)">5</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- What Worked Well -->
+                <div class="form-group">
+                    <label class="form-label">What Worked Well</label>
+                    <textarea class="form-textarea" id="whatWorked" placeholder="Effective prompting patterns, context strategies, tool integration, quality outcomes..."></textarea>
+                </div>
+
+                <!-- What Didn't Work -->
+                <div class="form-group">
+                    <label class="form-label">What Didn't Work</label>
+                    <textarea class="form-textarea" id="whatDidnt" placeholder="Ineffective approaches, context issues, quality problems, workflow friction..."></textarea>
+                </div>
+
+                <div class="navigation-buttons">
+                    <button class="btn btn-secondary" onclick="prevDetailedSection()">← Previous: Context</button>
+                    <button class="btn btn-primary" onclick="nextDetailedSection()">Next: Lessons & Sharing →</button>
+                </div>
+            </div>
+
+            <!-- Detailed Template Form - Section 3: Lessons & Sharing -->
+            <div class="form-section hidden" id="detailedSection3">
+                <div class="section-title">Lessons Learned & Knowledge Sharing</div>
+                
+                <!-- Lessons Learned -->
+                <div class="form-group">
+                    <label class="form-label">Lessons Learned</label>
+                    <textarea class="form-textarea" id="lessons" placeholder="Key insights for future similar tasks and broader team knowledge..."></textarea>
+                </div>
+
+                <!-- Knowledge Sharing Actions -->
+                <div class="form-group">
+                    <label class="form-label">Knowledge Sharing Actions</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox" onclick="toggleCheckbox('shared-chat')"></div>
+                        <label>Shared in team chat/Slack with summary</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <div class="checkbox" onclick="toggleCheckbox('shared-wiki')"></div>
+                        <label>Added to team wiki/knowledge base</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <div class="checkbox" onclick="toggleCheckbox('shared-meeting')"></div>
+                        <label>Presented in team standup/meeting</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <div class="checkbox" onclick="toggleCheckbox('shared-guidelines')"></div>
+                        <label>Updated team AI guidelines document</label>
+                    </div>
+                </div>
+
+                <div class="navigation-buttons">
+                    <button class="btn btn-secondary" onclick="prevDetailedSection()">← Previous: Assessment</button>
+                    <button class="btn btn-primary" onclick="generateOutput()">Generate Learning Document</button>
+                </div>
+            </div>
+
+            <!-- Quick Template Form -->
+            <div class="form-section hidden" id="quickForm">
+                <div class="section-title">Quick AI Learning Capture</div>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+                    <div class="form-group">
+                        <label class="form-label">Date</label>
+                        <input type="date" class="form-input" id="quickDate">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">AI Tool</label>
+                        <input type="text" class="form-input" id="quickTool" placeholder="e.g., Claude">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Task Type</label>
+                        <input type="text" class="form-input" id="quickTask" placeholder="e.g., Bug fix">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">One-line Description</label>
+                    <input type="text" class="form-input" id="quickDescription" placeholder="Brief description of what you learned...">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">💡 What Worked</label>
+                    <textarea class="form-textarea" id="quickWorked" placeholder="Key success factors and effective prompt patterns..." style="min-height: 80px;"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">❌ What Didn't Work</label>
+                    <textarea class="form-textarea" id="quickDidnt" placeholder="Main issues and anti-patterns to avoid..." style="min-height: 80px;"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">🔄 For Next Time</label>
+                    <textarea class="form-textarea" id="quickNext" placeholder="One key improvement to make..." style="min-height: 60px;"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">📤 Shared with Team</label>
+                    <select class="form-select" id="quickShared">
+                        <option value="No">No, not yet</option>
+                        <option value="Yes - Slack">Yes, in Slack</option>
+                        <option value="Yes - Meeting">Yes, in team meeting</option>
+                        <option value="Yes - Wiki">Yes, added to wiki</option>
+                        <option value="Yes - Other">Yes, other method</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Global Action Buttons (shown with output) -->
+            <div class="action-buttons hidden" id="globalActionButtons">
+                <button class="btn btn-secondary" onclick="saveProgress()">💾 Save Progress</button>
+                <button class="btn btn-secondary" onclick="clearForm()">🔄 Start Over</button>
+            </div>
+
+            <!-- Output Section -->
+            <div class="output-section" id="outputSection">
+                <div class="section-title">Generated Learning Document</div>
+                <p style="margin-bottom: 1rem; color: var(--text-secondary);">
+                    Copy and paste this markdown into your team's knowledge base, wiki, or documentation system.
+                </p>
+                <div class="markdown-output" id="markdownOutput"></div>
+                <div class="action-buttons">
+                    <button class="btn btn-primary" onclick="copyToClipboard()">📋 Copy to Clipboard</button>
+                    <button class="btn btn-secondary" onclick="downloadMarkdown()">📄 Download as .md</button>
+                    <button class="btn btn-secondary" onclick="createNew()">✨ Create New Entry</button>
+                </div>
+            </div>
+        </main>
+
+        <footer role="contentinfo">
+            <p>
+                Made with ❤️ for education by
+                <a href="https://twitter.com/alacolombiadev" target="_blank" rel="noopener noreferrer">
+                    Andrea Griffiths @alacolombiadev
+                </a>
+            </p>
+            <button class="btn btn-small" type="button" onclick="clearAllData()">Clear All Data</button>
+        </footer>
+    </div>
+
+    <script>
+        // Mobile navigation functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            
+            if (menuToggle && mobileMenu) {
+                menuToggle.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('active');
+                    menuToggle.classList.toggle('active');
+                });
+                
+                // Close menu when clicking outside
+                document.addEventListener('click', function(event) {
+                    if (!event.target.closest('.mobile-nav') && mobileMenu.classList.contains('active')) {
+                        mobileMenu.classList.remove('active');
+                        menuToggle.classList.remove('active');
+                    }
+                });
+            }
+            
+            // Mobile scroll progress indicator
+            function updateMobileProgress() {
+                const scrollTop = window.scrollY;
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const scrollPercent = (scrollTop / docHeight) * 100;
+                
+                const progressIndicator = document.getElementById('mobileProgressIndicator');
+                if (progressIndicator) {
+                    progressIndicator.style.width = scrollPercent + '%';
+                }
+                
+                // Show/hide back to top button
+                const backToTopButton = document.getElementById('backToTop');
+                if (backToTopButton) {
+                    if (scrollTop > 300) {
+                        backToTopButton.classList.add('visible');
+                    } else {
+                        backToTopButton.classList.remove('visible');
+                    }
+                }
+            }
+            
+            // Back to top functionality
+            const backToTopButton = document.getElementById('backToTop');
+            if (backToTopButton) {
+                backToTopButton.addEventListener('click', function() {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+            
+            window.addEventListener('scroll', updateMobileProgress);
+            // Initialize progress on load
+            updateMobileProgress();
+        });
+
+        // Global variables and functions for template functionality
+        let currentTemplate = null;
+        let ratings = {
+            completeness: 0,
+            accuracy: 0,
+            relevance: 0,
+            efficiency: 0
+        };
+        let checkboxes = {};
+
+        let currentSection = 1;
+        let totalSections = 3; // For detailed template
+
+        function selectTemplate(type) {
+            console.log('selectTemplate called with:', type);
+            currentTemplate = type;
+            currentSection = 1;
+
+            // Hide template choice
+            const templateChoice = document.getElementById('templateChoice');
+            const progressIndicator = document.getElementById('progressIndicator');
+
+            if (templateChoice) {
+                templateChoice.classList.add('hidden');
+            }
+            if (progressIndicator) {
+                progressIndicator.classList.remove('hidden');
+            }
+
+            // Show appropriate form
+            if (type === 'detailed') {
+                totalSections = 3;
+                const detailedSection1 = document.getElementById('detailedSection1');
+                const dateInput = document.getElementById('date');
+
+                if (detailedSection1) {
+                    detailedSection1.classList.remove('hidden');
+                    detailedSection1.classList.add('active');
+                }
+                if (dateInput) {
+                    dateInput.value = new Date().toISOString().split('T')[0];
+                }
+            } else {
+                totalSections = 1;
+                const quickForm = document.getElementById('quickForm');
+                const quickDateInput = document.getElementById('quickDate');
+
+                if (quickForm) {
+                    quickForm.classList.remove('hidden');
+                    quickForm.classList.add('active');
+                }
+                if (quickDateInput) {
+                    quickDateInput.value = new Date().toISOString().split('T')[0];
+                }
+            }
+
+            updateSectionIndicator();
+            updateProgress();
+        }
+
+        function setRating(category, value) {
+            ratings[category] = value;
+            
+            // Update UI
+            const ratingGroup = document.querySelector(`[data-rating="${category}"]`);
+            const options = ratingGroup.querySelectorAll('.rating-option');
+            options.forEach((option, index) => {
+                option.classList.remove('selected');
+                if (index + 1 <= value) {
+                    option.classList.add('selected');
+                }
+            });
+            
+            updateProgress();
+        }
+
+        function toggleCheckbox(id) {
+            checkboxes[id] = !checkboxes[id];
+            const checkbox = event.target;
+            checkbox.classList.toggle('checked');
+            updateProgress();
+        }
+
+        function nextDetailedSection() {
+            if (currentSection < totalSections) {
+                // Hide current section
+                const currentSectionElement = document.getElementById(`detailedSection${currentSection}`);
+                currentSectionElement.classList.remove('active');
+                currentSectionElement.classList.add('hidden');
+                
+                currentSection++;
+                
+                // Show next section
+                const nextSectionElement = document.getElementById(`detailedSection${currentSection}`);
+                nextSectionElement.classList.remove('hidden');
+                nextSectionElement.classList.add('active');
+                
+                updateSectionIndicator();
+                updateProgress();
+                
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function prevDetailedSection() {
+            if (currentSection > 1) {
+                // Hide current section
+                const currentSectionElement = document.getElementById(`detailedSection${currentSection}`);
+                currentSectionElement.classList.remove('active');
+                currentSectionElement.classList.add('hidden');
+                
+                currentSection--;
+                
+                // Show previous section
+                const prevSectionElement = document.getElementById(`detailedSection${currentSection}`);
+                prevSectionElement.classList.remove('hidden');
+                prevSectionElement.classList.add('active');
+                
+                updateSectionIndicator();
+                updateProgress();
+                
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function updateSectionIndicator() {
+            document.getElementById('currentSectionNum').textContent = currentSection;
+            document.getElementById('totalSectionsNum').textContent = totalSections;
+        }
+
+        function updateProgress() {
+            if (!currentTemplate) return;
+            
+            let completed = 0;
+            let total = 0;
+            
+            if (currentTemplate === 'detailed') {
+                const fields = ['description', 'teamMember', 'aiTool', 'taskType', 'objective', 'approach', 'result', 'whatWorked', 'whatDidnt', 'lessons'];
+                fields.forEach(field => {
+                    const element = document.getElementById(field);
+                    if (element) {
+                        total++;
+                        if (element.value && element.value.trim()) {
+                            completed++;
+                        }
+                    }
+                });
+                
+                // Add ratings
+                Object.values(ratings).forEach(rating => {
+                    total++;
+                    if (rating > 0) completed++;
+                });
+            } else {
+                const fields = ['quickDescription', 'quickTool', 'quickTask', 'quickWorked', 'quickDidnt', 'quickNext'];
+                fields.forEach(field => {
+                    const element = document.getElementById(field);
+                    if (element) {
+                        total++;
+                        if (element.value && element.value.trim()) {
+                            completed++;
+                        }
+                    }
+                });
+            }
+            
+            const percentage = Math.round((completed / total) * 100);
+            document.getElementById('progressText').textContent = `${percentage}%`;
+            document.getElementById('progressFill').style.width = `${percentage}%`;
+        }
+
+        function generateCheckboxSection() {
+            const labels = {
+                'shared-chat': 'Shared in team chat/Slack with summary',
+                'shared-wiki': 'Added to team wiki/knowledge base',
+                'shared-meeting': 'Presented in team standup/meeting',
+                'shared-guidelines': 'Updated team AI guidelines document'
+            };
+            return Object.entries(checkboxes).map(([key, checked]) => {
+                return '- [' + (checked ? 'x' : ' ') + '] ' + (labels[key] || key);
+            }).join('\n');
+        }
+
+        function generateOutput() {
+            let markdown = '';
+            const today = new Date().toISOString().split('T')[0];
+            
+            if (currentTemplate === 'detailed') {
+                // Hide current section
+                const currentSectionElement = document.getElementById(`detailedSection${currentSection}`);
+                if (currentSectionElement) {
+                    currentSectionElement.classList.remove('active');
+                    currentSectionElement.classList.add('hidden');
+                }
+                markdown = `# AI Learning Entry: ${document.getElementById('description').value || '[Description]'}
+
+## Context
+**Date:** ${document.getElementById('date').value || today}
+**Team Member:** ${document.getElementById('teamMember').value || '[Name]'}
+**AI Tool Used:** ${document.getElementById('aiTool').value || '[Tool]'}
+**Task Type:** ${document.getElementById('taskType').value || '[Type]'}
+**Complexity Level:** ${document.getElementById('complexity').value || '[Level]'}
+
+## What We Tried
+**Objective:** ${document.getElementById('objective').value || '[Objective]'}
+
+**Approach:**
+${document.getElementById('approach').value || '[Approach description]'}
+
+**Result:** ${document.getElementById('result').value || '[Result description]'}
+
+**Quality Score (CARE Framework):**
+- Completeness: ${ratings.completeness}/5
+- Accuracy: ${ratings.accuracy}/5
+- Relevance: ${ratings.relevance}/5
+- Efficiency: ${ratings.efficiency}/5
+
+## What Worked Well
+${document.getElementById('whatWorked').value || '[What worked well]'}
+
+## What Didn't Work
+${document.getElementById('whatDidnt').value || '[What didn\'t work]'}
+
+## Lessons Learned
+${document.getElementById('lessons').value || '[Lessons learned]'}
+
+## Knowledge Sharing Actions
+${generateCheckboxSection()}
+
+---
+*Generated on ${today} using Pair to Peer AI Workflows Teaching Moments tool*`;
+            } else {
+                markdown = `## Quick AI Learning: ${document.getElementById('quickDescription').value || '[Description]'}
+**Date:** ${document.getElementById('quickDate').value || today} | **Tool:** ${document.getElementById('quickTool').value || '[Tool]'} | **Task:** ${document.getElementById('quickTask').value || '[Task]'}
+
+**💡 What Worked:**
+${document.getElementById('quickWorked').value || '[What worked]'}
+
+**❌ What Didn't:**
+${document.getElementById('quickDidnt').value || '[What didn\'t work]'}
+
+**🔄 For Next Time:**
+${document.getElementById('quickNext').value || '[Improvements]'}
+
+**📤 Shared with team:** ${document.getElementById('quickShared').value}
+
+---
+*Generated on ${today} using Pair to Peer AI Workflows Teaching Moments tool*`;
+            }
+            
+            document.getElementById('markdownOutput').textContent = markdown;
+            document.getElementById('outputSection').classList.remove('hidden');
+            document.getElementById('outputSection').classList.add('active');
+            document.getElementById('globalActionButtons').classList.remove('hidden');
+            
+            // Scroll to output
+            document.getElementById('outputSection').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function copyToClipboard() {
+            const markdown = document.getElementById('markdownOutput').textContent;
+            navigator.clipboard.writeText(markdown).then(() => {
+                alert('📋 Copied to clipboard!');
+            });
+        }
+
+        function downloadMarkdown() {
+            const markdown = document.getElementById('markdownOutput').textContent;
+            const blob = new Blob([markdown], { type: 'text/markdown' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `ai-learning-${new Date().toISOString().split('T')[0]}.md`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        function saveProgress() {
+            const data = {
+                currentTemplate,
+                ratings,
+                checkboxes,
+                timestamp: new Date().toISOString()
+            };
+            
+            if (currentTemplate === 'detailed') {
+                const fields = ['description', 'date', 'teamMember', 'aiTool', 'taskType', 'complexity', 'objective', 'approach', 'result', 'whatWorked', 'whatDidnt', 'lessons'];
+                fields.forEach(field => {
+                    data[field] = document.getElementById(field).value;
+                });
+            } else {
+                const fields = ['quickDescription', 'quickDate', 'quickTool', 'quickTask', 'quickWorked', 'quickDidnt', 'quickNext', 'quickShared'];
+                fields.forEach(field => {
+                    data[field] = document.getElementById(field).value;
+                });
+            }
+            
+            localStorage.setItem('teachingMomentsData', JSON.stringify(data));
+            alert('💾 Progress saved!');
+        }
+
+        function loadProgress() {
+            const saved = localStorage.getItem('teachingMomentsData');
+            if (saved) {
+                const data = JSON.parse(saved);
+                // Restore data logic here
+                console.log('Loaded saved data:', data);
+            }
+        }
+
+        function goBack() {
+            // Hide all sections
+            for (let i = 1; i <= 3; i++) {
+                const section = document.getElementById(`detailedSection${i}`);
+                if (section) {
+                    section.classList.remove('active');
+                    section.classList.add('hidden');
+                }
+            }
+            document.getElementById('quickForm').classList.remove('active');
+            document.getElementById('quickForm').classList.add('hidden');
+            document.getElementById('outputSection').classList.remove('active');
+            document.getElementById('outputSection').classList.add('hidden');
+            document.getElementById('globalActionButtons').classList.add('hidden');
+            
+            // Show template choice and hide progress
+            document.getElementById('templateChoice').classList.remove('hidden');
+            document.getElementById('progressIndicator').classList.add('hidden');
+            
+            currentTemplate = null;
+            currentSection = 1;
+        }
+
+        function clearForm() {
+            if (confirm('Clear all form data? This cannot be undone.')) {
+                // Reset all data
+                currentTemplate = null;
+                currentSection = 1;
+                ratings = {
+                    completeness: 0,
+                    accuracy: 0,
+                    relevance: 0,
+                    efficiency: 0
+                };
+                checkboxes = {};
+                
+                // Hide all sections
+                for (let i = 1; i <= 3; i++) {
+                    const section = document.getElementById(`detailedSection${i}`);
+                    if (section) {
+                        section.classList.remove('active');
+                        section.classList.add('hidden');
+                    }
+                }
+                document.getElementById('quickForm').classList.remove('active');
+                document.getElementById('quickForm').classList.add('hidden');
+                document.getElementById('outputSection').classList.remove('active');
+                document.getElementById('outputSection').classList.add('hidden');
+                document.getElementById('globalActionButtons').classList.add('hidden');
+                document.getElementById('progressIndicator').classList.add('hidden');
+                
+                // Show template choice
+                document.getElementById('templateChoice').classList.remove('hidden');
+                
+                // Clear all form inputs
+                document.querySelectorAll('input, textarea, select').forEach(input => {
+                    if (input.type !== 'date') {
+                        input.value = '';
+                    }
+                });
+                
+                // Clear all selections
+                document.querySelectorAll('.rating-option.selected').forEach(option => {
+                    option.classList.remove('selected');
+                });
+                
+                document.querySelectorAll('.checkbox.checked').forEach(checkbox => {
+                    checkbox.classList.remove('checked');
+                });
+                
+                // Reset progress
+                document.getElementById('progressText').textContent = '0%';
+                document.getElementById('progressFill').style.width = '0%';
+                
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function createNew() {
+            if (confirm('Create a new learning entry? Current data will be lost.')) {
+                location.reload();
+            }
+        }
+
+        // Auto-save progress
+        setInterval(() => {
+            if (currentTemplate) {
+                updateProgress();
+            }
+        }, 1000);
+
+        // Initialize
+        window.addEventListener('load', loadProgress);
+
+        // Test function availability
+        window.addEventListener('load', function() {
+            console.log('Window loaded. Testing function availability:');
+            console.log('selectTemplate function exists:', typeof selectTemplate === 'function');
+            console.log('window.selectTemplate exists:', typeof window.selectTemplate);
+        });
+
+        // Clear all data function
+        function clearAllData() {
+            if (confirm('Are you sure you want to clear all stored data? This will remove any saved progress and cannot be undone.')) {
+                try {
+                    localStorage.clear();
+                    sessionStorage.clear();
+                    alert('All data has been cleared successfully.');
+                    // Reset to initial state
+                    location.reload();
+                } catch (error) {
+                    alert('Error clearing data: ' + error.message);
+                }
+            }
+        }
+    </script>
+</body>
+</html>

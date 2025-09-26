@@ -1,0 +1,568 @@
+/* Modern Dark Theme for Pair to Peer AI Workflows */
+:root {
+    --bg: #0a0e17;
+    --surface: #1a1f2e;
+    --surface-elevated: #252b3a;
+    --border-color: #373d4d;
+    --accent: #6ee7ff;
+    --accent-2: #82ffa7;
+    --fg: #ffffff;
+    --muted: #9ca3af;
+    --danger-color: #ff6b6b;
+    --warning-color: #ffd93d;
+    --success-color: #51cf66;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    --radius: 16px;
+    --font-size: 16px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* Container & Layout */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Navigation */
+nav {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem 2rem;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--muted);
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+nav a:hover, nav a.active {
+    color: var(--accent);
+    background: rgba(110, 231, 255, 0.1);
+}
+
+/* Mobile Navigation */
+.mobile-nav {
+    display: none;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem;
+    position: relative;
+}
+
+.menu-toggle {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--fg);
+    padding: 0.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.hamburger-icon {
+    display: block;
+    position: relative;
+    width: 24px;
+    height: 2px;
+    background: var(--fg);
+    transition: all 0.3s;
+}
+
+.hamburger-icon::before,
+.hamburger-icon::after {
+    content: "";
+    position: absolute;
+    width: 24px;
+    height: 2px;
+    background: var(--fg);
+    left: 0;
+    transition: all 0.3s;
+}
+
+.hamburger-icon::before {
+    top: -7px;
+}
+
+.hamburger-icon::after {
+    bottom: -7px;
+}
+
+.menu-toggle.active .hamburger-icon {
+    background: transparent;
+}
+
+.menu-toggle.active .hamburger-icon::before {
+    top: 0;
+    transform: rotate(45deg);
+}
+
+.menu-toggle.active .hamburger-icon::after {
+    bottom: 0;
+    transform: rotate(-45deg);
+}
+
+.mobile-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 1rem;
+    width: 250px;
+    background: var(--surface-elevated) !important;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: var(--shadow-lg);
+    padding: 0.5rem 0;
+    z-index: 1001;
+}
+
+.mobile-menu.active {
+    display: block;
+    background: var(--surface-elevated) !important;
+}
+
+.mobile-menu a {
+    display: block;
+    text-decoration: none;
+    color: var(--fg);
+    font-weight: 500;
+    padding: 0.75rem 1rem;
+    transition: all 0.2s ease;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.mobile-menu a:last-child {
+    border-bottom: none;
+}
+
+.mobile-menu a:hover, .mobile-menu a.active {
+    color: var(--accent);
+    background: rgba(110, 231, 255, 0.1);
+}
+
+header {
+    background: var(--surface);
+    padding: 3rem 2rem;
+    border-bottom: 1px solid var(--border-color);
+    text-align: center;
+}
+
+header h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--fg);
+}
+
+header p {
+    font-size: 1.25rem;
+    color: var(--muted);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+main {
+    flex: 1;
+    padding: 2rem;
+}
+
+/* Cards & Sections */
+.card, .section {
+    background: var(--surface-elevated);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow);
+}
+
+.card.highlight {
+    border-color: var(--accent);
+    background: var(--surface);
+}
+
+.card.success {
+    border-color: var(--success-color);
+}
+
+.card.warning {
+    border-color: var(--warning-color);
+}
+
+.card.danger {
+    border-color: var(--danger-color);
+}
+
+/* Grid Layout */
+.grid-2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--fg);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+h2 {
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 600;
+}
+
+h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+h4 {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+p {
+    color: var(--muted);
+    margin-bottom: 1rem;
+}
+
+.highlight {
+    color: var(--accent);
+}
+
+.accent {
+    color: var(--accent);
+}
+
+.accent-2 {
+    color: var(--accent-2);
+}
+
+.success {
+    color: var(--success-color);
+}
+
+.warning {
+    color: var(--warning-color);
+}
+
+.danger {
+    color: var(--danger-color);
+}
+
+
+.btn, button {
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    color: var(--fg);
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.15s ease;
+    font-family: inherit;
+    position: relative;
+    /* 3D Depth Effect */
+    box-shadow: 0px 4px var(--border-color);
+    transform: translateY(-4px);
+}
+
+.btn:hover, button:hover {
+    background: rgba(110, 231, 255, 0.1);
+    cursor: pointer;
+}
+
+.btn:active, button:active {
+    box-shadow: 0px 0px var(--border-color);
+    transform: translateY(0px);
+    animation: buttonClicked 0.15s;
+}
+
+.btn.primary {
+    background: var(--accent);
+    color: var(--bg);
+    border: none;
+    box-shadow: 0px 4px var(--button-primary-shadow);
+}
+
+.btn.primary:hover {
+    background: var(--accent-2);
+}
+
+.btn.primary:active {
+    box-shadow: 0px 0px var(--button-primary-shadow);
+    background: var(--accent-2);
+    transform: translateY(0px);
+    animation: buttonClicked 0.15s;
+}
+
+.btn.secondary {
+    background: var(--accent-2);
+    color: var(--bg);
+    border: none;
+    box-shadow: 0px 4px var(--button-secondary-shadow);
+}
+
+.btn.secondary:hover {
+    background: var(--success-color);
+}
+
+.btn.secondary:active {
+    box-shadow: 0px 0px var(--button-secondary-shadow);
+    background: var(--success-color);
+    transform: translateY(0px);
+    animation: buttonClicked 0.15s;
+}
+
+/* Button Click Animation */
+@keyframes buttonClicked {
+    0% {
+        transform: translateY(-4px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+/* Forms */
+input, textarea, select {
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    color: var(--fg);
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(110, 231, 255, 0.1);
+}
+
+label {
+    color: var(--fg);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--surface);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+th, td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+th {
+    background: var(--surface-elevated);
+    color: var(--fg);
+    font-weight: 600;
+}
+
+td {
+    color: var(--muted);
+}
+
+th[scope="row"] {
+    color: var(--accent);
+    background: var(--surface);
+}
+
+/* Progress Bars */
+.progress-bar {
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+    margin: 1rem 0;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    transition: width 0.3s ease;
+}
+
+footer {
+    background: var(--surface);
+    border-top: 1px solid var(--border-color);
+    padding: 2rem;
+    text-align: center;
+}
+
+footer p {
+    color: var(--muted);
+    margin-bottom: 1rem;
+}
+
+footer a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: var(--accent-2);
+    text-decoration: underline;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.mb-0 { margin-bottom: 0; }
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mb-3 { margin-bottom: 1.5rem; }
+.mb-4 { margin-bottom: 2rem; }
+
+.mt-0 { margin-top: 0; }
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mt-3 { margin-top: 1.5rem; }
+.mt-4 { margin-top: 2rem; }
+
+/* Back to top button */
+.back-to-top-btn.visible {
+    display: flex;
+}
+
+.back-to-top-btn {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: var(--accent);
+    color: var(--bg);
+    border: none;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.5rem;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-lg);
+    transition: all 0.2s ease;
+    z-index: 1000;
+}
+
+.back-to-top-btn:hover {
+    background: var(--accent-2);
+    transform: translateY(-2px);
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    nav {
+        display: none;
+    }
+
+    .mobile-nav {
+        display: block;
+    }
+
+    header {
+        padding: 2rem 1rem;
+    }
+
+    main {
+        padding: 1rem;
+    }
+
+    .card, .section {
+        padding: 1.5rem;
+    }
+
+    .grid-2, .grid-3 {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    table {
+        font-size: 0.9rem;
+    }
+
+    th, td {
+        padding: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 2rem;
+    }
+
+    .card, .section {
+        padding: 1rem;
+    }
+}
