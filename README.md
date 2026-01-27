@@ -102,6 +102,12 @@ Want your own AI analysis? Fork this repository:
 - **[📝 Teaching Moments](https://andreagriffiths11.github.io/pair-to-peer-ai-workflows/teaching-moments.html)** - Capture and share AI learning experiences  
 - **[❤️ Developer Experience](https://andreagriffiths11.github.io/pair-to-peer-ai-workflows/developer-experience.html)** - Monthly health check survey
 
+### 🎓 Hands-On Learning
+- **[🤖 AI Agents Masterclass](https://andreagriffiths11.github.io/pair-to-peer-ai-workflows/masterclass/)** - Build production-ready AI agents with Python & LangGraph
+  - Interactive Jupyter notebooks covering chatbots, tools, memory, and human-in-the-loop patterns
+  - Translated from [Juan Sensio's Spanish masterclass](https://github.com/juansensio/masterclass_agentes)
+  - Perfect for developers who want practical experience building AI systems
+
 ## 💡 What to Expect
 
 **Week 1-2:** Your team might resist the "extra overhead." That's normal—these processes prevent the technical debt that kills AI adoption.

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Agents Masterclass - Pair to Peer AI Workflows</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/modern-theme.css">
+    
+    <style>
+        .masterclass-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: var(--surface-elevated);
+            border-radius: var(--radius);
+            border: 2px solid var(--border-color);
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--muted);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .attribution {
+            background: var(--surface);
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent);
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+            color: var(--muted);
+        }
+
+        .attribution a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .attribution a:hover {
+            text-decoration: underline;
+        }
+
+        .content-section {
+            background: var(--surface-elevated);
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .content-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--fg);
+        }
+
+        .content-section p {
+            color: var(--muted);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .notebook-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .notebook-item {
+            background: var(--surface);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 12px;
+            border: 2px solid var(--border-color);
+            transition: all 0.2s ease;
+        }
+
+        .notebook-item:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .notebook-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--fg);
+        }
+
+        .notebook-item h3 a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .notebook-item h3 a:hover {
+            text-decoration: underline;
+        }
+
+        .notebook-item p {
+            color: var(--muted);
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        .file-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .file-badge {
+            background: var(--surface);
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            font-size: 0.9rem;
+            color: var(--muted);
+            font-family: 'Courier New', monospace;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.875rem 1.5rem;
+            background: var(--accent);
+            color: var(--bg);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: var(--accent-2);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-secondary {
+            background: var(--surface);
+            color: var(--accent);
+            border: 2px solid var(--accent);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(110, 231, 255, 0.1);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 2rem;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .file-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="masterclass-container">
+        <a href="../index.html" class="back-link">← Back to Main Site</a>
+
+        <div class="hero">
+            <h1>🤖 AI Agents Masterclass</h1>
+            <p>A hands-on Python tutorial for building intelligent agents with LangGraph, tools, memory, and human-in-the-loop patterns</p>
+        </div>
+
+        <div class="attribution">
+            <strong>Attribution:</strong> This content has been adapted and translated from the original Spanish masterclass by Juan Sensio at 
+            <a href="https://github.com/juansensio/masterclass_agentes" target="_blank" rel="noopener noreferrer">github.com/juansensio/masterclass_agentes</a>
+        </div>
+
+        <div class="content-section">
+            <h2>📚 What You'll Learn</h2>
+            <p>
+                This masterclass teaches you how to build production-ready AI agents using Python and LangGraph. 
+                You'll progress from a simple chatbot to a sophisticated agent with tool usage, persistent memory, 
+                and human oversight capabilities.
+            </p>
+            <p>
+                Perfect for developers who want hands-on experience building AI systems that can reason, use tools, 
+                remember context, and involve humans in decision-making loops.
+            </p>
+        </div>
+
+        <div class="content-section">
+            <h2>📓 Jupyter Notebooks</h2>
+            <p>Work through these interactive notebooks in sequence:</p>
+            
+            <ul class="notebook-list">
+                <li class="notebook-item">
+                    <h3><a href="01_intro.ipynb">01 - Introduction</a></h3>
+                    <p>Build a basic chatbot using LangGraph and learn the fundamentals of graph-based conversation flows.</p>
+                </li>
+                <li class="notebook-item">
+                    <h3><a href="02_herramientas.ipynb">02 - Tools</a></h3>
+                    <p>Enhance your chatbot with tool-calling capabilities, enabling it to search the web and perform calculations.</p>
+                </li>
+                <li class="notebook-item">
+                    <h3><a href="03_memoria.ipynb">03 - Memory</a></h3>
+                    <p>Implement persistent memory so your agent can remember and reference past conversations.</p>
+                </li>
+                <li class="notebook-item">
+                    <h3><a href="04_hil.ipynb">04 - Human-in-the-Loop</a></h3>
+                    <p>Add human oversight with interruption points where users can approve, reject, or modify agent actions.</p>
+                </li>
+                <li class="notebook-item">
+                    <h3><a href="agente.py">05 - Research Agent</a></h3>
+                    <p>A complete implementation applying all concepts: a search agent for business idea validation.</p>
+                </li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>🛠️ Setup & Requirements</h2>
+            <p>This masterclass uses <strong>uv</strong> for Python package management. See the full setup instructions in the README.</p>
+            
+            <div class="action-buttons">
+                <a href="README.md" class="btn">View Setup Guide</a>
+                <a href="https://docs.astral.sh/uv/getting-started/installation/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Install uv</a>
+            </div>
+
+            <h3 style="margin-top: 2rem; margin-bottom: 1rem; color: var(--fg);">Supporting Files</h3>
+            <div class="file-list">
+                <div class="file-badge">chatbot.py</div>
+                <div class="file-badge">memoria.py</div>
+                <div class="file-badge">hil.py</div>
+                <div class="file-badge">tools.py</div>
+                <div class="file-badge">pyproject.toml</div>
+                <div class="file-badge">.env.example</div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>🔑 Key Concepts</h2>
+            <ul style="color: var(--muted); line-height: 2;">
+                <li><strong>Graph-based Architecture:</strong> Build agents as state machines with nodes and edges</li>
+                <li><strong>Tool Integration:</strong> Enable agents to call external APIs and functions</li>
+                <li><strong>State Management:</strong> Maintain conversation context across interactions</li>
+                <li><strong>Checkpointing:</strong> Persist agent state for resumable conversations</li>
+                <li><strong>Human Oversight:</strong> Implement approval workflows for critical actions</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>🎓 Learn More</h2>
+            <p>Want to deepen your AI and Python knowledge? Check out these resources from the original author:</p>
+            <ul style="color: var(--muted); line-height: 2;">
+                <li><a href="https://www.juansensio.com/blog" target="_blank" rel="noopener noreferrer" style="color: var(--accent);">Blog & YouTube</a> - Free tutorials</li>
+                <li><a href="https://www.elcursodeia.com/" target="_blank" rel="noopener noreferrer" style="color: var(--accent);">El Curso de IA</a> - Comprehensive online course (Spanish)</li>
+                <li><a href="https://discord.gg/aTeEKXzKbs" target="_blank" rel="noopener noreferrer" style="color: var(--accent);">Discord Community</a> - Join the discussion</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
