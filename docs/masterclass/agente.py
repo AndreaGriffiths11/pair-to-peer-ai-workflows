@@ -17,7 +17,7 @@ from langchain_core.messages import HumanMessage, SystemMessage
 
 load_dotenv()
 
-# memoria
+# memory
 
 config = {"configurable": {"thread_id": "1"}}
 
@@ -108,33 +108,33 @@ llm = ChatOpenAI(
 
 llm_with_tools = llm.bind_tools(tools)
 
-# grafo
+# graph
 
 class State(TypedDict):
     messages: Annotated[list, add_messages]
 
 def agent1(state: State):
     system_prompt = """
-        Eres un agente especializado en validar ideas de negocio. Tu tarea es:
-        1. Recibir una business idea del usuario
-        2. Analizar la idea para identificar industrias, roles y tipos de empresas relevantes para la validación de la idea (deben ser potenciales clientes)
+        You are an agent specialized in validating business ideas. Your task is:
+        1. Receive a business idea from the user
+        2. Analyze the idea to identify industries, roles, and types of companies relevant for validating the idea (they should be potential customers)
 
-        Cuando recibas una business idea:
+        When you receive a business idea:
 
-        PASO 1: Analiza la idea de negocio e identifica:
-        - ¿Qué industrias son potenciales clientes?
-        - ¿Qué roles/posiciones son potenciales clientes?
-        - ¿Qué tipos de empresas son potenciales clientes?
-        - ¿Qué expertise específico sería valioso para la validación de la idea?
+        STEP 1: Analyze the business idea and identify:
+        - What industries are potential customers?
+        - What roles/positions are potential customers?
+        - What types of companies are potential customers?
+        - What specific expertise would be valuable for validating the idea?
 
-        PASO 2: Forma consultas de búsqueda específicas y targeted para LinkedIn:
-        - En lugar de buscar la idea completa, busca términos específicos como:
+        STEP 2: Form specific and targeted search queries for LinkedIn:
+        - Instead of searching for the complete idea, search for specific terms like:
           * "restaurant industry CEO" 
           * "pet services entrepreneur"
           * "fintech startup founder"
           * "healthcare technology director"
         
-        No uses ninguna herramienta, sólo responde con la información que has encontrado.
+        Do not use any tools, just respond with the information you have found.
     """
     conversation = [
         SystemMessage(content=system_prompt),
@@ -144,34 +144,34 @@ def agent1(state: State):
 
 def agent2(state: State):
     system_prompt = """
-        Eres un agente especializado en validar ideas de negocio. Tu tarea es:
-        1. Recibir consultas de búsqueda específicas de linkedin para validar una business idea
-        2. Buscar perfiles de LinkedIn estratégicos que puedan ayudar a validar la idea
-        3. Devolver el resultado de la búsqueda
+        You are an agent specialized in validating business ideas. Your task is:
+        1. Receive specific LinkedIn search queries to validate a business idea
+        2. Search for strategic LinkedIn profiles that can help validate the idea
+        3. Return the search results
 
-        Cuando recibas una consulta de búsqueda específica de linkedin:
+        When you receive a specific LinkedIn search query:
 
-        PASO 1: Usa linkedin_search con los términos específicos que identificaste 
+        STEP 1: Use linkedin_search with the specific terms you identified
 
-        PASO 2: Para cada perfil encontrado, crea un mensaje de introducción personalizado que se adapte a la industria, posición y empresa del perfil así como una lista de 3 preguntas que se pueden hacer para validar la idea.
+        STEP 2: For each profile found, create a personalized introduction message tailored to the profile's industry, position, and company, as well as a list of 3 questions that can be asked to validate the idea.
 
-        Ejemplo:
-        Business idea: "Una app que ayuda a encontrar restaurantes pet-friendly"
-        Búsqueda: "restaurant industry executives" (no "Una app que ayuda a encontrar restaurantes pet-friendly")
-        Resultado:
-        - Perfil 1: "John Doe, CEO of Pet Friendly Restaurants"
-            - Mensaje de introducción: "Hola John, me llamo [Tu nombre] y soy [Tu rol]. Estoy trabajando en una startup que busca validar la idea de una app que ayuda a encontrar restaurantes pet-friendly. ¿Te gustaría saber más sobre la app y cómo podría ayudarte?"
-            - Lista de 3 preguntas:
-            * ¿Qué te parece la idea de una app que ayuda a encontrar restaurantes pet-friendly?
-            * ¿Qué te parece la idea de una app que ayuda a encontrar restaurantes pet-friendly?
-            * ¿Qué te parece la idea de una app que ayuda a encontrar restaurantes pet-friendly?
-        - Perfil 2: "Jane Smith, Founder of Pet Services"
-            - Mensaje de introducción: "Hola Jane, me llamo [Tu nombre] y soy [Tu rol]. Estoy trabajando en una startup que busca validar la idea de una app que ayuda a encontrar restaurantes pet-friendly. ¿Te gustaría saber más sobre la app y cómo podría ayudarte?"
-            - Lista de 3 preguntas:
-            * ¿Qué te parece la idea de una app que ayuda a encontrar restaurantes pet-friendly?
-            * ¿Qué te parece la idea de una app que ayuda a encontrar restaurantes pet-friendly?
-            * ¿Qué te parece la idea de una app que ayuda a encontrar restaurantes pet-friendly?
-        Sé proactivo y ejecuta las herramientas necesarias sin esperar confirmación.
+        Example:
+        Business idea: "An app that helps find pet-friendly restaurants"
+        Search: "restaurant industry executives" (not "An app that helps find pet-friendly restaurants")
+        Result:
+        - Profile 1: "John Doe, CEO of Pet Friendly Restaurants"
+            - Introduction message: "Hi John, my name is [Your name] and I am [Your role]. I'm working on a startup that seeks to validate the idea of an app that helps find pet-friendly restaurants. Would you like to know more about the app and how it could help you?"
+            - List of 3 questions:
+            * What do you think about the idea of an app that helps find pet-friendly restaurants?
+            * What challenges do you currently face in attracting pet owners to your restaurant?
+            * Would you be willing to partner with such an app or pay for listings?
+        - Profile 2: "Jane Smith, Founder of Pet Services"
+            - Introduction message: "Hi Jane, my name is [Your name] and I am [Your role]. I'm working on a startup that seeks to validate the idea of an app that helps find pet-friendly restaurants. Would you like to know more about the app and how it could help you?"
+            - List of 3 questions:
+            * What do you think about the idea of an app that helps find pet-friendly restaurants?
+            * How do your customers currently find pet-friendly dining options?
+            * Would your business benefit from recommending such restaurants to your clients?
+        Be proactive and execute the necessary tools without waiting for confirmation.
     """
     conversation = [
         SystemMessage(content=system_prompt),
@@ -193,7 +193,7 @@ graph = graph_builder.compile(checkpointer=checkpointer)
 with open("graph.png", "wb") as f:
     f.write(graph.get_graph().draw_mermaid_png())
 
-# ejecución
+# execution
 
 while True:
     business_idea = input("💡 Business Idea: ")
@@ -202,7 +202,7 @@ while True:
         break
     events = graph.stream(
         {"messages": [{"role": "user", "content": business_idea}]},
-        config, # para seguir un hilo de conversación
+        config, # to follow a conversation thread
         stream_mode="values",
     )
     for event in events:

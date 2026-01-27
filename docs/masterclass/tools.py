@@ -26,7 +26,7 @@ llm = ChatOpenAI(
 
 llm_with_tools = llm.bind_tools([tool])
 
-# grafo
+# graph
 
 class State(TypedDict):
     messages: Annotated[list, add_messages]
@@ -44,7 +44,7 @@ graph_builder.add_conditional_edges("agent", tools_condition)
 graph_builder.add_edge("tools", "agent")
 graph = graph_builder.compile()
 
-# ejecución
+# execution
 
 while True:
     user_input = input("User: ")

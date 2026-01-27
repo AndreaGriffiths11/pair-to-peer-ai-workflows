@@ -18,7 +18,7 @@ llm = ChatOpenAI(
     callbacks=[StreamingStdOutCallbackHandler()]
 )
 
-# grafo
+# graph
 
 class State(TypedDict):
     messages: Annotated[list, add_messages]
@@ -32,7 +32,7 @@ graph_builder.add_node("chatbot", chatbot)
 graph_builder.add_edge("chatbot", END)
 graph = graph_builder.compile()
 
-# ejecución
+# execution
 
 while True:
     user_input = input("User: ")

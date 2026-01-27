@@ -16,7 +16,7 @@ import sys
 
 load_dotenv()
 
-# memoria
+# memory
 
 config = {"configurable": {"thread_id": "3"}}
 
@@ -48,7 +48,7 @@ llm = ChatOpenAI(
 
 llm_with_tools = llm.bind_tools(tools)
 
-# grafo
+# graph
 
 class State(TypedDict):
     messages: Annotated[list, add_messages]
@@ -66,7 +66,7 @@ graph_builder.add_conditional_edges("agent", tools_condition)
 graph_builder.add_edge("tools", "agent")
 graph = graph_builder.compile(checkpointer=checkpointer)
 
-# ejecución
+# execution
 
 while True:
     user_input = input("User: ")
@@ -75,7 +75,7 @@ while True:
         break
     events = graph.stream(
         {"messages": [{"role": "user", "content": user_input}]},
-        config, # para seguir un hilo de conversación
+        config, # to follow a conversation thread
         stream_mode="values",
     )
     for event in events:
