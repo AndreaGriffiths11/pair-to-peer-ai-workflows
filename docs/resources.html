@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources Hub - Pair to Peer AI Workflows</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/modern-theme.css">
+    <style>
+        .hero {
+            background: linear-gradient(120deg, rgba(110,231,255,0.08), rgba(88,28,135,0.08));
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+        .section-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 2.5rem;
+        }
+        .card {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+        .card h3 {
+            margin-top: 0;
+            margin-bottom: 0.75rem;
+        }
+        .card ul {
+            padding-left: 1.2rem;
+            margin: 0;
+            display: grid;
+            gap: 0.5rem;
+        }
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.25rem 0.6rem;
+            border-radius: 999px;
+            background: rgba(110,231,255,0.12);
+            color: var(--fg);
+            font-weight: 600;
+            font-size: 0.85rem;
+            border: 1px solid var(--border-color);
+        }
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        .section-title span {
+            font-size: 1.25rem;
+        }
+        .newsletter-list li strong {
+            display: inline-block;
+            min-width: 110px;
+        }
+        @media (max-width: 768px) {
+            .hero { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="desktop-nav" role="navigation" aria-label="Main navigation">
+            <ul>
+                <li><a href="index.html">Decision Tree</a></li>
+                <li><a href="team-assessment.html">Team Assessment</a></li>
+                <li><a href="teaching-moments.html">Teaching Moments</a></li>
+                <li><a href="developer-experience.html">Developer Experience</a></li>
+                <li><a href="resources.html" class="active" aria-current="page">Resources</a></li>
+            </ul>
+        </nav>
+
+        <nav class="mobile-nav" role="navigation" aria-label="Mobile navigation">
+            <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span class="hamburger-icon"></span>
+            </button>
+            <div class="mobile-menu">
+                <a href="index.html">Decision Tree</a>
+                <a href="team-assessment.html">Team Assessment</a>
+                <a href="teaching-moments.html">Teaching Moments</a>
+                <a href="developer-experience.html">Developer Experience</a>
+                <a href="resources.html" class="active" aria-current="page">Resources</a>
+            </div>
+        </nav>
+
+        <header role="banner" class="hero">
+            <div class="section-title">
+                <span>📚</span>
+                <div>
+                    <h1 style="margin:0;">Resources Hub</h1>
+                    <p style="margin:0;color:var(--muted);">Agentic AI, MCP security, developer experience, and the ecosystem that powers the framework.</p>
+                </div>
+            </div>
+            <div style="display:flex; flex-wrap:wrap; gap:0.5rem;">
+                <span class="tag">Agent Mode</span>
+                <span class="tag">MCP Security</span>
+                <span class="tag">DX Metrics</span>
+                <span class="tag">Governance</span>
+            </div>
+        </header>
+
+        <main role="main">
+            <section aria-labelledby="agentic-ai">
+                <div class="section-title" id="agentic-ai">
+                    <span>🧭</span><h2>Agentic AI &amp; Agent Mode</h2>
+                </div>
+                <div class="section-grid">
+                    <div class="card">
+                        <h3>Copilot Agent Mode</h3>
+                        <ul>
+                            <li><a href="https://github.blog/ai-and-ml/github-copilot/mastering-github-copilot-when-to-use-ai-agent-mode/" target="_blank" rel="noopener noreferrer">Mastering GitHub Copilot: when to use agent mode</a></li>
+                            <li><a href="https://github.blog/ai-and-ml/github-copilot/5-ways-to-integrate-github-copilot-coding-agent-into-your-workflow/" target="_blank" rel="noopener noreferrer">5 ways to integrate the coding agent</a></li>
+                            <li><a href="https://github.blog/ai-and-ml/github-copilot/a-step-by-step-guide-to-modernizing-java-projects-with-github-copilot-agent-mode/" target="_blank" rel="noopener noreferrer">Modernizing Java with agent mode</a></li>
+                            <li><a href="https://github.blog/ai-and-ml/github-copilot/how-github-copilot-and-ai-agents-are-saving-legacy-systems/" target="_blank" rel="noopener noreferrer">Agents rescuing legacy systems</a></li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Copilot Spaces &amp; Context</h3>
+                        <ul>
+                            <li><a href="https://github.blog/ai-and-ml/github-copilot/github-copilot-spaces-bring-the-right-context-to-every-suggestion/" target="_blank" rel="noopener noreferrer">Bring the right context to every suggestion</a></li>
+                            <li><a href="https://github.blog/ai-and-ml/github-copilot/how-to-use-github-copilot-spaces-to-debug-issues-faster/" target="_blank" rel="noopener noreferrer">Debug faster with Copilot Spaces</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section aria-labelledby="mcp">
+                <div class="section-title" id="mcp">
+                    <span>🛡️</span><h2>MCP (Model Context Protocol)</h2>
+                </div>
+                <div class="section-grid">
+                    <div class="card">
+                        <h3>Registry &amp; Guides</h3>
+                        <ul>
+                            <li><a href="https://github.blog/ai-and-ml/generative-ai/how-to-find-install-and-manage-mcp-servers-with-the-github-mcp-registry/" target="_blank" rel="noopener noreferrer">GitHub MCP Registry launch</a></li>
+                            <li><a href="https://github.com/AndreaGriffiths11/mcp-tips" target="_blank" rel="noopener noreferrer">MCP Tips best practices</a></li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Security &amp; Governance</h3>
+                        <ul>
+                            <li><a href="https://github.com/AndreaGriffiths11/mcp-config-scan" target="_blank" rel="noopener noreferrer">MCP Config Scan (Go)</a> — audit configs for risky scopes</li>
+                            <li><a href="https://github.com/AndreaGriffiths11/pair-to-peer-ai-workflows/blob/main/templates/agent-governance-template.md" target="_blank" rel="noopener noreferrer">Agent governance template</a> — approvals, permissions, incident playbooks</li>
+                            <li>Agent guardrails: approvals, least privilege, blast-radius checks</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section aria-labelledby="dx">
+                <div class="section-title" id="dx">
+                    <span>📈</span><h2>Developer Experience &amp; Workflows</h2>
+                </div>
+                <div class="section-grid">
+                    <div class="card">
+                        <h3>Workflow Foundations</h3>
+                        <ul>
+                            <li><a href="https://github.blog/enterprise-software/collaboration/level-up-design-to-code-collaboration-with-githubs-open-source-annotation-toolkit/" target="_blank" rel="noopener noreferrer">Annotation Toolkit for design-to-code</a></li>
+                            <li><a href="https://github.blog/security/supply-chain-security/understand-your-softwares-dependency-graph/" target="_blank" rel="noopener noreferrer">Understand your dependency graph</a></li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Health Checks</h3>
+                        <ul>
+                            <li>DX Health Check survey + AI analysis (this repo)</li>
+                            <li>Teaching Moments capture for continuous fluency</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section aria-labelledby="ecosystem">
+                <div class="section-title" id="ecosystem">
+                    <span>🌐</span><h2>The Ecosystem</h2>
+                </div>
+                <div class="section-grid">
+                    <div class="card">
+                        <h3>Tools &amp; Repos</h3>
+                        <ul>
+                            <li><a href="https://github.com/AndreaGriffiths11/teamxray" target="_blank" rel="noopener noreferrer">teamxray</a> — VS Code expertise analysis (GitHub Models + MCP)</li>
+                            <li><a href="https://github.com/AndreaGriffiths11/open-source-best-practices" target="_blank" rel="noopener noreferrer">open-source-best-practices</a> — 8-phase OSS skill framework</li>
+                            <li><a href="https://github.com/AndreaGriffiths11/git-history-cleaner" target="_blank" rel="noopener noreferrer">git-history-cleaner</a> — safe history cleanup</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Agent Context System</h3>
+                        <ul>
+                            <li><a href="https://agent-context-system-acolombiadev.zocomputer.io/" target="_blank" rel="noopener noreferrer">Agent Context System</a> — persistent context, multi-tool orchestration, 24/7 agent execution</li>
+                            <li>Highlights: context engineering, scoped permissions, autonomous task runners</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section aria-labelledby="newsletter">
+                <div class="section-title" id="newsletter">
+                    <span>📰</span><h2>Main Branch Newsletter</h2>
+                </div>
+                <div class="card newsletter-list">
+                    <p style="color:var(--muted); margin-top:0;">Fundamentals-first weekly newsletter: <a href="https://mainbranch.dev" target="_blank" rel="noopener noreferrer">mainbranch.dev</a></p>
+                    <ul>
+                        <li><strong>Dec 1, 2025:</strong> “The One Where Code Reviews Got Actually Better”</li>
+                        <li><strong>Nov 24, 2025:</strong> Security issue (threat modeling + guardrails)</li>
+                        <li><strong>Nov 17, 2025:</strong> Workflows issue (delivery pipelines)</li>
+                        <li><strong>Jan/Feb 2026:</strong> Ongoing updates on security and workflows (see archive)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section aria-labelledby="talks">
+                <div class="section-title" id="talks">
+                    <span>🎤</span><h2>Talks &amp; Appearances</h2>
+                </div>
+                <div class="card">
+                    <ul>
+                        <li>GitHub Universe 2025 — panel with Justin Cormack (Docker) + Quincy Larson (freeCodeCamp)</li>
+                        <li>Commit Your Code Conference 2025 — hybrid human/AI workflows</li>
+                        <li>JFrog SwampUP 2025 — AI agent security risks and autonomy</li>
+                        <li>GitHub Universe LATAM Series — Universe announcements (Spanish)</li>
+                        <li>freeCodeCamp Podcast #199 — <a href="https://www.freecodecamp.org/news/tips-from-serial-career-changer-github-andrea-griffiths-podcast-199/" target="_blank" rel="noopener noreferrer">Tips from a Serial Career Changer</a></li>
+                        <li>RedMonk Conversation (Feb 2025) — onboarding beginners to Git with Kedasha Kerr</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section aria-labelledby="research">
+                <div class="section-title" id="research">
+                    <span>📊</span><h2>Research &amp; Data</h2>
+                </div>
+                <div class="card">
+                    <ul>
+                        <li>Deloitte: 25% of companies running agentic pilots in 2025; 50% by 2027.</li>
+                        <li>McKinsey: governance-first teams see +37% adoption success, -41% security issues.</li>
+                        <li>Microsoft: productivity gains arrive after ~11 weeks of steady use.</li>
+                        <li>GitHub Enterprise Research: structured sharing drives ~40% better outcomes.</li>
+                        <li>Octoverse 2025: 1.13M repos importing LLM SDKs (+178% YoY); Universe 2025 launched Agent HQ, Mission Control, Custom Copilot Agents.</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <footer role="contentinfo">
+            <p>
+                Made with ❤️ for education by 
+                <a href="https://twitter.com/alacolombiadev" target="_blank" rel="noopener noreferrer">
+                    Andrea Griffiths @alacolombiadev
+                </a>
+            </p>
+        </footer>
+    </div>
+
+    <script type="module" src="js/navigation.js"></script>
+</body>
+</html>

@@ -15,21 +15,27 @@ START: New Development Task
 │     ├─ YES → Use local AI models OR enhanced security review process
 │     └─ NO → [AI-FIRST] High suitability for AI generation
 │
-└─ Task Complexity Assessment:
-   ├─ Simple/Repetitive (boilerplate, CRUD, tests) → AI-FIRST
-   ├─ Medium (business logic, integrations) → AI-ASSISTED  
-   └─ Complex (architecture, novel algorithms) → HUMAN-FIRST
+└─ Task Assessment:
+   ├─ Agent suitability? (clear criteria, low blast radius, MCP tools available)
+   │   ├─ YES → **AGENT-DELEGATED** (Copilot coding agent)
+   │   └─ NO → Continue
+   ├─ Task Complexity:
+   │   ├─ Simple/Repetitive (boilerplate, CRUD, tests) → AI-FIRST
+   │   ├─ Medium (business logic, integrations) → AI-ASSISTED  
+   │   └─ Complex (architecture, novel algorithms) → HUMAN-FIRST
 ```
 
 ## Decision Criteria Matrix
 
-| Factor | AI-First | AI-Assisted | Human-First |
-|--------|----------|-------------|-------------|
-| **Code Complexity** | Simple patterns, boilerplate | Standard business logic | Novel algorithms, complex architecture |
-| **Security Risk** | Low (UI, docs, tests) | Medium (business logic) | High (auth, payments, crypto) |
-| **Team Experience** | Senior devs who can review | Mixed experience teams | Junior devs learning concepts |
-| **Context Available** | Similar code exists in codebase | Some existing patterns | No precedent or patterns |
-| **Time Constraints** | Tight deadlines, standard work | Balanced delivery timeline | Learning/exploration priority |
+| Factor | AI-First | AI-Assisted | Agent-Delegated | Human-First |
+|--------|----------|-------------|-----------------|-------------|
+| **Code Complexity** | Simple patterns, boilerplate | Standard business logic | Repetitive tasks with clear acceptance | Novel algorithms, complex architecture |
+| **Security Risk** | Low (UI, docs, tests) | Medium (business logic) | Guarded scopes, low blast radius | High (auth, payments, crypto) |
+| **Team Experience** | Senior devs who can review | Mixed experience teams | Confident in reviewing agent output | Junior devs learning concepts |
+| **Context Available** | Similar code exists in codebase | Some existing patterns | Playbook + tests ready for agent | No precedent or patterns |
+| **Time Constraints** | Tight deadlines, standard work | Balanced delivery timeline | Async/background acceptable | Learning/exploration priority |
+| **Agent Autonomy Risk** | N/A | Low autonomy with supervision | Scoped autonomy with kill-switches | Requires real-time human judgment |
+| **MCP Integration** | Optional | Helpful | MCP servers provide tools/context | Not applicable |
 
 ## Risk Assessment Checklist
 
@@ -46,6 +52,13 @@ START: New Development Task
 - [ ] Is this a novel pattern for our codebase? (If yes, human-first approach)
 - [ ] Do we have existing test coverage for similar functionality? (If no, add testing requirements)
 - [ ] Will this code be modified frequently? (If yes, ensure human understanding)
+
+**Agent-Delegated Acceptance (Copilot coding agent):**
+- [ ] Clear success criteria and rollback plan
+- [ ] Blast radius bounded (scoped repo/actions, no secrets)
+- [ ] MCP/context ready (tools, datasets, configs)
+- [ ] Human checkpoint on PR with agent-authored change log
+- [ ] Telemetry/alerts for long-running or autonomous actions
 
 ## Quality Thresholds by Scenario
 

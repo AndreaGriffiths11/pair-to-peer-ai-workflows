@@ -148,6 +148,26 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="form-label">Learning Category</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox" onclick="toggleCheckbox('cat-agent-mode')"></div>
+                        <label>Agent Mode vs. Edit Mode</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <div class="checkbox" onclick="toggleCheckbox('cat-agent-delegation')"></div>
+                        <label>Agent Delegation</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <div class="checkbox" onclick="toggleCheckbox('cat-mcp-integration')"></div>
+                        <label>MCP Integration</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <div class="checkbox" onclick="toggleCheckbox('cat-multi-agent')"></div>
+                        <label>Multi-Agent Orchestration</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <label class="form-label">Objective</label>
                     <textarea class="form-textarea" id="objective" placeholder="What you wanted to achieve..."></textarea>
                 </div>
@@ -292,6 +312,26 @@
                     <div class="form-group">
                         <label class="form-label">Task Type</label>
                         <input type="text" class="form-input" id="quickTask" placeholder="e.g., Bug fix">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Learning Category</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox" onclick="toggleCheckbox('cat-agent-mode')"></div>
+                        <label>Agent Mode vs. Edit Mode</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <div class="checkbox" onclick="toggleCheckbox('cat-agent-delegation')"></div>
+                        <label>Agent Delegation</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <div class="checkbox" onclick="toggleCheckbox('cat-mcp-integration')"></div>
+                        <label>MCP Integration</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <div class="checkbox" onclick="toggleCheckbox('cat-multi-agent')"></div>
+                        <label>Multi-Agent Orchestration</label>
                     </div>
                 </div>
 
@@ -591,6 +631,18 @@
             document.getElementById('progressFill').style.width = `${percentage}%`;
         }
 
+        function generateCategorySection() {
+            const labels = {
+                'cat-agent-mode': 'Agent Mode vs. Edit Mode',
+                'cat-agent-delegation': 'Agent Delegation',
+                'cat-mcp-integration': 'MCP Integration',
+                'cat-multi-agent': 'Multi-Agent Orchestration'
+            };
+            return Object.entries(labels).map(([key, label]) => {
+                return '- [' + (checkboxes[key] ? 'x' : ' ') + '] ' + label;
+            }).join('\n');
+        }
+
         function generateCheckboxSection() {
             const labels = {
                 'shared-chat': 'Shared in team chat/Slack with summary',
@@ -598,8 +650,8 @@
                 'shared-meeting': 'Presented in team standup/meeting',
                 'shared-guidelines': 'Updated team AI guidelines document'
             };
-            return Object.entries(checkboxes).map(([key, checked]) => {
-                return '- [' + (checked ? 'x' : ' ') + '] ' + (labels[key] || key);
+            return Object.entries(labels).map(([key, label]) => {
+                return '- [' + (checkboxes[key] ? 'x' : ' ') + '] ' + label;
             }).join('\n');
         }
 
@@ -622,6 +674,9 @@
 **AI Tool Used:** ${document.getElementById('aiTool').value || '[Tool]'}
 **Task Type:** ${document.getElementById('taskType').value || '[Type]'}
 **Complexity Level:** ${document.getElementById('complexity').value || '[Level]'}
+
+## Learning Categories
+${generateCategorySection()}
 
 ## What We Tried
 **Objective:** ${document.getElementById('objective').value || '[Objective]'}
@@ -663,6 +718,9 @@ ${document.getElementById('quickDidnt').value || '[What didn\'t work]'}
 
 **🔄 For Next Time:**
 ${document.getElementById('quickNext').value || '[Improvements]'}
+
+**📂 Categories:**
+${generateCategorySection()}
 
 **📤 Shared with team:** ${document.getElementById('quickShared').value}
 
