@@ -1,36 +1,107 @@
 # Gotchas
 
-<!-- This file is loaded when starting unfamiliar tasks or debugging unexpected behavior. -->
 <!-- Each entry: what looks right, what's actually wrong, and how to handle it. -->
-<!-- Replace these examples with your project's actual gotchas. -->
+<!-- Tested against the vanilla HTML/CSS/JS stack in this project. -->
 
-## Build & Deploy
+## localStorage
 
-- **`pnpm build` silently hides type errors.** The build only checks JavaScript emit, not full type correctness. Always run `pnpm typecheck` separately before considering a build "clean." CI runs both.
-- **Next.js caches aggressively in dev.** If your code changes aren't reflected, `rm -rf .next` and restart. This is especially common after modifying `next.config.js` or middleware.
-- **Environment variables must be listed in `next.config.js`.** Server-side env vars need to be in `serverRuntimeConfig`. Client-side ones need the `NEXT_PUBLIC_` prefix. Missing this causes undefined values that only surface at runtime.
-- **Vercel preview deploys use the `preview` environment.** Not `development`, not `production`. If something works locally but fails on preview, check that `preview` env vars are set in the Vercel dashboard.
+- **localStorage persists across page refreshes and browser sessions.** If you don't explicitly clear it, stale data survives. Always provide a "Reset" button or clear on logout. Check DevTools → Application → localStorage to inspect and debug.
+- **localStorage is synchronous and blocks rendering.** Parsing large JSON (>100KB) can cause jank. Keep assessment responses lean: extract only what's needed, remove redundant data, prune old responses.
+- **localStorage is same-origin only.** `localhost:3000` and `localhost:8000` are different origins. Moving between dev ports = lost state. Use the same port during dev.
+- **localStorage is cleared on "Clear browsing data" in user settings.** Assessments vanish without warning. Consider adding a "download as JSON" button so users can back up their responses.
 
-## Database
+## CSS Custom Properties (Theming)
 
-- **`prisma migrate dev` resets the database.** It drops and recreates when migrations diverge. Use `prisma db push` for safe schema iteration during development. Only use `migrate dev` when you're ready to create a migration file.
-- **Prisma generates to `src/generated/`.** After any schema change, run `prisma generate`. If types look stale, this is why. The generated client is gitignored — CI runs generate as a build step.
-- **Connection pooling in serverless.** Each Vercel function invocation creates a new Prisma client. Use the singleton pattern in `src/lib/db/client.ts` to avoid exhausting the connection pool. The `connection_limit` in the DATABASE_URL should be set to 1 for serverless.
+- **CSS custom properties are inherited.** A var defined on `:root` cascades down. If you override it in a selector, child elements see the new value. Test dark mode and high contrast carefully.
+- **Fallbacks don't work if var is undefined.** `color: var(--nonexistent, blue)` will be `blue`, but if the var exists and is invalid (empty, typo), the fallback is ignored. Always test theme switching.
+- **@media queries can't read custom props.** You can't do `@media (max-width: var(--breakpoint))`. Use fixed pixel values in media queries; custom props work fine inside the rules.
 
-## Auth
+Example of theme switching gotcha:
+```javascript
+// WRONG: This won't update colors in existing elements
+document.documentElement.style.setProperty('--primary-color', '#ff0000');
 
-- **Session tokens expire at different rates.** 24 hours in dev, 7 days in production. Don't write tests that assume session persistence beyond a single test run.
-- **NextAuth callbacks run on every request.** The `session` callback in `src/lib/auth.ts` adds custom fields. If you add a new field to the session, you must update both the callback and the `Session` type declaration in `types/next-auth.d.ts`.
-- **Middleware auth checks run at the edge.** The middleware in `src/middleware.ts` checks auth for protected routes. It cannot access the database — it only reads the JWT. If you need DB-backed authorization, do it in the route handler.
+// RIGHT: Add a class that redefines vars
+document.documentElement.classList.add('dark-mode');
+/* In CSS: */
+.dark-mode { --primary-color: #1a1a1a; }
+```
 
-## Testing
+## Event Listeners & Memory Leaks
 
-- **Integration tests require the database.** Run `docker compose up db` before running the test suite. CI handles this automatically. If tests fail locally with connection errors, this is the first thing to check.
-- **Vitest runs in happy-dom by default.** Component tests that need real browser APIs (IntersectionObserver, ResizeObserver) must add `// @vitest-environment jsdom` at the top of the test file.
-- **Snapshot tests break on Prisma model changes.** If you update the Prisma schema, expect snapshot failures. Update snapshots with `pnpm test -- -u` after verifying the changes are correct.
+- **Event listeners added in a loop persist until explicitly removed.** If you re-init a tool without cleaning up old listeners, you'll attach duplicates. Always call `removeEventListener()` with the same function reference in a cleanup method.
+- **`addEventListener('click', (e) => ...)` creates a new function each time.** Can't remove it later because you've lost the reference. Use named functions or cache the handler: `this.handleClick = (e) => {...}; el.addEventListener('click', this.handleClick)`.
+- **Event delegation scales.** One listener on the container that checks `event.target` is better than listeners on each child. See `Navigation` class in `navigation.js` for the pattern.
 
-## Third-Party APIs
+## Focus Management & Transitions
 
-- **Stripe webhooks fail in dev without the CLI.** Run `stripe listen --forward-to localhost:3000/api/webhooks/stripe` in a separate terminal. The webhook signing secret changes each time you restart the listener — update `.env.local` if signature verification fails.
-- **Cloudinary transforms are cached by URL.** If you change a transform (resize, crop), the old cached version persists. Append a version parameter or use a different public ID.
-- **Resend has rate limits in dev.** The free tier allows 100 emails/day. Tests that trigger emails should mock the Resend client using the helper in `tests/mocks/resend.ts`.
+- **`element.focus()` doesn't wait for CSS transitions.** If you focus immediately after showing an element with `display: none → block`, the browser hasn't laid out the element yet. Focus fails silently. Fix: `setTimeout(() => el.focus(), 500)` after transition.
+- **`scrollIntoView()` disrupts smooth scroll if called before layout.** The page hasn't calculated positions yet. Same fix: delay with setTimeout.
+- **Tab order follows DOM order, not CSS layout order.** If you `position: absolute` an element early in the DOM, it's still in tab order before later elements. Use `tabindex` carefully or reorder DOM elements to match visual flow.
+
+Example from assessment tools:
+```javascript
+// Show modal with transition
+this.modal.style.display = 'block';
+
+// WRONG: Focus immediately
+this.modal.querySelector('button').focus();
+
+// RIGHT: Wait for layout
+setTimeout(() => {
+  this.modal.querySelector('button').focus();
+}, 300); // Match CSS transition duration
+```
+
+## Form State Sync
+
+- **Form input values and DOM state can diverge.** If you update `localStorage` but not `input.value`, or vice versa, the page reloads but inputs are empty. Always sync both: `input.value = data.response` AND `localStorage.setItem(...)`.
+- **Checkbox state is tricky.** `checked` is a property, not an attribute. Use `input.checked = true`, not `input.setAttribute('checked', 'true')`. Same for radio buttons.
+- **Date inputs have a specific format.** `<input type="date">` only accepts `YYYY-MM-DD`. If you store dates as ISO strings with timezone, strip the time part before setting `input.value`.
+
+## Mobile Responsive Layout
+
+- **`@media (max-width: 768px)` is tested, but not all devices.** 768px is the breakpoint, but some tablets are 800px wide. Test on actual devices or use Chrome DevTools device emulation.
+- **Touch targets must be at least 44×44 pixels.** Buttons smaller than this are hard to tap. CSS `padding` helps: 1rem (16px) padding on a button = ~48×48 total touch target.
+- **`position: fixed` breaks on mobile when keyboard is open.** Floating buttons disappear behind the keyboard on iOS. Use `position: sticky` or move to `position: relative` inside a scrollable container for mobile.
+
+## HTML Semantics & ARIA
+
+- **`<button>` elements submit forms by default.** If you want a button that doesn't submit, use `type="button"`. Otherwise, clicks trigger form submission and page reload.
+- **ARIA attributes don't make inaccessible elements accessible.** `<div role="button">` still isn't keyboard accessible. Use real `<button>` elements whenever possible.
+- **`aria-live="polite"` fires announcements every time content changes.** Update the same element, not create new ones. Screen reader users hear every change: "Loading... Loading complete." Very annoying. Use `aria-live` sparingly.
+
+Example:
+```html
+<!-- WRONG: New element = new announcement -->
+<div aria-live="polite" id="status"></div>
+<script>
+  status.innerHTML = '<p>Loaded 1</p>';
+  status.innerHTML = '<p>Loaded 2</p>'; // Announces twice
+</script>
+
+<!-- RIGHT: Same element, updated content -->
+<div aria-live="polite" id="status">Idle</div>
+<script>
+  status.textContent = 'Loaded 1';
+  status.textContent = 'Loaded 2'; // Announces once
+</script>
+```
+
+## GitHub Models API Integration
+
+- **GitHub Models API requires authentication.** Uses `MODELS_TOKEN` (preferred) or `GITHUB_TOKEN` from secrets. If missing or invalid, API calls fail silently. Check `.env` (local) or GitHub repo settings (Actions).
+- **API rate limits are per token, not per user.** If you test the workflow multiple times in one minute, you'll hit limits. Rate limit headers are in the response: `x-ratelimit-remaining`. Check them in CI logs.
+- **Survey data sent as JSON must be valid.** Malformed JSON causes 400 errors. Validate structure: `{ responses: {...}, timestamp: "...", metadata: {...} }`.
+- **API response timeout is 30 seconds (default fetch).** If the model takes longer, your workflow fails. No easy fix; accept that AI analysis sometimes times out.
+
+## Browser Caching
+
+- **GitHub Pages caches HTML for 1 minute, static assets for 1 hour.** If you update `index.html`, users might see the old version for up to 60 seconds. Add a cache-buster query param: `<script src="js/app.js?v=2">`
+- **Service workers (if added) cache everything.** Test in private/incognito window to bypass cache, or manually clear via DevTools.
+
+## DevTools & Debugging
+
+- **DevTools Application tab shows localStorage for the current origin.** If testing on multiple ports, you see different localStorage for each. Don't confuse this with data loss.
+- **`console.log()` works, but production code should avoid it.** Logs bloat CI output and leak info. Use structured logging if you need debugging in production.
+- **CSS custom properties don't show inline in DevTools.** The Styles panel shows resolved values (`color: #2563eb`), not the var reference. Inspect the `:root` rule to see the actual var definitions.
