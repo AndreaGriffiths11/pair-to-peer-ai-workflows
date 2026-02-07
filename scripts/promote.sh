@@ -22,7 +22,7 @@ if [ ! -f "$LOCAL_FILE" ]; then
 fi
 
 # --- Count sessions ---
-session_count=$(grep -c "^### [0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}" "$LOCAL_FILE" 2>/dev/null || echo "0")
+session_count=$(grep -cE "^### [0-9]{4}-[0-9]{2}-[0-9]{2}" "$LOCAL_FILE" 2>/dev/null) || session_count="0"
 echo "Promotion Analysis"
 echo "=================="
 echo ""
@@ -47,7 +47,7 @@ while IFS= read -r line; do
     fi
     if $in_promote; then
         # Skip HTML comments and blank lines
-        if echo "$line" | grep -q "^<!--" || echo "$line" | grep -q "^$" || echo "$line" | grep -q "-->"; then
+        if echo "$line" | grep -q "^<!--" || echo "$line" | grep -q "^$" || echo "$line" | grep -q -- "-->"; then
             continue
         fi
         if [ -n "$line" ]; then
@@ -85,7 +85,7 @@ else
             break
         fi
         if $in_session_log; then
-            if echo "$line" | grep -q "^### [0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}"; then
+            if echo "$line" | grep -qE "^### [0-9]{4}-[0-9]{2}-[0-9]{2}"; then
                 current_session=$(echo "$line" | sed 's/^### //')
             fi
             # Extract learning-type entries

@@ -40,3 +40,4 @@ speaker-notes.js
 # Build artifacts
 dist/
 build/
+.agents.local.md
