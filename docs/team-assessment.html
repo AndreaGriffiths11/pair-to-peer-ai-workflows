@@ -31,34 +31,9 @@
     <style>
         /* Team Assessment Specific Styles */
 
-        /* Header */
-        header {
-            background: linear-gradient(135deg, var(--bg) 0%, var(--surface) 100%);
-            padding: 3rem 2rem;
-            text-align: center;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        header h1 {
-            font-size: clamp(1.875rem, 5vw, 3rem);
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(90deg, var(--accent) 0%, var(--accent-2) 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        header p {
-            color: var(--muted);
-            font-size: 1rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
         /* Team Assessment container adjustments */
         .container {
-            max-width: 1000px;
+            max-width: 100%;
         }
 
         .assessment-container {
@@ -587,7 +562,7 @@
         </nav>
 
         <header>
-            <h1>Team Maturity Assessment</h1>
+            <h1>Team Maturity <span class="accent">Assessment</span></h1>
             <p>Interactive AI implementation scorecard with real-time scoring</p>
         </header>
 

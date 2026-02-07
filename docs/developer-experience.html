@@ -29,30 +29,7 @@
     <link rel="stylesheet" href="css/interactive-components.css">
 
     <style>
-        /* Page-specific header styling */
-        header {
-            background: linear-gradient(135deg, var(--bg) 0%, var(--surface) 100%);
-            padding: 3rem 2rem;
-            text-align: center;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        header h1 {
-            font-size: clamp(1.875rem, 5vw, 3rem);
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(90deg, var(--accent) 0%, var(--accent-2) 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        header p {
-            color: var(--muted);
-            font-size: 1rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
+        /* Page-specific styles (header now in base CSS) */
     </style>
 
 </head>
@@ -90,7 +67,7 @@
         </nav>
 
         <header role="banner">
-            <h1>Developer Experience Health Check</h1>
+            <h1>Developer Experience <span class="accent">Health Check</span></h1>
             <p>Monthly AI workflow survey measuring satisfaction, learning, and quality confidence</p>
         </header>
 
