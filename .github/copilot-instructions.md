@@ -5,7 +5,7 @@ This is an educational static site project showcasing "From Pair to Peer" AI wor
 
 ## Architecture & File Structure
 - **`docs/`**: Main site (GitHub Pages root)
-  - Interactive HTML tools: `index.html` (decision tree), `team-assessment.html`, `developer-experience.html`, `teaching-moments.html`
+  - Interactive HTML tools: `index.html` (decision tree), `team-assessment.html`, `developer-experience.html`, `teaching-moments.html`, `resources.html`
   - JavaScript modules in `docs/js/` follow class-based patterns (see `DecisionTree` class in `decision-tree.js`)
   - CSS uses CSS custom properties for theming (`--accent`, `--surface-elevated`, etc.)
 - **`templates/`**: Markdown templates for team processes (not web content)
@@ -68,8 +68,8 @@ Key integration points:
 
 ### Adding New Assessment Features
 - Follow the established pattern: class-based JS with localStorage persistence
-- Maintain the three-pattern framework: Standards-First, Experience-Focus, Fluency-Building
-- Update both interactive tools AND corresponding markdown templates
+- Maintain the three-pattern framework: Standards-First, Experience-Focus, Fluency-Building plus agent governance (delegation trust, MCP literacy, permissions)
+- Update both interactive tools AND corresponding markdown templates (including `agent-governance-template.md`)
 
 ## Dependencies & Integrations
 - **No build process**: Vanilla HTML/CSS/JS only
