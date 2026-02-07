@@ -1,46 +1,92 @@
 # Code Conventions
 
-<!-- This file is loaded only when a task involves writing or modifying code. -->
-<!-- Replace this example with your project's actual conventions. -->
+## HTML Structure
 
-## Naming
+- **Semantic HTML:** Use `<section>`, `<article>`, `<nav>`, `<header>`, `<footer>` for meaningful page structure.
+- **ARIA attributes:** Always include `aria-label`, `aria-describedby`, `role`, `aria-live` for interactive elements.
+- **Inline scripts:** Script tags at bottom of body. No external script deps except Google Fonts (with preconnect).
+- **Meta tags:** OpenGraph, CSP headers, description, keywords in `<head>` for SEO.
+- **Progressive enhancement:** All tools function without JavaScript; JS enhances with interactivity and state.
 
-- **Files:** kebab-case (`user-profile.tsx`, `api-client.ts`)
-- **Components:** PascalCase (`UserProfile`, `DataTable`)
-- **Functions/variables:** camelCase (`getUserById`, `isLoading`)
-- **Types/interfaces:** PascalCase, no `I` prefix (`UserProfile`, not `IUserProfile`)
-- **Constants:** UPPER_SNAKE for true constants (`MAX_RETRIES`), camelCase for derived values
-- **Test files:** `[source-name].test.ts` inside `__tests__/` directory adjacent to source
+Example: see `docs/team-assessment.html` — proper nav structure, ARIA labels on buttons, fallback text.
+
+## CSS Structure
+
+- **CSS custom properties:** Define theme in `:root` (see `docs/css/main.css`). All colors, spacing, shadows use vars.
+- **Mobile-first:** Base styles for mobile. Use `@media (max-width: 768px)` for desktop adjustments.
+- **Component classes:** Reusable classes like `.btn-primary`, `.card`, `.score-dashboard` shared across tools.
+- **No inline styles:** Never use `style="..."` in HTML. All styling via CSS classes.
+- **Accessibility classes:** `.sr-only` for screen reader text. Maintain color contrast ratios (4.5:1 minimum).
+
+Key theme variables:
+```css
+--primary-color, --text-primary, --text-secondary, --surface, --surface-elevated
+--border-color, --success-color, --warning-color, --danger-color, --shadow
+```
+
+## JavaScript Patterns
+
+- **Class-based modules:** Each tool is a class (e.g., `Navigation`, `Assessment`, `DecisionTree`).
+- **Constructor + init():** Constructor calls `this.init()`. All setup happens in `init()`, not constructor.
+- **Event listeners in initializeEventListeners():** Dedicated method that attaches all listeners. Called from `init()`.
+- **Data attributes:** Use `data-*` attributes to track state in DOM (e.g., `data-selected="true"`).
+- **DOM queries before listeners:** Cache frequently used DOM elements in `init()`.
+
+```javascript
+class MyTool {
+  constructor(containerSelector) {
+    this.container = document.querySelector(containerSelector);
+    this.init();
+  }
+
+  init() {
+    this.initializeEventListeners();
+    this.updateUI();
+  }
+
+  initializeEventListeners() {
+    this.container.addEventListener('click', (e) => this.handleClick(e));
+  }
+}
+```
+
+## localStorage Keys
+
+- **Naming:** camelCase, descriptive (e.g., `teamAssessmentData`, `decisionTreeResults`, `developerExperienceSummary`).
+- **Structure:** Always store as JSON string. Parse on retrieval.
+- **Lifetime:** Data persists across page refreshes. Clear on user action or 30-day expiry.
+- **Size:** Keep under 5MB per domain. One tool's state should not exceed 100KB.
+
+Example:
+```javascript
+const data = { responses: {...}, timestamp: new Date().toISOString() };
+localStorage.setItem('teamAssessmentData', JSON.stringify(data));
+```
+
+## Naming Conventions
+
+- **File names:** kebab-case (e.g., `decision-tree.js`, `team-assessment.html`, `modern-theme.css`).
+- **IDs in HTML:** kebab-case, unique per page (e.g., `scoreDashboard`, `welcomeSection`).
+- **Classes in HTML:** kebab-case, reusable (e.g., `btn-primary`, `card`, `score-dashboard`).
+- **JS functions:** camelCase, verb-first (e.g., `initializeEventListeners()`, `calculateScore()`, `handleClick()`).
+- **JS variables:** camelCase (e.g., `scoreData`, `isVisible`, `currentQuestion`).
 
 ## File Structure
 
-- One component per file. File name matches the export name.
-- Co-locate tests: `src/lib/errors.ts` → `src/lib/__tests__/errors.test.ts`
-- Co-locate page-specific components: `src/app/dashboard/components/StatsCard.tsx`
-- Shared components go in `src/components/` only when used by 2+ routes.
+- One interactive tool per HTML file in `docs/`.
+- Inline CSS and JS in HTML (no external dependencies beyond fonts).
+- Shared CSS in `docs/css/` (imported via `<link>`).
+- No JS subdirectory needed if modules are inline; separate only for shared utilities.
 
-## Patterns to Follow
+Shared CSS files:
+- `main.css` — Base typography, colors, layout
+- `modern-theme.css` — Color scheme and spacing system
+- `interactive-components.css` — Button, card, input styles
+- `decision-tree.css`, `team-assessment.css` — Tool-specific overrides
 
-- **Named exports everywhere.** `export function Button()`, never `export default`. This makes renames trackable and tree-shaking reliable. See `src/components/Button.tsx`.
-- **Result types for fallible operations.** Return `{ok: true, data}` or `{ok: false, error}` instead of throwing. Callers handle both paths explicitly. See `src/lib/errors.ts`.
-- **Zod schemas at API boundaries.** Every route handler validates input with a Zod schema before processing. See `src/app/api/users/route.ts`.
-- **Prisma helpers in `src/lib/db/`.** Don't use Prisma client directly in routes or components. Write a typed function in the db module. See `src/lib/db/users.ts`.
-- **Server-first components.** Start with server components. Add `'use client'` only when you need `useState`, `useEffect`, event handlers, or browser APIs.
+## Testing & Validation
 
-## Patterns to Avoid
-
-- **No `any` types.** Use `unknown` and narrow, or define a proper type. The only exception is test mocks, and even then prefer `as unknown as Type`.
-- **No inline styles.** Use Tailwind classes. Keeps styling consistent and grep-able.
-- **No barrel exports (`index.ts` re-exports).** They break tree-shaking and make imports ambiguous. Import from the specific file.
-- **No `console.log` in committed code.** Use the structured logger at `src/lib/logger.ts`. It includes request IDs and respects log levels.
-- **No direct `fetch` calls.** Use `src/lib/api-client.ts` which handles auth headers, base URL, and error normalization.
-
-## Examples
-
-<!-- Point to existing code rather than pasting snippets. Code changes; pointers are cheaper to maintain. -->
-
-- Good component pattern: see `src/components/Button.tsx` — named export, props interface, Tailwind only
-- Good API route pattern: see `src/app/api/users/route.ts` — Zod validation, Result return, Prisma helper
-- Good error handling: see `src/lib/errors.ts` — Result type definition and utility functions
-- Good test pattern: see `src/lib/__tests__/errors.test.ts` — describes grouped by function, edge cases covered
-- Good store pattern: see `src/stores/counter.ts` — single domain, typed selectors, no side effects in store
+- **No test framework configured.** Manual browser testing via local server.
+- **Accessibility:** Test with Axe browser extension. Check focus order (Tab key).
+- **Responsive:** Test on mobile (max-width: 768px) before commit.
+- **localStorage:** Open DevTools → Application → localStorage → verify key names and JSON structure.
