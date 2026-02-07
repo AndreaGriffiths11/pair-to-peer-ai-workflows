@@ -28,6 +28,33 @@
     <link rel="stylesheet" href="css/clean-minimal-theme.css">
     <link rel="stylesheet" href="css/interactive-components.css">
 
+    <style>
+        /* Page-specific header styling */
+        header {
+            background: linear-gradient(135deg, var(--bg) 0%, var(--surface) 100%);
+            padding: 3rem 2rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        header h1 {
+            font-size: clamp(1.875rem, 5vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(90deg, var(--accent) 0%, var(--accent-2) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        header p {
+            color: var(--muted);
+            font-size: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+    </style>
+
 </head>
 <body>
     <!-- Mobile progress bar -->
@@ -195,8 +222,8 @@
                 </div>
 
                 <div class="navigation-buttons">
-                    <button class="btn btn-secondary" disabled>Previous</button>
-                    <button class="btn btn-primary" onclick="nextSection()">Next: Skill Balance →</button>
+                    <button class="btn secondary" disabled>Previous</button>
+                    <button class="btn primary" onclick="nextSection()">Next: Skill Balance →</button>
                 </div>
             </div>
 
@@ -281,8 +308,8 @@
                 </div>
 
                 <div class="navigation-buttons">
-                    <button class="btn btn-secondary" onclick="prevSection()">← Previous</button>
-                    <button class="btn btn-primary" onclick="nextSection()">Next: Learning Velocity →</button>
+                    <button class="btn secondary" onclick="prevSection()">← Previous</button>
+                    <button class="btn primary" onclick="nextSection()">Next: Learning Velocity →</button>
                 </div>
             </div>
 
@@ -349,8 +376,8 @@
                 </div>
 
                 <div class="navigation-buttons">
-                    <button class="btn btn-secondary" onclick="prevSection()">← Previous</button>
-                    <button class="btn btn-primary" onclick="nextSection()">Next: Code Quality →</button>
+                    <button class="btn secondary" onclick="prevSection()">← Previous</button>
+                    <button class="btn primary" onclick="nextSection()">Next: Code Quality →</button>
                 </div>
             </div>
 
@@ -417,8 +444,8 @@
                 </div>
 
                 <div class="navigation-buttons">
-                    <button class="btn btn-secondary" onclick="prevSection()">← Previous</button>
-                    <button class="btn btn-primary" onclick="nextSection()">Next: Team Process →</button>
+                    <button class="btn secondary" onclick="prevSection()">← Previous</button>
+                    <button class="btn primary" onclick="nextSection()">Next: Team Process →</button>
                 </div>
             </div>
 
@@ -507,8 +534,8 @@
                 </div>
 
                 <div class="navigation-buttons">
-                    <button class="btn btn-secondary" onclick="prevSection()">← Previous</button>
-                    <button class="btn btn-primary" onclick="nextSection()">Next: Open Response →</button>
+                    <button class="btn secondary" onclick="prevSection()">← Previous</button>
+                    <button class="btn primary" onclick="nextSection()">Next: Open Response →</button>
                 </div>
             </div>
 
@@ -545,8 +572,8 @@
                 </div>
 
                 <div class="navigation-buttons">
-                    <button class="btn btn-secondary" onclick="prevSection()">← Previous</button>
-                    <button class="btn btn-primary" onclick="showResults()">View Results →</button>
+                    <button class="btn secondary" onclick="prevSection()">← Previous</button>
+                    <button class="btn primary" onclick="showResults()">View Results →</button>
                 </div>
             </div>
             
@@ -567,7 +594,7 @@
                 <div class="ai-analysis-section" id="aiAnalysisSection">
                     <h3>🤖 AI-Powered Analysis</h3>
                     <div class="analysis-status" id="analysisStatus">
-                        <button class="btn btn-primary" onclick="runAIAnalysis()">🔍 Generate AI Insights</button>
+                        <button class="btn primary" onclick="runAIAnalysis()">🔍 Generate AI Insights</button>
                         <div class="analysis-loading hidden" id="analysisLoading">
                             <div class="loading-spinner"></div>
                             <span>Analyzing your responses with AI...</span>
@@ -585,9 +612,9 @@
                 </div>
 
                 <div class="export-controls">
-                    <button class="btn btn-primary" onclick="exportReport()">📊 Export Report</button>
-                    <button class="btn btn-secondary" onclick="saveResponses()">💾 Save Responses</button>
-                    <button class="btn btn-secondary" onclick="resetSurvey()">🔄 Take Again</button>
+                    <button class="btn primary" onclick="exportReport()">📊 Export Report</button>
+                    <button class="btn secondary" onclick="saveResponses()">💾 Save Responses</button>
+                    <button class="btn secondary" onclick="resetSurvey()">🔄 Take Again</button>
                 </div>
             </div>
         </main>

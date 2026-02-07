@@ -1,40 +1,40 @@
 /* Clean Minimal Documentation Theme - Agent Context System Aesthetic */
 
 :root {
-    /* Core Colors - Clean & Minimal */
-    --bg: #ffffff;
-    --surface: #ffffff;
-    --surface-elevated: #f5f5f5;
-    --border-color: #e1e4e8;
-    --accent: #0366d6;
-    --accent-2: #0366d6;
-    --fg: #1e1e1e;
-    --muted: #586069;
-    --danger-color: #ef4444;
-    --warning-color: #f59e0b;
-    --success-color: #22c55e;
-    --shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
-    --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.08);
+    /* Core Colors - Dark, Minimal with Cyan & Purple Accents */
+    --bg: #0a0a0a;
+    --surface: #18181b;
+    --surface-elevated: #27272a;
+    --border-color: #27272a;
+    --accent: #22d3ee;
+    --accent-2: #a855f7;
+    --fg: #fafafa;
+    --muted: #a1a1aa;
+    --danger-color: #ff6b6b;
+    --warning-color: #ffd93d;
+    --success-color: #51cf66;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.4);
     --radius: 8px;
     --font-size: 16px;
 
     /* Code block colors */
-    --code-bg: #f6f8fa;
-    --code-border: #e1e4e8;
+    --code-bg: #18181b;
+    --code-border: #27272a;
 
     /* Diagram accent colors */
     --accent-green-stroke: #22c55e;
-    --accent-green-fill: #b2f2bb;
-    --accent-blue-stroke: #4a9eed;
-    --accent-blue-fill: #a5d8ff;
-    --accent-red-stroke: #ef4444;
-    --accent-red-fill: #ffc9c9;
-    --accent-amber-stroke: #f59e0b;
-    --accent-amber-fill: #fff3bf;
+    --accent-green-fill: #22c55e;
+    --accent-blue-stroke: #22d3ee;
+    --accent-blue-fill: #22d3ee;
+    --accent-red-stroke: #ff6b6b;
+    --accent-red-fill: #ff6b6b;
+    --accent-amber-stroke: #ffd93d;
+    --accent-amber-fill: #ffd93d;
 
     /* Button shadows */
-    --button-primary-shadow: #0252a8;
-    --button-secondary-shadow: #0252a8;
+    --button-primary-shadow: #06b6d4;
+    --button-secondary-shadow: #7e22ce;
 }
 
 * {
@@ -347,11 +347,11 @@ button {
     background: var(--surface);
     border: 1px solid var(--border-color);
     color: var(--fg);
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
     cursor: pointer;
-    font-size: 0.9rem;
-    font-weight: 500;
+    font-size: 1rem;
+    font-weight: 600;
     transition: all 0.2s ease;
     font-family: inherit;
     display: inline-block;
@@ -360,30 +360,32 @@ button {
 
 .btn:hover,
 button:hover {
-    background: var(--surface-elevated);
     border-color: var(--accent);
+    color: var(--accent);
 }
 
 .btn.primary {
     background: var(--accent);
-    color: white;
+    color: #000000;
     border-color: var(--accent);
 }
 
 .btn.primary:hover {
-    background: #0256c7;
-    border-color: #0256c7;
+    background: #06b6d4;
+    border-color: #06b6d4;
+    box-shadow: 0 0 20px rgba(34, 211, 238, 0.3);
 }
 
 .btn.secondary {
-    background: var(--success-color);
-    color: white;
-    border-color: var(--success-color);
+    background: transparent;
+    color: var(--fg);
+    border-color: var(--border-color);
 }
 
 .btn.secondary:hover {
-    background: #1fb350;
-    border-color: #1fb350;
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(34, 211, 238, 0.1);
 }
 
 /* Forms - Clean */

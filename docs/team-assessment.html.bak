@@ -31,31 +31,6 @@
     <style>
         /* Team Assessment Specific Styles */
 
-        /* Header */
-        header {
-            background: linear-gradient(135deg, var(--bg) 0%, var(--surface) 100%);
-            padding: 3rem 2rem;
-            text-align: center;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        header h1 {
-            font-size: clamp(1.875rem, 5vw, 3rem);
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(90deg, var(--accent) 0%, var(--accent-2) 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        header p {
-            color: var(--muted);
-            font-size: 1rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
         /* Team Assessment container adjustments */
         .container {
             max-width: 1000px;
@@ -600,7 +575,7 @@
                     Experience-focused metrics, and AI Fluency building. This assessment takes 5-10 minutes 
                     and provides personalized action plans.
                 </div>
-                <button class="start-btn btn primary" onclick="startAssessment()">Start Assessment</button>
+                <button class="start-btn btn btn-primary" onclick="startAssessment()">Start Assessment</button>
             </div>
 
             <!-- Score Dashboard - Always Visible -->
@@ -870,8 +845,8 @@
                 </div>
 
                 <div class="nav-buttons">
-                    <button class="btn secondary" disabled>Previous</button>
-                    <button class="btn primary" onclick="nextStep()">Next: Experience Metrics</button>
+                    <button class="btn btn-secondary" disabled>Previous</button>
+                    <button class="btn btn-primary" onclick="nextStep()">Next: Experience Metrics</button>
                 </div>
             </div>
 
@@ -1105,8 +1080,8 @@
                 </div>
 
                 <div class="nav-buttons">
-                    <button class="btn secondary" onclick="prevStep()">Previous: Standards</button>
-                    <button class="btn primary" onclick="nextStep()">Next: AI Fluency</button>
+                    <button class="btn btn-secondary" onclick="prevStep()">Previous: Standards</button>
+                    <button class="btn btn-primary" onclick="nextStep()">Next: AI Fluency</button>
                 </div>
             </div>
 
@@ -1340,8 +1315,8 @@
                 </div>
 
                 <div class="nav-buttons">
-                    <button class="btn secondary" onclick="prevStep()">Previous: Experience</button>
-                    <button class="btn primary" onclick="nextStep()">View Results</button>
+                    <button class="btn btn-secondary" onclick="prevStep()">Previous: Experience</button>
+                    <button class="btn btn-primary" onclick="nextStep()">View Results</button>
                 </div>
             </div>
 
@@ -1356,14 +1331,14 @@
                     </div>
 
                     <div class="export-controls">
-                        <button class="btn primary" onclick="exportResults()">Export Results</button>
-                        <button class="btn secondary" onclick="saveProgress()">Save Progress</button>
-                        <button class="btn secondary" onclick="resetAssessment()">Start Over</button>
+                        <button class="btn btn-primary" onclick="exportResults()">Export Results</button>
+                        <button class="btn btn-secondary" onclick="saveProgress()">Save Progress</button>
+                        <button class="btn btn-secondary" onclick="resetAssessment()">Start Over</button>
                     </div>
 
                     <div class="nav-buttons">
-                        <button class="btn secondary" onclick="prevStep()">Previous: AI Fluency</button>
-                        <button class="btn primary" onclick="showStep(1)">Take Again</button>
+                        <button class="btn btn-secondary" onclick="prevStep()">Previous: AI Fluency</button>
+                        <button class="btn btn-primary" onclick="showStep(1)">Take Again</button>
                     </div>
                 </div>
             </div>

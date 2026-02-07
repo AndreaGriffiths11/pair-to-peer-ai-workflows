@@ -27,6 +27,33 @@
 
     <link rel="stylesheet" href="css/clean-minimal-theme.css">
     <link rel="stylesheet" href="css/interactive-components.css">
+
+    <style>
+        /* Page-specific header styling */
+        header {
+            background: linear-gradient(135deg, var(--bg) 0%, var(--surface) 100%);
+            padding: 3rem 2rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        header h1 {
+            font-size: clamp(1.875rem, 5vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(90deg, var(--accent) 0%, var(--accent-2) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        header p {
+            color: var(--muted);
+            font-size: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+    </style>
 </head>
 <body>
     <!-- Mobile progress bar -->
@@ -180,8 +207,8 @@
                 </div>
 
                 <div class="navigation-buttons">
-                    <button class="btn btn-secondary" onclick="goBack()">← Back to Template Choice</button>
-                    <button class="btn btn-primary" onclick="nextDetailedSection()">Next: CARE Assessment →</button>
+                    <button class="btn secondary" onclick="goBack()">← Back to Template Choice</button>
+                    <button class="btn primary" onclick="nextDetailedSection()">Next: CARE Assessment →</button>
                 </div>
             </div>
 
@@ -251,8 +278,8 @@
                 </div>
 
                 <div class="navigation-buttons">
-                    <button class="btn btn-secondary" onclick="prevDetailedSection()">← Previous: Context</button>
-                    <button class="btn btn-primary" onclick="nextDetailedSection()">Next: Lessons & Sharing →</button>
+                    <button class="btn secondary" onclick="prevDetailedSection()">← Previous: Context</button>
+                    <button class="btn primary" onclick="nextDetailedSection()">Next: Lessons & Sharing →</button>
                 </div>
             </div>
 
@@ -288,8 +315,8 @@
                 </div>
 
                 <div class="navigation-buttons">
-                    <button class="btn btn-secondary" onclick="prevDetailedSection()">← Previous: Assessment</button>
-                    <button class="btn btn-primary" onclick="generateOutput()">Generate Learning Document</button>
+                    <button class="btn secondary" onclick="prevDetailedSection()">← Previous: Assessment</button>
+                    <button class="btn primary" onclick="generateOutput()">Generate Learning Document</button>
                 </div>
             </div>
 
@@ -366,8 +393,8 @@
 
             <!-- Global Action Buttons (shown with output) -->
             <div class="action-buttons hidden" id="globalActionButtons">
-                <button class="btn btn-secondary" onclick="saveProgress()">💾 Save Progress</button>
-                <button class="btn btn-secondary" onclick="clearForm()">🔄 Start Over</button>
+                <button class="btn secondary" onclick="saveProgress()">💾 Save Progress</button>
+                <button class="btn secondary" onclick="clearForm()">🔄 Start Over</button>
             </div>
 
             <!-- Output Section -->
@@ -378,9 +405,9 @@
                 </p>
                 <div class="markdown-output" id="markdownOutput"></div>
                 <div class="action-buttons">
-                    <button class="btn btn-primary" onclick="copyToClipboard()">📋 Copy to Clipboard</button>
-                    <button class="btn btn-secondary" onclick="downloadMarkdown()">📄 Download as .md</button>
-                    <button class="btn btn-secondary" onclick="createNew()">✨ Create New Entry</button>
+                    <button class="btn primary" onclick="copyToClipboard()">📋 Copy to Clipboard</button>
+                    <button class="btn secondary" onclick="downloadMarkdown()">📄 Download as .md</button>
+                    <button class="btn secondary" onclick="createNew()">✨ Create New Entry</button>
                 </div>
             </div>
         </main>

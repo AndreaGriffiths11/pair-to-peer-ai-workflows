@@ -7,6 +7,21 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="css/clean-minimal-theme.css">
     <style>
+        /* Page Header */
+        header.hero {
+            background: linear-gradient(135deg, var(--bg) 0%, var(--surface) 100%);
+            border: none;
+        }
+
+        header h1 {
+            font-size: clamp(1.875rem, 5vw, 2.5rem);
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--accent) 0%, var(--accent-2) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
         .hero {
             background: var(--surface);
             border: 1px solid var(--border-color);
@@ -27,7 +42,13 @@
             border-radius: 14px;
             padding: 1.5rem;
             box-shadow: var(--shadow);
+            transition: all 0.2s ease;
         }
+
+        .card:hover {
+            border-color: var(--accent);
+        }
+
         .card h3 {
             margin-top: 0;
             margin-bottom: 0.75rem;
@@ -42,13 +63,13 @@
             display: inline-flex;
             align-items: center;
             gap: 0.35rem;
-            padding: 0.25rem 0.6rem;
+            padding: 0.5rem 1rem;
             border-radius: 999px;
-            background: rgba(3, 102, 214, 0.08);
-            color: var(--fg);
+            background: rgba(34, 211, 238, 0.1);
+            color: var(--accent);
             font-weight: 600;
             font-size: 0.85rem;
-            border: 1px solid var(--border-color);
+            border: 1px solid var(--accent);
         }
         .section-title {
             display: flex;

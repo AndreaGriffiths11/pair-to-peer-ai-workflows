@@ -1,17 +1,17 @@
 /* Modern Dark Theme for Pair to Peer AI Workflows */
 :root {
-    --bg: #0a0e17;
-    --surface: #1a1f2e;
-    --surface-elevated: #252b3a;
-    --border-color: #373d4d;
-    --accent: #6ee7ff;
-    --accent-2: #82ffa7;
-    --fg: #ffffff;
-    --muted: #9ca3af;
+    --bg: #0a0a0a;
+    --surface: #18181b;
+    --surface-elevated: #27272a;
+    --border-color: #27272a;
+    --accent: #22d3ee;
+    --accent-2: #a855f7;
+    --fg: #fafafa;
+    --muted: #a1a1aa;
     --danger-color: #ff6b6b;
     --warning-color: #ffd93d;
     --success-color: #51cf66;
-    --shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
     --radius: 16px;
     --font-size: 16px;
 }
@@ -65,7 +65,7 @@ nav a {
 
 nav a:hover, nav a.active {
     color: var(--accent);
-    background: rgba(110, 231, 255, 0.1);
+    background: rgba(34, 211, 238, 0.1);
 }
 
 /* Mobile Navigation */
@@ -163,7 +163,7 @@ nav a:hover, nav a.active {
 
 .mobile-menu a:hover, .mobile-menu a.active {
     color: var(--accent);
-    background: rgba(110, 231, 255, 0.1);
+    background: rgba(34, 211, 238, 0.1);
 }
 
 header {
@@ -194,17 +194,22 @@ main {
 
 /* Cards & Sections */
 .card, .section {
-    background: var(--surface-elevated);
+    background: var(--surface);
     border: 1px solid var(--border-color);
     border-radius: 16px;
     padding: 2rem;
     margin-bottom: 2rem;
     box-shadow: var(--shadow);
+    transition: all 0.2s ease;
+}
+
+.card:hover, .section:hover {
+    border-color: var(--accent);
 }
 
 .card.highlight {
     border-color: var(--accent);
-    background: var(--surface);
+    background: rgba(34, 211, 238, 0.05);
 }
 
 .card.success {
@@ -240,17 +245,17 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h2 {
-    font-size: clamp(1.5rem, 3vw, 2.5rem);
-    font-weight: 600;
+    font-size: clamp(1.875rem, 4vw, 2.25rem);
+    font-weight: 700;
 }
 
 h3 {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     font-weight: 600;
 }
 
 h4 {
-    font-size: 1.25rem;
+    font-size: 1.125rem;
     font-weight: 600;
 }
 
@@ -294,68 +299,50 @@ p {
     font-size: 1rem;
     font-weight: 600;
     letter-spacing: 0.5px;
-    transition: all 0.15s ease;
+    transition: all 0.2s ease;
     font-family: inherit;
-    position: relative;
-    /* 3D Depth Effect */
-    box-shadow: 0px 4px var(--border-color);
-    transform: translateY(-4px);
 }
 
 .btn:hover, button:hover {
-    background: rgba(110, 231, 255, 0.1);
+    border-color: var(--accent);
+    color: var(--accent);
     cursor: pointer;
 }
 
 .btn:active, button:active {
-    box-shadow: 0px 0px var(--border-color);
-    transform: translateY(0px);
-    animation: buttonClicked 0.15s;
+    opacity: 0.8;
 }
 
 .btn.primary {
     background: var(--accent);
-    color: var(--bg);
+    color: #000000;
     border: none;
-    box-shadow: 0px 4px var(--button-primary-shadow);
 }
 
 .btn.primary:hover {
-    background: var(--accent-2);
-}
-
-.btn.primary:active {
-    box-shadow: 0px 0px var(--button-primary-shadow);
-    background: var(--accent-2);
-    transform: translateY(0px);
-    animation: buttonClicked 0.15s;
+    background: #06b6d4;
+    box-shadow: 0 0 20px rgba(34, 211, 238, 0.3);
 }
 
 .btn.secondary {
-    background: var(--accent-2);
-    color: var(--bg);
-    border: none;
-    box-shadow: 0px 4px var(--button-secondary-shadow);
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--fg);
 }
 
 .btn.secondary:hover {
-    background: var(--success-color);
-}
-
-.btn.secondary:active {
-    box-shadow: 0px 0px var(--button-secondary-shadow);
-    background: var(--success-color);
-    transform: translateY(0px);
-    animation: buttonClicked 0.15s;
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(34, 211, 238, 0.1);
 }
 
 /* Button Click Animation */
 @keyframes buttonClicked {
     0% {
-        transform: translateY(-4px);
+        transform: scale(1);
     }
     100% {
-        transform: translateY(0px);
+        transform: scale(0.95);
     }
 }
 
@@ -374,7 +361,7 @@ input, textarea, select {
 input:focus, textarea:focus, select:focus {
     outline: none;
     border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(110, 231, 255, 0.1);
+    box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.1);
 }
 
 label {
@@ -517,8 +504,9 @@ footer a:hover {
 }
 
 .back-to-top-btn:hover {
-    background: var(--accent-2);
+    background: #06b6d4;
     transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(34, 211, 238, 0.3);
 }
 
 /* Mobile Styles */

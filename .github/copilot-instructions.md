@@ -1,10 +1,10 @@
 # AI Workflows Project - Copilot Instructions
 
 ## Project Overview
-This is an educational static site project showcasing "From Pair to Peer" AI workflows. The site contains interactive assessments and decision trees to help teams adopt AI development practices. Built with vanilla HTML/CSS/JS and deployed via GitHub Pages.
+This is an educational static site project showcasing "From Pair to Peer" AI workflows. The site contains interactive assessments and decision trees to help teams adopt AI development practices. Built with vanilla HTML/CSS/JS (no build process, no external script deps beyond Google Fonts) and deployed via GitHub Pages.
 
 ## Architecture & File Structure
-- **`docs/`**: Main site (GitHub Pages root)
+- **`docs/`**: Main site (GitHub Pages root; all shipped assets live here)
   - Interactive HTML tools: `index.html` (decision tree), `team-assessment.html`, `developer-experience.html`, `teaching-moments.html`, `resources.html`
   - JavaScript modules in `docs/js/` follow class-based patterns (see `DecisionTree` class in `decision-tree.js`)
   - CSS uses CSS custom properties for theming (`--accent`, `--surface-elevated`, etc.)
@@ -16,7 +16,7 @@ This is an educational static site project showcasing "From Pair to Peer" AI wor
 ### JavaScript Architecture
 - Use ES6 class-based modules with explicit `export default`
 - Event delegation pattern: attach listeners in `initializeEventListeners()` method
-- State management via localStorage with consistent key naming (e.g., `teamAssessmentData`, `teamAssessmentSummary`)
+- State management via localStorage with consistent key naming (e.g., `teamAssessmentData`, `teamAssessmentSummary`); keep dev on the same origin/port to avoid "missing" saved data
 - Progressive enhancement: all functionality works without JavaScript, enhanced with interactions
 
 ### CSS Conventions
@@ -51,6 +51,8 @@ Key integration points:
 - Survey data format: `{ responses: {...}, timestamp: "...", metadata: {...} }`
 - API auth via `MODELS_TOKEN` secret (fallback to `GITHUB_TOKEN`)
 - Error handling for API failures in `callGitHubModels()` function
+- Validate JSON before sending to the workflow; malformed inputs hard-fail the job
+- Expect GitHub Models API rate limits/timeouts—surface these in UI/logs instead of swallowing errors
 
 ## Project-Specific Guidelines
 
@@ -66,6 +68,11 @@ Key integration points:
 - Use existing CSS custom properties before adding new ones
 - Test theme consistency across all 5 HTML pages
 
+### Non-Negotiable Boundaries
+- Keep everything vanilla: no bundlers or new npm deps; commit only assets under `docs/`
+- Avoid new external scripts; only Google Fonts (with preconnect) is allowed
+- GitHub Pages caching can mask recent HTML changes—use cache-busters during validation if needed
+
 ### Adding New Assessment Features
 - Follow the established pattern: class-based JS with localStorage persistence
 - Maintain the three-pattern framework: Standards-First, Experience-Focus, Fluency-Building plus agent governance (delegation trust, MCP literacy, permissions)
@@ -73,7 +80,7 @@ Key integration points:
 
 ## Dependencies & Integrations
 - **No build process**: Vanilla HTML/CSS/JS only
-- **GitHub Pages**: Auto-deploy from `docs/` folder on push to main
+- **GitHub Pages**: Auto-deploy from `docs/` folder on push to main; keep assets in `docs/`
 - **GitHub Models API**: GPT-4o-mini for AI analysis features
 - **Font**: Inter from Google Fonts (preconnect optimized)
 
