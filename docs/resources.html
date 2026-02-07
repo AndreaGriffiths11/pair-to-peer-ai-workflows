@@ -124,6 +124,9 @@
             </div>
             <div style="display:flex; flex-wrap:wrap; gap:0.5rem;">
                 <span class="tag">Agent Mode</span>
+                <span class="tag">Copilot CLI</span>
+                <span class="tag">Mission Control</span>
+                <span class="tag">Custom Agents</span>
                 <span class="tag">MCP Security</span>
                 <span class="tag">DX Metrics</span>
                 <span class="tag">Governance</span>
@@ -146,10 +149,40 @@
                         </ul>
                     </div>
                     <div class="card">
+                        <h3>Copilot CLI &amp; Terminal Agents</h3>
+                        <ul>
+                            <li><a href="https://github.com/github/copilot-cli" target="_blank" rel="noopener noreferrer">Copilot CLI</a> — terminal-native agentic development</li>
+                            <li><a href="https://github.blog/changelog/2026-01-14-github-copilot-cli-enhanced-agents-context-management-and-new-ways-to-install/" target="_blank" rel="noopener noreferrer">Enhanced agents, context management (Jan 2026)</a></li>
+                            <li>Four sub-agents: Explore, Task, Plan, Code-review with parallel execution</li>
+                            <li>Autopilot mode, <code>/compact</code> context management, <code>--resume</code> sessions</li>
+                            <li>Multi-model: Claude Sonnet 4.5 (default), GPT-5, GPT-4.1, Claude Opus 4.6</li>
+                        </ul>
+                    </div>
+                    <div class="card">
                         <h3>Copilot Spaces &amp; Context</h3>
                         <ul>
                             <li><a href="https://github.blog/ai-and-ml/github-copilot/github-copilot-spaces-bring-the-right-context-to-every-suggestion/" target="_blank" rel="noopener noreferrer">Bring the right context to every suggestion</a></li>
                             <li><a href="https://github.blog/ai-and-ml/github-copilot/how-to-use-github-copilot-spaces-to-debug-issues-faster/" target="_blank" rel="noopener noreferrer">Debug faster with Copilot Spaces</a></li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Custom Agents &amp; agents.md</h3>
+                        <ul>
+                            <li><a href="https://docs.github.com/en/copilot/how-tos/use-copilot-agents/coding-agent/create-custom-agents" target="_blank" rel="noopener noreferrer">Creating custom agents</a> — file-based <code>.agent.md</code> profiles</li>
+                            <li><a href="https://github.blog/ai-and-ml/github-copilot/how-to-write-a-great-agents-md-lessons-from-over-2500-repositories/" target="_blank" rel="noopener noreferrer">How to write a great agents.md</a> — lessons from 2,500+ repos</li>
+                            <li>Scopes: repo (<code>.github/agents</code>), org (<code>.github-private</code>), CLI (<code>~/.copilot/agents</code>)</li>
+                            <li>Shareable across teams with custom prompts, tools, and MCP configs</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Mission Control &amp; Agent HQ</h3>
+                        <ul>
+                            <li><a href="https://github.blog/news-insights/company-news/welcome-home-agents/" target="_blank" rel="noopener noreferrer">Introducing Agent HQ</a> — any agent, any way you work</li>
+                            <li>Mission Control: unified command center across GitHub, VS Code, mobile, CLI</li>
+                            <li>Fleet orchestration: assign agents work in parallel, steer mid-task</li>
+                            <li>Agent identity &amp; access management (treat agents like team members)</li>
+                            <li>Integrations: Slack, Linear, Jira, Teams, Azure Boards, Raycast</li>
+                            <li>Third-party agents: Anthropic, OpenAI, Google, Cognition, xAI</li>
                         </ul>
                     </div>
                 </div>
@@ -165,6 +198,7 @@
                         <ul>
                             <li><a href="https://github.blog/ai-and-ml/generative-ai/how-to-find-install-and-manage-mcp-servers-with-the-github-mcp-registry/" target="_blank" rel="noopener noreferrer">GitHub MCP Registry launch</a></li>
                             <li><a href="https://github.com/AndreaGriffiths11/mcp-tips" target="_blank" rel="noopener noreferrer">MCP Tips best practices</a></li>
+                            <li>MCP Apps: interactive visualizations in VS Code chat (Jan 2026)</li>
                         </ul>
                     </div>
                     <div class="card">
@@ -173,6 +207,14 @@
                             <li><a href="https://github.com/AndreaGriffiths11/mcp-config-scan" target="_blank" rel="noopener noreferrer">MCP Config Scan (Go)</a> — audit configs for risky scopes</li>
                             <li><a href="https://github.com/AndreaGriffiths11/pair-to-peer-ai-workflows/blob/main/templates/agent-governance-template.md" target="_blank" rel="noopener noreferrer">Agent governance template</a> — approvals, permissions, incident playbooks</li>
                             <li>Agent guardrails: approvals, least privilege, blast-radius checks</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Enterprise MCP Controls</h3>
+                        <ul>
+                            <li><a href="https://github.blog/changelog/2025-09-12-internal-mcp-registry-and-allowlist-controls-for-vs-code-insiders/" target="_blank" rel="noopener noreferrer">Internal MCP registry &amp; allowlist controls</a></li>
+                            <li>Centrally curated trust boundaries for enterprise MCP servers</li>
+                            <li>Admin policies for which agents and MCP servers developers can use</li>
                         </ul>
                     </div>
                 </div>
@@ -202,6 +244,23 @@
                         <ul>
                             <li><a href="developer-experience.html">DX Health Check survey + AI analysis</a> (this repo)</li>
                             <li><a href="teaching-moments.html">Teaching Moments capture</a> for continuous fluency</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Agentic Code Review</h3>
+                        <ul>
+                            <li>Copilot code review with agentic tool-calling (gathers full project context)</li>
+                            <li>Autonomous PR review capabilities for agent-authored code</li>
+                            <li>Risk-based review tiers: human-authored vs. agent-authored PRs</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>VS Code Agent Features (Jan 2026)</h3>
+                        <ul>
+                            <li><a href="https://code.visualstudio.com/updates/v1_109" target="_blank" rel="noopener noreferrer">VS Code v1.109</a> — multi-agent development hub</li>
+                            <li>Claude agent support (public preview) via Claude Agent SDK</li>
+                            <li>Copilot Memory: retains relevant context across interactions</li>
+                            <li>Terminal command sandboxing for agent-executed commands</li>
                         </ul>
                     </div>
                 </div>
@@ -272,6 +331,9 @@
                         <li>Microsoft: productivity gains arrive after ~11 weeks of steady use.</li>
                         <li>GitHub Enterprise Research: structured sharing drives ~40% better outcomes.</li>
                         <li>Octoverse 2025: 1.13M repos importing LLM SDKs (+178% YoY); Universe 2025 launched Agent HQ, Mission Control, Custom Copilot Agents.</li>
+                        <li>Agent HQ multi-model fleet: Anthropic, OpenAI, Google, Cognition, xAI agents on one platform via Copilot subscription.</li>
+                        <li>Free users get core Mission Control dashboard + basic agent features by Q1 2026.</li>
+                        <li>2,500+ repos with agents.md analyzed — custom agents becoming standard practice.</li>
                     </ul>
                 </div>
             </section>
