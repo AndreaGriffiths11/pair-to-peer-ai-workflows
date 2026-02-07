@@ -59,14 +59,6 @@
 - Weekly fundamentals-first newsletter: https://mainbranch.dev  
 - Notable issues: “The One Where Code Reviews Got Actually Better” (Dec 1, 2025), Security issue (Nov 24, 2025), Workflows issue (Nov 17, 2025), plus January/February 2026 updates tagged for security and workflows.
 
-**Talks & Appearances**
-- GitHub Universe 2025 (panel with Justin Cormack + Quincy Larson) — agentic workflows.
-- Commit Your Code Conference 2025 — managing hybrid human/AI workflows.
-- JFrog SwampUP 2025 — AI agent security risks and autonomy.
-- GitHub Universe LATAM Series — Universe announcements in Spanish.
-- freeCodeCamp Podcast #199 — https://www.freecodecamp.org/news/tips-from-serial-career-changer-github-andrea-griffiths-podcast-199/
-- RedMonk Conversation (Feb 2025) — onboarding beginners to Git with Kedasha Kerr.
-
 **DEV Community**
 - Main Branch: A Newsletter About Fundamentals First Always (Dec 17, 2025)  
   https://dev.to/andreagriffiths11/main-branch-a-newsletter-about-fundamentals-first-always-1k7m
