@@ -316,14 +316,14 @@
 
             <!-- Question 4: Agent suitability -->
             <div class="question-group hidden" id="question4" data-question="autonomy">
-                <h3 class="question">Is this task suitable for an autonomous agent (e.g., Copilot coding agent)?</h3>
+                <h3 class="question">Is this task suitable for an autonomous agent (e.g., Copilot coding agent, Copilot CLI, or Mission Control fleet)?</h3>
                 <button class="option" data-value="agent-ready" data-approach="agent-delegated">
                     <span class="option-title">Yes — clear success criteria</span>
-                    <span class="option-desc">Low blast radius, tests/playbooks ready, can run async</span>
+                    <span class="option-desc">Low blast radius, tests/playbooks ready, can delegate via CLI or Mission Control</span>
                 </button>
                 <button class="option" data-value="guardrails-needed" data-approach="ai-assisted">
                     <span class="option-title">Maybe — with guardrails</span>
-                    <span class="option-desc">Needs tight scopes, human check-ins, or MCP limits</span>
+                    <span class="option-desc">Needs custom agent scopes, human check-ins, or MCP limits</span>
                 </button>
                 <button class="option" data-value="human-led" data-approach="human-first">
                     <span class="option-title">No — human-led</span>
@@ -372,29 +372,36 @@
                             <th>Context Available</th>
                             <td class="ai-first-col">Similar code exists in codebase</td>
                             <td class="ai-assisted-col">Some existing patterns</td>
-                            <td class="agent-delegated-col">Clear playbook + tests for Copilot agent</td>
+                            <td class="agent-delegated-col">agents.md + playbook + tests ready</td>
                             <td class="human-first-col">No precedent or patterns</td>
                         </tr>
                         <tr>
                             <th>Time Constraints</th>
                             <td class="ai-first-col">Tight deadlines, standard work</td>
                             <td class="ai-assisted-col">Balanced delivery timeline</td>
-                            <td class="agent-delegated-col">Async execution acceptable</td>
+                            <td class="agent-delegated-col">Async via CLI or Mission Control fleet</td>
                             <td class="human-first-col">Learning/exploration priority</td>
                         </tr>
                         <tr>
                             <th>Agent Autonomy Risk</th>
                             <td class="ai-first-col">N/A</td>
                             <td class="ai-assisted-col">Low autonomy, close supervision</td>
-                            <td class="agent-delegated-col">Scoped tasks with blast-radius limits</td>
+                            <td class="agent-delegated-col">Custom agent scopes + blast-radius limits</td>
                             <td class="human-first-col">Requires real-time human judgment</td>
                         </tr>
                         <tr>
                             <th>MCP Integration Available</th>
                             <td class="ai-first-col">Optional</td>
                             <td class="ai-assisted-col">Useful but not required</td>
-                            <td class="agent-delegated-col">MCP servers provide tools/context</td>
+                            <td class="agent-delegated-col">MCP servers + enterprise registry</td>
                             <td class="human-first-col">Not applicable</td>
+                        </tr>
+                        <tr>
+                            <th>Tooling</th>
+                            <td class="ai-first-col">Copilot inline completions</td>
+                            <td class="ai-assisted-col">Copilot chat, Spaces</td>
+                            <td class="agent-delegated-col">Copilot CLI, Mission Control, custom agents</td>
+                            <td class="human-first-col">IDE + manual workflows</td>
                         </tr>
                     </tbody>
                 </table>
@@ -621,7 +628,7 @@
                 const explanations = {
                     'ai-first': 'Perfect for AI generation - your task has low complexity, low security risk, and experienced team oversight.',
                     'ai-assisted': 'AI can accelerate development while you maintain control over business logic and architecture decisions.',
-                    'agent-delegated': 'Great fit for a Copilot coding agent: clear success criteria, low blast radius, and MCP/context ready for automation.',
+                    'agent-delegated': 'Great fit for agent delegation: use Copilot CLI sub-agents, Mission Control fleet orchestration, or custom agents with clear success criteria and blast-radius controls.',
                     'human-first': 'Human expertise should lead due to complexity, security requirements, or team learning needs. Use AI for research assistance.'
                 };
 
