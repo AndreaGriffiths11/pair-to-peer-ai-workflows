@@ -61,6 +61,7 @@
 
         .result-badge.ai-first { background: var(--accent-2); color: var(--bg); }
         .result-badge.ai-assisted { background: var(--accent); color: var(--bg); }
+        .result-badge.agent-delegated { background: var(--success-color); color: var(--bg); }
         .result-badge.human-first { background: var(--warning-color); color: var(--bg); }
 
         .result-explanation {
@@ -220,11 +221,11 @@
     <div class="container">
         <nav class="desktop-nav" role="navigation" aria-label="Main navigation">
             <ul>
-                <li><a href="slides.html">📖 About</a></li>
                 <li><a href="index.html" class="active" aria-current="page">Decision Tree</a></li>
                 <li><a href="team-assessment.html">Team Assessment</a></li>
                 <li><a href="teaching-moments.html">Teaching Moments</a></li>
                 <li><a href="developer-experience.html">Developer Experience</a></li>
+                <li><a href="resources.html">Resources</a></li>
             </ul>
         </nav>
 
@@ -233,11 +234,11 @@
                 <span class="hamburger-icon"></span>
             </button>
             <div class="mobile-menu">
-                <a href="slides.html">📖 About</a>
                 <a href="index.html" class="active" aria-current="page">Decision Tree</a>
                 <a href="team-assessment.html">Team Assessment</a>
                 <a href="teaching-moments.html">Teaching Moments</a>
                 <a href="developer-experience.html">Developer Experience</a>
+                <a href="resources.html">Resources</a>
             </div>
         </nav>
 
@@ -316,6 +317,23 @@
                 </button>
             </div>
 
+            <!-- Question 4: Agent suitability -->
+            <div class="question-group hidden" id="question4" data-question="autonomy">
+                <h3 class="question">Is this task suitable for an autonomous agent (e.g., Copilot coding agent)?</h3>
+                <button class="option" data-value="agent-ready" data-approach="agent-delegated">
+                    <span class="option-title">Yes — clear success criteria</span>
+                    <span class="option-desc">Low blast radius, tests/playbooks ready, can run async</span>
+                </button>
+                <button class="option" data-value="guardrails-needed" data-approach="ai-assisted">
+                    <span class="option-title">Maybe — with guardrails</span>
+                    <span class="option-desc">Needs tight scopes, human check-ins, or MCP limits</span>
+                </button>
+                <button class="option" data-value="human-led" data-approach="human-first">
+                    <span class="option-title">No — human-led</span>
+                    <span class="option-desc">Requires real-time judgment or undefined success criteria</span>
+                </button>
+            </div>
+
             <!-- Decision Matrix -->
             <div class="criteria-matrix" id="criteriaMatrix">
                 <h3>Decision Framework</h3>
@@ -327,6 +345,7 @@
                             <th>Factor</th>
                             <th class="approach-header ai-first-col">AI-First</th>
                             <th class="approach-header ai-assisted-col">AI-Assisted</th>
+                            <th class="approach-header agent-delegated-col">Agent-Delegated</th>
                             <th class="approach-header human-first-col">Human-First</th>
                         </tr>
                     </thead>
@@ -335,31 +354,50 @@
                             <th>Code Complexity</th>
                             <td class="ai-first-col">Simple patterns, boilerplate</td>
                             <td class="ai-assisted-col">Standard business logic</td>
+                            <td class="agent-delegated-col">Repetitive tasks with clear acceptance</td>
                             <td class="human-first-col">Novel algorithms, complex architecture</td>
                         </tr>
                         <tr>
                             <th>Security Risk</th>
                             <td class="ai-first-col">Low (UI, docs, tests)</td>
                             <td class="ai-assisted-col">Medium (business logic)</td>
+                            <td class="agent-delegated-col">Guarded scopes, low blast radius</td>
                             <td class="human-first-col">High (auth, payments, crypto)</td>
                         </tr>
                         <tr>
                             <th>Team Experience</th>
                             <td class="ai-first-col">Senior devs who can review</td>
                             <td class="ai-assisted-col">Mixed experience teams</td>
+                            <td class="agent-delegated-col">Confident in reviewing agent output</td>
                             <td class="human-first-col">Junior devs learning concepts</td>
                         </tr>
                         <tr>
                             <th>Context Available</th>
                             <td class="ai-first-col">Similar code exists in codebase</td>
                             <td class="ai-assisted-col">Some existing patterns</td>
+                            <td class="agent-delegated-col">Clear playbook + tests for Copilot agent</td>
                             <td class="human-first-col">No precedent or patterns</td>
                         </tr>
                         <tr>
                             <th>Time Constraints</th>
                             <td class="ai-first-col">Tight deadlines, standard work</td>
                             <td class="ai-assisted-col">Balanced delivery timeline</td>
+                            <td class="agent-delegated-col">Async execution acceptable</td>
                             <td class="human-first-col">Learning/exploration priority</td>
+                        </tr>
+                        <tr>
+                            <th>Agent Autonomy Risk</th>
+                            <td class="ai-first-col">N/A</td>
+                            <td class="ai-assisted-col">Low autonomy, close supervision</td>
+                            <td class="agent-delegated-col">Scoped tasks with blast-radius limits</td>
+                            <td class="human-first-col">Requires real-time human judgment</td>
+                        </tr>
+                        <tr>
+                            <th>MCP Integration Available</th>
+                            <td class="ai-first-col">Optional</td>
+                            <td class="ai-assisted-col">Useful but not required</td>
+                            <td class="agent-delegated-col">MCP servers provide tools/context</td>
+                            <td class="human-first-col">Not applicable</td>
                         </tr>
                     </tbody>
                 </table>
@@ -373,7 +411,7 @@
             constructor() {
                 this.answers = {};
                 this.currentQuestion = 1;
-                this.totalQuestions = 3;
+                this.totalQuestions = 4;
                 this.init();
             }
 
@@ -586,6 +624,7 @@
                 const explanations = {
                     'ai-first': 'Perfect for AI generation - your task has low complexity, low security risk, and experienced team oversight.',
                     'ai-assisted': 'AI can accelerate development while you maintain control over business logic and architecture decisions.',
+                    'agent-delegated': 'Great fit for a Copilot coding agent: clear success criteria, low blast radius, and MCP/context ready for automation.',
                     'human-first': 'Human expertise should lead due to complexity, security requirements, or team learning needs. Use AI for research assistance.'
                 };
 

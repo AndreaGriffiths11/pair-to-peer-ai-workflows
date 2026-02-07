@@ -15,6 +15,14 @@
 | Database Operations | Medium | Level 3: Automated + senior peer |
 | UI Components | Low | Level 2: Automated + peer |
 | Configuration/Documentation | Low | Level 1: Automated only |
+| Agent-Authored Changes (PRs) | Variable | **Agent Review Tier + matching risk level** |
+
+### Agent Review Tier (additive)
+- [ ] Agent change log included (actions, prompts, tools)
+- [ ] Scope bounded (no unexpected files, secrets, or infra changes)
+- [ ] Tests and acceptance criteria attached to PR
+- [ ] MCP servers/tools listed with permissions and audit trail
+- [ ] Rollback path documented; human owner assigned
 
 ## Four-Tier Review Process
 
@@ -76,6 +84,7 @@ coverage_check:
 - [ ] AI suggestions align with project coding standards
 - [ ] No obvious AI hallucinations or incorrect assumptions
 - [ ] Business logic validation beyond syntactic correctness
+- [ ] Agent-authored sections flagged with scopes, logs, and tests
 
 ### Level 4: Security Team Review (High Risk Code)
 **Security-Focused Checklist:**
@@ -92,6 +101,7 @@ coverage_check:
 - [ ] Threat model updated if architectural changes
 - [ ] Security test cases added to test suite
 - [ ] Incident response procedures reviewed if applicable
+- [ ] Agent/MCP permissions reviewed; secrets and actions validated for scope
 
 ## Automated Quality Monitoring
 
@@ -144,3 +154,9 @@ coverage_check:
 - Monthly process retrospectives
 - Quarterly security review of AI code patterns
 - Annual evaluation of tools and frameworks
+
+## MCP Security Considerations
+- Maintain MCP server allowlist with scope per project; expire unused servers.
+- Run automated config scans (e.g., `mcp-config-scan`) before enabling new servers.
+- Log MCP calls for agent runs; alert on privileged scopes (fs/network/secrets).
+- Require human approval for actions beyond predefined blast radius.

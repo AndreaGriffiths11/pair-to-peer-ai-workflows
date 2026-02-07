@@ -44,11 +44,11 @@
     <div class="container">
         <nav class="desktop-nav" role="navigation" aria-label="Main navigation">
             <ul>
-                <li><a href="slides.html">📖 About</a></li>
                 <li><a href="index.html">Decision Tree</a></li>
                 <li><a href="team-assessment.html">Team Assessment</a></li>
                 <li><a href="teaching-moments.html">Teaching Moments</a></li>
                 <li><a href="developer-experience.html" class="active" aria-current="page">Developer Experience</a></li>
+                <li><a href="resources.html">Resources</a></li>
             </ul>
         </nav>
         
@@ -57,11 +57,11 @@
                 <span class="hamburger-icon"></span>
             </button>
             <div class="mobile-menu">
-                <a href="slides.html">📖 About</a>
                 <a href="index.html">Decision Tree</a>
                 <a href="team-assessment.html">Team Assessment</a>
                 <a href="teaching-moments.html">Teaching Moments</a>
                 <a href="developer-experience.html" class="active" aria-current="page">Developer Experience</a>
+                <a href="resources.html">Resources</a>
             </div>
         </nav>
 
@@ -95,11 +95,11 @@
                 <div class="category-scores">
                     <div class="category-score">
                         <div class="category-value" id="integrationScore">-</div>
-                        <div class="category-label">AI Integration</div>
+                        <div class="category-label">AI Integration &amp; Agents</div>
                     </div>
                     <div class="category-score">
                         <div class="category-value" id="skillScore">-</div>
-                        <div class="category-label">Skill Balance</div>
+                        <div class="category-label">Skill Balance &amp; PR Review</div>
                     </div>
                     <div class="category-score">
                         <div class="category-value" id="learningScore">-</div>
@@ -111,7 +111,7 @@
                     </div>
                     <div class="category-score">
                         <div class="category-value" id="teamScore">-</div>
-                        <div class="category-label">Team Process</div>
+                        <div class="category-label">Team Process &amp; Guardrails</div>
                     </div>
                 </div>
             </div>
@@ -175,17 +175,8 @@
                     </div>
                 </div>
 
-                <div class="navigation-buttons">
-                    <button class="btn btn-secondary" disabled>Previous</button>
-                    <button class="btn btn-primary" onclick="nextSection()">Next: Skill Balance →</button>
-                </div>
-            </div>
-
-            <div class="survey-section hidden" id="section2">
-                <div class="section-title">AI Dependency vs. Skill Development Balance</div>
-                
                 <div class="question">
-                    <div class="question-text">6. I'm confident debugging code without AI assistance</div>
+                    <div class="question-text">6. I feel confident delegating routine tasks to AI agents (e.g., Copilot coding agent)</div>
                     <div class="rating-scale">
                         <div class="rating-option" onclick="setRating(6, 1)">1<br><small>Strongly Disagree</small></div>
                         <div class="rating-option" onclick="setRating(6, 2)">2<br><small>Disagree</small></div>
@@ -196,7 +187,7 @@
                 </div>
 
                 <div class="question">
-                    <div class="question-text">7. I understand the reasoning behind AI-suggested solutions</div>
+                    <div class="question-text">7. My team has clear guidelines for when to use agent mode vs. edit mode vs. chat</div>
                     <div class="rating-scale">
                         <div class="rating-option" onclick="setRating(7, 1)">1<br><small>Strongly Disagree</small></div>
                         <div class="rating-option" onclick="setRating(7, 2)">2<br><small>Disagree</small></div>
@@ -206,8 +197,17 @@
                     </div>
                 </div>
 
+                <div class="navigation-buttons">
+                    <button class="btn btn-secondary" disabled>Previous</button>
+                    <button class="btn btn-primary" onclick="nextSection()">Next: Skill Balance →</button>
+                </div>
+            </div>
+
+            <div class="survey-section hidden" id="section2">
+                <div class="section-title">AI Dependency vs. Skill Development Balance</div>
+                
                 <div class="question">
-                    <div class="question-text">8. I can explain AI-generated code to colleagues</div>
+                    <div class="question-text">8. I'm confident debugging code without AI assistance</div>
                     <div class="rating-scale">
                         <div class="rating-option" onclick="setRating(8, 1)">1<br><small>Strongly Disagree</small></div>
                         <div class="rating-option" onclick="setRating(8, 2)">2<br><small>Disagree</small></div>
@@ -218,7 +218,7 @@
                 </div>
 
                 <div class="question">
-                    <div class="question-text">9. I actively research concepts behind AI suggestions</div>
+                    <div class="question-text">9. I understand the reasoning behind AI-suggested solutions</div>
                     <div class="rating-scale">
                         <div class="rating-option" onclick="setRating(9, 1)">1<br><small>Strongly Disagree</small></div>
                         <div class="rating-option" onclick="setRating(9, 2)">2<br><small>Disagree</small></div>
@@ -229,13 +229,57 @@
                 </div>
 
                 <div class="question">
-                    <div class="question-text">10. AI helps me learn new technical concepts faster</div>
+                    <div class="question-text">10. I can explain AI-generated code to colleagues</div>
                     <div class="rating-scale">
                         <div class="rating-option" onclick="setRating(10, 1)">1<br><small>Strongly Disagree</small></div>
                         <div class="rating-option" onclick="setRating(10, 2)">2<br><small>Disagree</small></div>
                         <div class="rating-option" onclick="setRating(10, 3)">3<br><small>Neutral</small></div>
                         <div class="rating-option" onclick="setRating(10, 4)">4<br><small>Agree</small></div>
                         <div class="rating-option" onclick="setRating(10, 5)">5<br><small>Strongly Agree</small></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">11. I actively research concepts behind AI suggestions</div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="setRating(11, 1)">1<br><small>Strongly Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(11, 2)">2<br><small>Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(11, 3)">3<br><small>Neutral</small></div>
+                        <div class="rating-option" onclick="setRating(11, 4)">4<br><small>Agree</small></div>
+                        <div class="rating-option" onclick="setRating(11, 5)">5<br><small>Strongly Agree</small></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">12. AI helps me learn new technical concepts faster</div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="setRating(12, 1)">1<br><small>Strongly Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(12, 2)">2<br><small>Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(12, 3)">3<br><small>Neutral</small></div>
+                        <div class="rating-option" onclick="setRating(12, 4)">4<br><small>Agree</small></div>
+                        <div class="rating-option" onclick="setRating(12, 5)">5<br><small>Strongly Agree</small></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">13. I can evaluate whether an agent-generated PR meets our quality standards</div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="setRating(13, 1)">1<br><small>Strongly Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(13, 2)">2<br><small>Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(13, 3)">3<br><small>Neutral</small></div>
+                        <div class="rating-option" onclick="setRating(13, 4)">4<br><small>Agree</small></div>
+                        <div class="rating-option" onclick="setRating(13, 5)">5<br><small>Strongly Agree</small></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">14. I understand how MCP servers extend AI capabilities in our workflow</div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="setRating(14, 1)">1<br><small>Strongly Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(14, 2)">2<br><small>Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(14, 3)">3<br><small>Neutral</small></div>
+                        <div class="rating-option" onclick="setRating(14, 4)">4<br><small>Agree</small></div>
+                        <div class="rating-option" onclick="setRating(14, 5)">5<br><small>Strongly Agree</small></div>
                     </div>
                 </div>
 
@@ -249,61 +293,61 @@
             <div class="survey-section hidden" id="section3">
                 <div class="progress-indicator">
                     <div class="category-label">Learning Velocity</div>
-                    <div class="question-counter">Questions 11-15 of 25</div>
+                    <div class="question-counter">Questions 15-19 of 31</div>
                 </div>
 
                 <div class="question">
-                    <div class="question-text">11. I'm developing new skills through AI-assisted work</div>
-                    <div class="rating-scale">
-                        <div class="rating-option" onclick="setRating(11, 1)">1<br><small>Strongly Disagree</small></div>
-                        <div class="rating-option" onclick="setRating(11, 2)">2<br><small>Disagree</small></div>
-                        <div class="rating-option" onclick="setRating(11, 3)">3<br><small>Neutral</small></div>
-                        <div class="rating-option" onclick="setRating(11, 4)">4<br><small>Agree</small></div>
-                        <div class="rating-option" onclick="setRating(11, 5)">5<br><small>Strongly Agree</small></div>
-                    </div>
-                </div>
-
-                <div class="question">
-                    <div class="question-text">12. AI enables me to explore technologies I wouldn't otherwise try</div>
-                    <div class="rating-scale">
-                        <div class="rating-option" onclick="setRating(12, 1)">1<br><small>Strongly Disagree</small></div>
-                        <div class="rating-option" onclick="setRating(12, 2)">2<br><small>Disagree</small></div>
-                        <div class="rating-option" onclick="setRating(12, 3)">3<br><small>Neutral</small></div>
-                        <div class="rating-option" onclick="setRating(12, 4)">4<br><small>Agree</small></div>
-                        <div class="rating-option" onclick="setRating(12, 5)">5<br><small>Strongly Agree</small></div>
-                    </div>
-                </div>
-
-                <div class="question">
-                    <div class="question-text">13. I understand how AI-generated code fits into our architecture</div>
-                    <div class="rating-scale">
-                        <div class="rating-option" onclick="setRating(13, 1)">1<br><small>Strongly Disagree</small></div>
-                        <div class="rating-option" onclick="setRating(13, 2)">2<br><small>Disagree</small></div>
-                        <div class="rating-option" onclick="setRating(13, 3)">3<br><small>Neutral</small></div>
-                        <div class="rating-option" onclick="setRating(13, 4)">4<br><small>Agree</small></div>
-                        <div class="rating-option" onclick="setRating(13, 5)">5<br><small>Strongly Agree</small></div>
-                    </div>
-                </div>
-
-                <div class="question">
-                    <div class="question-text">14. I'm becoming more effective at prompting AI tools</div>
-                    <div class="rating-scale">
-                        <div class="rating-option" onclick="setRating(14, 1)">1<br><small>Strongly Disagree</small></div>
-                        <div class="rating-option" onclick="setRating(14, 2)">2<br><small>Disagree</small></div>
-                        <div class="rating-option" onclick="setRating(14, 3)">3<br><small>Neutral</small></div>
-                        <div class="rating-option" onclick="setRating(14, 4)">4<br><small>Agree</small></div>
-                        <div class="rating-option" onclick="setRating(14, 5)">5<br><small>Strongly Agree</small></div>
-                    </div>
-                </div>
-
-                <div class="question">
-                    <div class="question-text">15. My problem-solving skills are improving with AI assistance</div>
+                    <div class="question-text">15. I'm developing new skills through AI-assisted work</div>
                     <div class="rating-scale">
                         <div class="rating-option" onclick="setRating(15, 1)">1<br><small>Strongly Disagree</small></div>
                         <div class="rating-option" onclick="setRating(15, 2)">2<br><small>Disagree</small></div>
                         <div class="rating-option" onclick="setRating(15, 3)">3<br><small>Neutral</small></div>
                         <div class="rating-option" onclick="setRating(15, 4)">4<br><small>Agree</small></div>
                         <div class="rating-option" onclick="setRating(15, 5)">5<br><small>Strongly Agree</small></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">16. AI enables me to explore technologies I wouldn't otherwise try</div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="setRating(16, 1)">1<br><small>Strongly Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(16, 2)">2<br><small>Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(16, 3)">3<br><small>Neutral</small></div>
+                        <div class="rating-option" onclick="setRating(16, 4)">4<br><small>Agree</small></div>
+                        <div class="rating-option" onclick="setRating(16, 5)">5<br><small>Strongly Agree</small></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">17. I understand how AI-generated code fits into our architecture</div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="setRating(17, 1)">1<br><small>Strongly Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(17, 2)">2<br><small>Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(17, 3)">3<br><small>Neutral</small></div>
+                        <div class="rating-option" onclick="setRating(17, 4)">4<br><small>Agree</small></div>
+                        <div class="rating-option" onclick="setRating(17, 5)">5<br><small>Strongly Agree</small></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">18. I'm becoming more effective at prompting AI tools</div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="setRating(18, 1)">1<br><small>Strongly Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(18, 2)">2<br><small>Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(18, 3)">3<br><small>Neutral</small></div>
+                        <div class="rating-option" onclick="setRating(18, 4)">4<br><small>Agree</small></div>
+                        <div class="rating-option" onclick="setRating(18, 5)">5<br><small>Strongly Agree</small></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">19. My problem-solving skills are improving with AI assistance</div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="setRating(19, 1)">1<br><small>Strongly Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(19, 2)">2<br><small>Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(19, 3)">3<br><small>Neutral</small></div>
+                        <div class="rating-option" onclick="setRating(19, 4)">4<br><small>Agree</small></div>
+                        <div class="rating-option" onclick="setRating(19, 5)">5<br><small>Strongly Agree</small></div>
                     </div>
                 </div>
 
@@ -317,61 +361,61 @@
             <div class="survey-section hidden" id="section4">
                 <div class="progress-indicator">
                     <div class="category-label">Code Quality Confidence</div>
-                    <div class="question-counter">Questions 16-20 of 25</div>
+                    <div class="question-counter">Questions 20-24 of 31</div>
                 </div>
 
                 <div class="question">
-                    <div class="question-text">16. I'm confident in the security of AI-generated code after my review</div>
-                    <div class="rating-scale">
-                        <div class="rating-option" onclick="setRating(16, 1)">1<br><small>Strongly Disagree</small></div>
-                        <div class="rating-option" onclick="setRating(16, 2)">2<br><small>Disagree</small></div>
-                        <div class="rating-option" onclick="setRating(16, 3)">3<br><small>Neutral</small></div>
-                        <div class="rating-option" onclick="setRating(16, 4)">4<br><small>Agree</small></div>
-                        <div class="rating-option" onclick="setRating(16, 5)">5<br><small>Strongly Agree</small></div>
-                    </div>
-                </div>
-
-                <div class="question">
-                    <div class="question-text">17. AI-generated code meets our quality standards</div>
-                    <div class="rating-scale">
-                        <div class="rating-option" onclick="setRating(17, 1)">1<br><small>Strongly Disagree</small></div>
-                        <div class="rating-option" onclick="setRating(17, 2)">2<br><small>Disagree</small></div>
-                        <div class="rating-option" onclick="setRating(17, 3)">3<br><small>Neutral</small></div>
-                        <div class="rating-option" onclick="setRating(17, 4)">4<br><small>Agree</small></div>
-                        <div class="rating-option" onclick="setRating(17, 5)">5<br><small>Strongly Agree</small></div>
-                    </div>
-                </div>
-
-                <div class="question">
-                    <div class="question-text">18. Our code review process effectively catches AI-generated issues</div>
-                    <div class="rating-scale">
-                        <div class="rating-option" onclick="setRating(18, 1)">1<br><small>Strongly Disagree</small></div>
-                        <div class="rating-option" onclick="setRating(18, 2)">2<br><small>Disagree</small></div>
-                        <div class="rating-option" onclick="setRating(18, 3)">3<br><small>Neutral</small></div>
-                        <div class="rating-option" onclick="setRating(18, 4)">4<br><small>Agree</small></div>
-                        <div class="rating-option" onclick="setRating(18, 5)">5<br><small>Strongly Agree</small></div>
-                    </div>
-                </div>
-
-                <div class="question">
-                    <div class="question-text">19. I'm comfortable shipping AI-assisted code to production</div>
-                    <div class="rating-scale">
-                        <div class="rating-option" onclick="setRating(19, 1)">1<br><small>Strongly Disagree</small></div>
-                        <div class="rating-option" onclick="setRating(19, 2)">2<br><small>Disagree</small></div>
-                        <div class="rating-option" onclick="setRating(19, 3)">3<br><small>Neutral</small></div>
-                        <div class="rating-option" onclick="setRating(19, 4)">4<br><small>Agree</small></div>
-                        <div class="rating-option" onclick="setRating(19, 5)">5<br><small>Strongly Agree</small></div>
-                    </div>
-                </div>
-
-                <div class="question">
-                    <div class="question-text">20. AI helps improve overall code quality in our projects</div>
+                    <div class="question-text">20. I'm confident in the security of AI-generated code after my review</div>
                     <div class="rating-scale">
                         <div class="rating-option" onclick="setRating(20, 1)">1<br><small>Strongly Disagree</small></div>
                         <div class="rating-option" onclick="setRating(20, 2)">2<br><small>Disagree</small></div>
                         <div class="rating-option" onclick="setRating(20, 3)">3<br><small>Neutral</small></div>
                         <div class="rating-option" onclick="setRating(20, 4)">4<br><small>Agree</small></div>
                         <div class="rating-option" onclick="setRating(20, 5)">5<br><small>Strongly Agree</small></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">21. AI-generated code meets our quality standards</div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="setRating(21, 1)">1<br><small>Strongly Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(21, 2)">2<br><small>Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(21, 3)">3<br><small>Neutral</small></div>
+                        <div class="rating-option" onclick="setRating(21, 4)">4<br><small>Agree</small></div>
+                        <div class="rating-option" onclick="setRating(21, 5)">5<br><small>Strongly Agree</small></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">22. Our code review process effectively catches AI-generated issues</div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="setRating(22, 1)">1<br><small>Strongly Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(22, 2)">2<br><small>Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(22, 3)">3<br><small>Neutral</small></div>
+                        <div class="rating-option" onclick="setRating(22, 4)">4<br><small>Agree</small></div>
+                        <div class="rating-option" onclick="setRating(22, 5)">5<br><small>Strongly Agree</small></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">23. I'm comfortable shipping AI-assisted code to production</div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="setRating(23, 1)">1<br><small>Strongly Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(23, 2)">2<br><small>Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(23, 3)">3<br><small>Neutral</small></div>
+                        <div class="rating-option" onclick="setRating(23, 4)">4<br><small>Agree</small></div>
+                        <div class="rating-option" onclick="setRating(23, 5)">5<br><small>Strongly Agree</small></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">24. AI helps improve overall code quality in our projects</div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="setRating(24, 1)">1<br><small>Strongly Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(24, 2)">2<br><small>Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(24, 3)">3<br><small>Neutral</small></div>
+                        <div class="rating-option" onclick="setRating(24, 4)">4<br><small>Agree</small></div>
+                        <div class="rating-option" onclick="setRating(24, 5)">5<br><small>Strongly Agree</small></div>
                     </div>
                 </div>
 
@@ -385,61 +429,83 @@
             <div class="survey-section hidden" id="section5">
                 <div class="progress-indicator">
                     <div class="category-label">Team Collaboration & Process</div>
-                    <div class="question-counter">Questions 21-25 of 25</div>
+                    <div class="question-counter">Questions 25-31 of 31</div>
                 </div>
 
                 <div class="question">
-                    <div class="question-text">21. My team shares effective AI practices and learnings</div>
-                    <div class="rating-scale">
-                        <div class="rating-option" onclick="setRating(21, 1)">1<br><small>Strongly Disagree</small></div>
-                        <div class="rating-option" onclick="setRating(21, 2)">2<br><small>Disagree</small></div>
-                        <div class="rating-option" onclick="setRating(21, 3)">3<br><small>Neutral</small></div>
-                        <div class="rating-option" onclick="setRating(21, 4)">4<br><small>Agree</small></div>
-                        <div class="rating-option" onclick="setRating(21, 5)">5<br><small>Strongly Agree</small></div>
-                    </div>
-                </div>
-
-                <div class="question">
-                    <div class="question-text">22. We have clear guidelines for AI tool usage</div>
-                    <div class="rating-scale">
-                        <div class="rating-option" onclick="setRating(22, 1)">1<br><small>Strongly Disagree</small></div>
-                        <div class="rating-option" onclick="setRating(22, 2)">2<br><small>Disagree</small></div>
-                        <div class="rating-option" onclick="setRating(22, 3)">3<br><small>Neutral</small></div>
-                        <div class="rating-option" onclick="setRating(22, 4)">4<br><small>Agree</small></div>
-                        <div class="rating-option" onclick="setRating(22, 5)">5<br><small>Strongly Agree</small></div>
-                    </div>
-                </div>
-
-                <div class="question">
-                    <div class="question-text">23. AI tools enhance rather than replace team collaboration</div>
-                    <div class="rating-scale">
-                        <div class="rating-option" onclick="setRating(23, 1)">1<br><small>Strongly Disagree</small></div>
-                        <div class="rating-option" onclick="setRating(23, 2)">2<br><small>Disagree</small></div>
-                        <div class="rating-option" onclick="setRating(23, 3)">3<br><small>Neutral</small></div>
-                        <div class="rating-option" onclick="setRating(23, 4)">4<br><small>Agree</small></div>
-                        <div class="rating-option" onclick="setRating(23, 5)">5<br><small>Strongly Agree</small></div>
-                    </div>
-                </div>
-
-                <div class="question">
-                    <div class="question-text">24. I receive adequate support when AI tools don't work as expected</div>
-                    <div class="rating-scale">
-                        <div class="rating-option" onclick="setRating(24, 1)">1<br><small>Strongly Disagree</small></div>
-                        <div class="rating-option" onclick="setRating(24, 2)">2<br><small>Disagree</small></div>
-                        <div class="rating-option" onclick="setRating(24, 3)">3<br><small>Neutral</small></div>
-                        <div class="rating-option" onclick="setRating(24, 4)">4<br><small>Agree</small></div>
-                        <div class="rating-option" onclick="setRating(24, 5)">5<br><small>Strongly Agree</small></div>
-                    </div>
-                </div>
-
-                <div class="question">
-                    <div class="question-text">25. Our AI workflow integrates well with existing processes</div>
+                    <div class="question-text">25. My team shares effective AI practices and learnings</div>
                     <div class="rating-scale">
                         <div class="rating-option" onclick="setRating(25, 1)">1<br><small>Strongly Disagree</small></div>
                         <div class="rating-option" onclick="setRating(25, 2)">2<br><small>Disagree</small></div>
                         <div class="rating-option" onclick="setRating(25, 3)">3<br><small>Neutral</small></div>
                         <div class="rating-option" onclick="setRating(25, 4)">4<br><small>Agree</small></div>
                         <div class="rating-option" onclick="setRating(25, 5)">5<br><small>Strongly Agree</small></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">26. We have clear guidelines for AI tool usage</div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="setRating(26, 1)">1<br><small>Strongly Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(26, 2)">2<br><small>Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(26, 3)">3<br><small>Neutral</small></div>
+                        <div class="rating-option" onclick="setRating(26, 4)">4<br><small>Agree</small></div>
+                        <div class="rating-option" onclick="setRating(26, 5)">5<br><small>Strongly Agree</small></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">27. AI tools enhance rather than replace team collaboration</div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="setRating(27, 1)">1<br><small>Strongly Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(27, 2)">2<br><small>Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(27, 3)">3<br><small>Neutral</small></div>
+                        <div class="rating-option" onclick="setRating(27, 4)">4<br><small>Agree</small></div>
+                        <div class="rating-option" onclick="setRating(27, 5)">5<br><small>Strongly Agree</small></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">28. I receive adequate support when AI tools don't work as expected</div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="setRating(28, 1)">1<br><small>Strongly Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(28, 2)">2<br><small>Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(28, 3)">3<br><small>Neutral</small></div>
+                        <div class="rating-option" onclick="setRating(28, 4)">4<br><small>Agree</small></div>
+                        <div class="rating-option" onclick="setRating(28, 5)">5<br><small>Strongly Agree</small></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">29. Our AI workflow integrates well with existing processes</div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="setRating(29, 1)">1<br><small>Strongly Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(29, 2)">2<br><small>Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(29, 3)">3<br><small>Neutral</small></div>
+                        <div class="rating-option" onclick="setRating(29, 4)">4<br><small>Agree</small></div>
+                        <div class="rating-option" onclick="setRating(29, 5)">5<br><small>Strongly Agree</small></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">30. Our team has agreed-on practices for reviewing agent-authored code</div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="setRating(30, 1)">1<br><small>Strongly Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(30, 2)">2<br><small>Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(30, 3)">3<br><small>Neutral</small></div>
+                        <div class="rating-option" onclick="setRating(30, 4)">4<br><small>Agree</small></div>
+                        <div class="rating-option" onclick="setRating(30, 5)">5<br><small>Strongly Agree</small></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">31. We have a shared understanding of tasks that are appropriate for autonomous agents</div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="setRating(31, 1)">1<br><small>Strongly Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(31, 2)">2<br><small>Disagree</small></div>
+                        <div class="rating-option" onclick="setRating(31, 3)">3<br><small>Neutral</small></div>
+                        <div class="rating-option" onclick="setRating(31, 4)">4<br><small>Agree</small></div>
+                        <div class="rating-option" onclick="setRating(31, 5)">5<br><small>Strongly Agree</small></div>
                     </div>
                 </div>
 
@@ -457,27 +523,27 @@
                 </div>
 
                 <div class="open-question">
-                    <label for="q26">26. What's your most significant AI success story from the past month?</label>
-                    <textarea id="q26" name="q26" rows="4" placeholder="Share a specific example of how AI helped you succeed..."></textarea>
+                    <label for="q32">32. What's your most significant AI success story from the past month?</label>
+                    <textarea id="q32" name="q32" rows="4" placeholder="Share a specific example of how AI helped you succeed..."></textarea>
                 </div>
 
                 <div class="open-question">
-                    <label for="q27">27. What's your biggest frustration or challenge with AI tools?</label>
-                    <textarea id="q27" name="q27" rows="4" placeholder="Describe any difficulties or limitations you've encountered..."></textarea>
+                    <label for="q33">33. What's your biggest frustration or challenge with AI tools?</label>
+                    <textarea id="q33" name="q33" rows="4" placeholder="Describe any difficulties or limitations you've encountered..."></textarea>
                 </div>
 
                 <div class="open-question">
-                    <label for="q28">28. What AI capability or improvement would have the highest impact on your work?</label>
-                    <textarea id="q28" name="q28" rows="4" placeholder="What would make the biggest difference to your productivity or satisfaction?"></textarea>
+                    <label for="q34">34. What AI capability or improvement would have the highest impact on your work?</label>
+                    <textarea id="q34" name="q34" rows="4" placeholder="What would make the biggest difference to your productivity or satisfaction?"></textarea>
                 </div>
 
                 <div class="open-question">
-                    <label for="q29">29. How has your relationship with AI tools changed over the past quarter?</label>
-                    <textarea id="q29" name="q29" rows="4" placeholder="Reflect on your evolving feelings, skills, and confidence with AI..."></textarea>
+                    <label for="q35">35. How has your relationship with AI tools changed over the past quarter?</label>
+                    <textarea id="q35" name="q35" rows="4" placeholder="Reflect on your evolving feelings, skills, and confidence with AI..."></textarea>
                 </div>
 
                 <div class="open-question">
-                    <label for="openFeedback">30. Additional Comments & Suggestions</label>
+                    <label for="openFeedback">36. Additional Comments & Suggestions</label>
                     <textarea id="openFeedback" name="openFeedback" rows="6" placeholder="Share any additional thoughts, suggestions, or experiences that weren't covered in the previous questions. This is your space for open-ended feedback about your developer experience with AI tools..."></textarea>
                 </div>
 
@@ -632,7 +698,7 @@
         }
 
         function updateProgress() {
-            const totalQuestions = 25; // Adjust based on actual number
+            const totalQuestions = 31; // Adjust based on actual number
             const answered = Object.keys(responses).length;
             const percentage = Math.round((answered / totalQuestions) * 100);
             
@@ -647,14 +713,24 @@
 
         function updateCategoryScores() {
             // AI Integration: Questions 1-5
-            const integration = calculateCategoryAverage([1, 2, 3, 4, 5]);
+            const integration = calculateCategoryAverage([1, 2, 3, 4, 5, 6, 7]);
             updateCategoryDisplay('integrationScore', integration);
             
-            // Skill Balance: Questions 6-10  
-            const skill = calculateCategoryAverage([6, 7, 8, 9, 10]);
+            // Skill Balance: Questions 8-12  
+            const skill = calculateCategoryAverage([8, 9, 10, 11, 12, 13, 14]);
             updateCategoryDisplay('skillScore', skill);
-            
-            // Add other categories as sections are completed...
+
+            // Learning Velocity: Questions 15-19
+            const learning = calculateCategoryAverage([15, 16, 17, 18, 19]);
+            updateCategoryDisplay('learningScore', learning);
+
+            // Code Quality: Questions 20-24
+            const quality = calculateCategoryAverage([20, 21, 22, 23, 24]);
+            updateCategoryDisplay('qualityScore', quality);
+
+            // Team Process: Questions 25-31
+            const team = calculateCategoryAverage([25, 26, 27, 28, 29, 30, 31]);
+            updateCategoryDisplay('teamScore', team);
         }
 
         function calculateCategoryAverage(questionIds) {
@@ -746,11 +822,11 @@
 
         function generateHealthReport() {
             // Calculate all category averages
-            const integration = calculateCategoryAverage([1, 2, 3, 4, 5]);
-            const skill = calculateCategoryAverage([6, 7, 8, 9, 10]);
-            const learning = calculateCategoryAverage([11, 12, 13, 14, 15]);
-            const quality = calculateCategoryAverage([16, 17, 18, 19, 20]);
-            const team = calculateCategoryAverage([21, 22, 23, 24, 25]);
+            const integration = calculateCategoryAverage([1, 2, 3, 4, 5, 6, 7]);
+            const skill = calculateCategoryAverage([8, 9, 10, 11, 12]);
+            const learning = calculateCategoryAverage([15, 16, 17, 18, 19]);
+            const quality = calculateCategoryAverage([20, 21, 22, 23, 24]);
+            const team = calculateCategoryAverage([25, 26, 27, 28, 29, 30, 31]);
             
             // Update category displays
             updateCategoryDisplay('integrationScore', integration);
@@ -799,6 +875,9 @@
             if (integration > 4.0 && skill < 3.0) {
                 redFlags.push("Over-dependence risk: High AI integration but low skill balance");
             }
+            if (integration > 4.0 && team < 3.0) {
+                redFlags.push("Agent autonomy risk: High integration but weak team processes/guardrails");
+            }
             
             if (quality < 3.0) {
                 redFlags.push("Security/quality risk: Low confidence in AI-generated code quality");
@@ -810,6 +889,18 @@
             
             if (team < 2.5) {
                 redFlags.push("Team collaboration issues: Poor AI workflow integration");
+            }
+
+            if (responses[7] && responses[7] <= 2) {
+                redFlags.push("Agent mode guidance missing: unclear when to use agent vs. edit/chat");
+            }
+
+            if (responses[30] && responses[30] <= 2) {
+                redFlags.push("Review gap: no agreed practices for agent-authored code");
+            }
+
+            if (responses[14] && responses[14] <= 2) {
+                redFlags.push("MCP literacy gap: team cannot evaluate server capabilities safely");
             }
             
             if (redFlags.length > 0) {
@@ -925,10 +1016,10 @@ Generated by: Pair to Peer AI Workflows Developer Experience Tool`;
         // Collect open responses from textarea elements
         function collectOpenResponses() {
             openResponses = {
-                'AI Success Story': document.getElementById('q26').value,
-                'Biggest Frustration': document.getElementById('q27').value,
-                'High Impact Improvement': document.getElementById('q28').value,
-                'Relationship Change': document.getElementById('q29').value,
+                'AI Success Story': document.getElementById('q32').value,
+                'Biggest Frustration': document.getElementById('q33').value,
+                'High Impact Improvement': document.getElementById('q34').value,
+                'Relationship Change': document.getElementById('q35').value,
                 'Additional Comments': document.getElementById('openFeedback').value
             };
         }

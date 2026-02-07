@@ -115,3 +115,19 @@ Save checkpoint when:
 Checkpoint naming: "v0.1-[feature-name]-[status]"
 Example: "v0.1-user-auth-complete"
 ```
+
+## Agent Delegation Sessions (Async)
+- Scope tasks with **clear acceptance criteria, blast-radius limits, and rollback plan**.
+- Decide **Agent Mode vs. Edit Mode**:
+  - Agent Mode: background execution, repeatable tasks, strong tests/context.
+  - Edit Mode: collaborative pairing, ambiguous requirements, exploratory work.
+- Prep context: repository map, test commands, MCP server list + scopes.
+- Run agent in bounded chunks; log prompts, actions, and artifacts.
+- Schedule human review window; require PR surfaced with agent change log.
+
+## Agent-Authored PR Checkpoints
+- [ ] Agent scope respected (no unexpected files/secrets/infra changes)
+- [ ] Tests updated/executed; blast radius documented
+- [ ] MCP calls/tools noted; permissions match policy
+- [ ] Quality gates applied (security, performance, accessibility as applicable)
+- [ ] Rollback path documented; owner accountable for merge

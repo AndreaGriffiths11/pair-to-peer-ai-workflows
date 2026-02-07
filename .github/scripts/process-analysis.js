@@ -67,6 +67,10 @@ function generateRiskFlags(categories) {
     flags.push("Over-dependence risk: High AI integration but low skill balance");
   }
 
+  if (categories.aiIntegration > 3.5 && categories.teamProcess < 3.0) {
+    flags.push("Agent autonomy risk: High agent usage with weak guardrails/review process");
+  }
+
   if (categories.qualityConfidence < 3.0) {
     flags.push("Security/quality risk: Low confidence in AI-generated code quality");
   }
@@ -77,6 +81,10 @@ function generateRiskFlags(categories) {
 
   if (categories.teamProcess < 2.5) {
     flags.push("Team collaboration issues: Poor AI workflow integration");
+  }
+
+  if (categories.skillBalance < 2.5) {
+    flags.push("Agent review capability risk: Team cannot reliably evaluate agent-authored work");
   }
 
   return flags;
@@ -162,6 +170,12 @@ function generateRecommendations(overallScore, categories) {
   if (categories.qualityConfidence < 3.0) {
     recommendations.push("Implement code review processes for AI-generated code");
   }
+  if (categories.teamProcess < 3.0) {
+    recommendations.push("Add agent guardrails: scoped permissions, required reviewer for agent-authored PRs");
+  }
+  if (categories.aiIntegration > 3.5 && categories.teamProcess < 3.5) {
+    recommendations.push("Define when to use agent mode vs. edit/chat and require agent change logs");
+  }
 
   return recommendations;
 }
@@ -174,11 +188,11 @@ async function analyzeDeveloperExperience(data) {
 
   // Calculate category averages
   const categories = {
-    aiIntegration: calculateAverage(scores, [1, 2, 3, 4, 5]),
-    skillBalance: calculateAverage(scores, [6, 7, 8, 9, 10]),
-    learningVelocity: calculateAverage(scores, [11, 12, 13, 14, 15]),
-    qualityConfidence: calculateAverage(scores, [16, 17, 18, 19, 20]),
-    teamProcess: calculateAverage(scores, [21, 22, 23, 24, 25])
+    aiIntegration: calculateAverage(scores, [1, 2, 3, 4, 5, 6, 7]),
+    skillBalance: calculateAverage(scores, [8, 9, 10, 11, 12, 13, 14]),
+    learningVelocity: calculateAverage(scores, [15, 16, 17, 18, 19]),
+    qualityConfidence: calculateAverage(scores, [20, 21, 22, 23, 24]),
+    teamProcess: calculateAverage(scores, [25, 26, 27, 28, 29, 30, 31])
   };
 
   const overallScore = Object.values(categories).reduce((sum, score) => sum + score, 0) / 5;
@@ -196,15 +210,15 @@ async function analyzeDeveloperExperience(data) {
       const prompt = `Analyze this developer experience data:
 
 Categories (1-5 scale):
-- AI Integration: ${categories.aiIntegration.toFixed(1)}
-- Skill Balance: ${categories.skillBalance.toFixed(1)}
+- AI Integration & Agent Mode: ${categories.aiIntegration.toFixed(1)}
+- Skill Balance & Agent Review: ${categories.skillBalance.toFixed(1)}
 - Learning Velocity: ${categories.learningVelocity.toFixed(1)}
 - Quality Confidence: ${categories.qualityConfidence.toFixed(1)}
-- Team Process: ${categories.teamProcess.toFixed(1)}
+- Team Process & Guardrails: ${categories.teamProcess.toFixed(1)}
 
 Feedback: ${Object.values(openResponses).join('. ')}
 
-Provide 2-3 key insights about this team's AI adoption patterns.`;
+Provide 2-3 key insights about this team's AI adoption patterns, including any agent governance or MCP readiness gaps.`;
 
       const aiInsights = await callGitHubModels(prompt, token);
       insights = aiInsights;

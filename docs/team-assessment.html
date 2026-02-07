@@ -543,11 +543,11 @@
     <div class="container">
         <nav class="desktop-nav">
             <ul>
-                <li><a href="slides.html">📖 About</a></li>
                 <li><a href="index.html">Decision Tree</a></li>
                 <li><a href="team-assessment.html" class="active">Team Assessment</a></li>
                 <li><a href="teaching-moments.html">Teaching Moments</a></li>
                 <li><a href="developer-experience.html">Developer Experience</a></li>
+                <li><a href="resources.html">Resources</a></li>
             </ul>
         </nav>
         
@@ -556,11 +556,11 @@
                 <span class="hamburger-icon"></span>
             </button>
             <div class="mobile-menu">
-                <a href="slides.html">📖 About</a>
                 <a href="index.html">Decision Tree</a>
                 <a href="team-assessment.html" class="active">Team Assessment</a>
                 <a href="teaching-moments.html">Teaching Moments</a>
                 <a href="developer-experience.html">Developer Experience</a>
+                <a href="resources.html">Resources</a>
             </div>
         </nav>
 
@@ -757,6 +757,96 @@
                     </div>
                 </div>
 
+                <!-- MCP Server Governance -->
+                <div class="assessment-item">
+                    <div class="item-header">
+                        <div class="item-title">MCP Server Governance</div>
+                        <div class="item-weight">10% Weight</div>
+                    </div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="selectRating('mcpGovernance', 1, event)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 1: Initial</div>
+                                <div class="rating-description">No approval process for MCP servers</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('mcpGovernance', 2, event)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 2: Developing</div>
+                                <div class="rating-description">Basic allowlist with ad-hoc reviews</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('mcpGovernance', 3, event)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 3: Defined</div>
+                                <div class="rating-description">Documented approval and retirement process</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('mcpGovernance', 4, event)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 4: Managed</div>
+                                <div class="rating-description">Regular audits, scoped permissions, and logging</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('mcpGovernance', 5, event)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 5: Optimized</div>
+                                <div class="rating-description">Automated scans (e.g., mcp-config-scan) and approval SLAs</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Agent Permissions & Guardrails -->
+                <div class="assessment-item">
+                    <div class="item-header">
+                        <div class="item-title">Agent Permissions & Guardrails</div>
+                        <div class="item-weight">10% Weight</div>
+                    </div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="selectRating('agentGuardrails', 1, event)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 1: Initial</div>
+                                <div class="rating-description">Agents run without defined boundaries</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('agentGuardrails', 2, event)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 2: Developing</div>
+                                <div class="rating-description">Manual guardrails, inconsistent enforcement</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('agentGuardrails', 3, event)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 3: Defined</div>
+                                <div class="rating-description">Documented scopes and review for agent-authored changes</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('agentGuardrails', 4, event)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 4: Managed</div>
+                                <div class="rating-description">Risk tiers, approval workflows, and telemetry for agents</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('agentGuardrails', 5, event)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 5: Optimized</div>
+                                <div class="rating-description">Automated guardrails with continuous tuning and incident playbooks</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="nav-buttons">
                     <button class="btn btn-secondary" disabled>Previous</button>
                     <button class="btn btn-primary" onclick="nextStep()">Next: Experience Metrics</button>
@@ -902,6 +992,96 @@
                     </div>
                 </div>
 
+                <!-- Agent Delegation Trust -->
+                <div class="assessment-item">
+                    <div class="item-header">
+                        <div class="item-title">Agent Delegation Trust</div>
+                        <div class="item-weight">10% Weight</div>
+                    </div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="selectRating('agentDelegation', 1, event)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 1: Initial</div>
+                                <div class="rating-description">Uncomfortable delegating to agents</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('agentDelegation', 2, event)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 2: Developing</div>
+                                <div class="rating-description">Delegation only for trivial tasks</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('agentDelegation', 3, event)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 3: Defined</div>
+                                <div class="rating-description">Delegation with documented criteria and reviews</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('agentDelegation', 4, event)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 4: Managed</div>
+                                <div class="rating-description">Regular use of agent mode with acceptance tests</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('agentDelegation', 5, event)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 5: Optimized</div>
+                                <div class="rating-description">Confident delegation with clear blast-radius controls</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Copilot Spaces Adoption -->
+                <div class="assessment-item">
+                    <div class="item-header">
+                        <div class="item-title">Copilot Spaces Adoption</div>
+                        <div class="item-weight">10% Weight</div>
+                    </div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="selectRating('copilotSpaces', 1, event)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 1: Initial</div>
+                                <div class="rating-description">No shared context or Spaces in use</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('copilotSpaces', 2, event)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 2: Developing</div>
+                                <div class="rating-description">Occasional use for debugging or demos</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('copilotSpaces', 3, event)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 3: Defined</div>
+                                <div class="rating-description">Spaces used for shared prompts and context</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('copilotSpaces', 4, event)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 4: Managed</div>
+                                <div class="rating-description">Standardized Spaces per workflow with owners</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('copilotSpaces', 5, event)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 5: Optimized</div>
+                                <div class="rating-description">Spaces integrated into delivery pipelines and reviews</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="nav-buttons">
                     <button class="btn btn-secondary" onclick="prevStep()">Previous: Standards</button>
                     <button class="btn btn-primary" onclick="nextStep()">Next: AI Fluency</button>
@@ -1041,10 +1221,100 @@
                             <div class="rating-radio"></div>
                             <div class="rating-content">
                                 <div class="rating-level">Level 5: Optimized</div>
-                                <div class="rating-description">Leading-edge AI research and development capabilities</div>
+                            <div class="rating-description">Leading-edge AI research and development capabilities</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Agent Orchestration Skills -->
+                <div class="assessment-item">
+                    <div class="item-header">
+                        <div class="item-title">Agent Orchestration Skills</div>
+                        <div class="item-weight">10% Weight</div>
+                    </div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="selectRating('agentOrchestration', 1, event)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 1: Initial</div>
+                                <div class="rating-description">No coordinated use of multiple agents</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('agentOrchestration', 2, event)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 2: Developing</div>
+                                <div class="rating-description">Ad-hoc chaining of agents without playbooks</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('agentOrchestration', 3, event)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 3: Defined</div>
+                                <div class="rating-description">Documented handoffs and triggers between agents</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('agentOrchestration', 4, event)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 4: Managed</div>
+                                <div class="rating-description">Reliable multi-agent workflows with monitoring</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('agentOrchestration', 5, event)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 5: Optimized</div>
+                                <div class="rating-description">Dynamic orchestration with automated fallbacks</div>
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <!-- MCP Literacy -->
+                <div class="assessment-item">
+                    <div class="item-header">
+                        <div class="item-title">MCP Literacy</div>
+                        <div class="item-weight">10% Weight</div>
+                    </div>
+                    <div class="rating-scale">
+                        <div class="rating-option" onclick="selectRating('mcpLiteracy', 1, event)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 1: Initial</div>
+                                <div class="rating-description">Unfamiliar with MCP capabilities</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('mcpLiteracy', 2, event)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 2: Developing</div>
+                                <div class="rating-description">Basic awareness of MCP registry/servers</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('mcpLiteracy', 3, event)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 3: Defined</div>
+                                <div class="rating-description">Team can evaluate and configure MCP servers</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('mcpLiteracy', 4, event)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 4: Managed</div>
+                                <div class="rating-description">MCP capabilities mapped to workflows with safeguards</div>
+                            </div>
+                        </div>
+                        <div class="rating-option" onclick="selectRating('mcpLiteracy', 5, event)">
+                            <div class="rating-radio"></div>
+                            <div class="rating-content">
+                                <div class="rating-level">Level 5: Optimized</div>
+                                <div class="rating-description">Advanced MCP usage with continuous security reviews</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 </div>
 
                 <div class="nav-buttons">
@@ -1155,12 +1425,18 @@
             governance: 0,
             codeReview: 0,
             security: 0,
+            mcpGovernance: 0,
+            agentGuardrails: 0,
             devSatisfaction: 0,
             productivity: 0,
             learning: 0,
+            agentDelegation: 0,
+            copilotSpaces: 0,
             training: 0,
             knowledge: 0,
-            innovation: 0
+            innovation: 0,
+            agentOrchestration: 0,
+            mcpLiteracy: 0
         };
 
         let currentStep = 0; // 0 = welcome, 1-4 = steps
@@ -1171,12 +1447,18 @@
             governance: 0.10,
             codeReview: 0.15,
             security: 0.15,
+            mcpGovernance: 0.10,
+            agentGuardrails: 0.10,
             devSatisfaction: 0.10,
             productivity: 0.15,
             learning: 0.10,
+            agentDelegation: 0.10,
+            copilotSpaces: 0.10,
             training: 0.10,
             knowledge: 0.08,
-            innovation: 0.07
+            innovation: 0.07,
+            agentOrchestration: 0.10,
+            mcpLiteracy: 0.10
         };
 
         const dimensionWeights = {
@@ -1270,20 +1552,26 @@
             const standardsScore = (
                 (assessmentData.governance * weights.governance) +
                 (assessmentData.codeReview * weights.codeReview) +
-                (assessmentData.security * weights.security)
-            ) / (weights.governance + weights.codeReview + weights.security);
+                (assessmentData.security * weights.security) +
+                (assessmentData.mcpGovernance * weights.mcpGovernance) +
+                (assessmentData.agentGuardrails * weights.agentGuardrails)
+            ) / (weights.governance + weights.codeReview + weights.security + weights.mcpGovernance + weights.agentGuardrails);
 
             const experienceScore = (
                 (assessmentData.devSatisfaction * weights.devSatisfaction) +
                 (assessmentData.productivity * weights.productivity) +
-                (assessmentData.learning * weights.learning)
-            ) / (weights.devSatisfaction + weights.productivity + weights.learning);
+                (assessmentData.learning * weights.learning) +
+                (assessmentData.agentDelegation * weights.agentDelegation) +
+                (assessmentData.copilotSpaces * weights.copilotSpaces)
+            ) / (weights.devSatisfaction + weights.productivity + weights.learning + weights.agentDelegation + weights.copilotSpaces);
 
             const fluencyScore = (
                 (assessmentData.training * weights.training) +
                 (assessmentData.knowledge * weights.knowledge) +
-                (assessmentData.innovation * weights.innovation)
-            ) / (weights.training + weights.knowledge + weights.innovation);
+                (assessmentData.innovation * weights.innovation) +
+                (assessmentData.agentOrchestration * weights.agentOrchestration) +
+                (assessmentData.mcpLiteracy * weights.mcpLiteracy)
+            ) / (weights.training + weights.knowledge + weights.innovation + weights.agentOrchestration + weights.mcpLiteracy);
 
             // Calculate total weighted score
             const totalScore = (
