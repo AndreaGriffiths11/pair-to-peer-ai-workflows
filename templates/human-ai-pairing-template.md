@@ -118,16 +118,28 @@ Example: "v0.1-user-auth-complete"
 
 ## Agent Delegation Sessions (Async)
 - Scope tasks with **clear acceptance criteria, blast-radius limits, and rollback plan**.
-- Decide **Agent Mode vs. Edit Mode**:
-  - Agent Mode: background execution, repeatable tasks, strong tests/context.
+- Decide **Edit Mode vs. Agent Mode vs. Cloud Delegation**:
   - Edit Mode: collaborative pairing, ambiguous requirements, exploratory work.
-- Prep context: repository map, test commands, MCP server list + scopes.
-- Run agent in bounded chunks; log prompts, actions, and artifacts.
-- Schedule human review window; require PR surfaced with agent change log.
+  - Agent Mode (IDE/CLI): you stay in the loop, approve tool calls, strong tests/context.
+  - Cloud delegation (Copilot cloud agent or a Copilot app cloud session): background execution, repeatable tasks, you review the PR.
+- Prep context: `AGENTS.md`, relevant `SKILL.md` skills, test commands, MCP server list + scopes.
+- Pick the model and reasoning effort for the task; higher effort for debugging and architecture, lower for routine work.
+- Run agent in bounded chunks; log prompts, actions, and artifacts (session link, hooks output).
+- Schedule human review window; require PR surfaced with agent change log and self-review.
+
+## Parallel Sessions (Copilot App / CLI `/fleet`)
+- One task per session, one session per worktree. Never point two agents at the same working tree.
+- Start sessions from an issue or PR so **My Work** keeps the thread; steer on the canvas instead of re-prompting.
+- Cap concurrency to what you can review the same day (2-4 sessions for most people).
+- Before Agent Merge touches a PR, decide its conditions: fix CI only, respond to reviews, or merge.
+- Ask **Rubber Duck** (different model family) for a second opinion on any plan or diff you cannot verify quickly yourself.
+- Close the loop: retro which sessions needed re-prompting and update `AGENTS.md` or a skill so the next run needs less.
 
 ## Agent-Authored PR Checkpoints
 - [ ] Agent scope respected (no unexpected files/secrets/infra changes)
 - [ ] Tests updated/executed; blast radius documented
 - [ ] MCP calls/tools noted; permissions match policy
+- [ ] Agent self-review and security review ran; Rubber Duck findings addressed for non-trivial diffs
 - [ ] Quality gates applied (security, performance, accessibility as applicable)
+- [ ] Agent Merge conditions respected (no auto-merge on protected paths)
 - [ ] Rollback path documented; owner accountable for merge

@@ -119,43 +119,96 @@
                 <span>📚</span>
                 <div>
                     <h1 style="margin:0;">Resources <span class="accent">Hub</span></h1>
-                    <p style="margin:0;color:var(--muted);">Agentic AI, MCP security, developer experience, and the ecosystem that powers the framework.</p>
+                    <p style="margin:0;color:var(--muted);">The GitHub Copilot app, cloud agent, CLI, skills and plugins, MCP governance, developer experience, and the ecosystem that powers the framework. Updated September 2026.</p>
                 </div>
             </div>
             <div style="display:flex; flex-wrap:wrap; gap:0.5rem;">
-                <span class="tag">Agent Mode</span>
+                <span class="tag">Copilot App</span>
+                <span class="tag">Cloud Agent</span>
                 <span class="tag">Copilot CLI</span>
-                <span class="tag">Mission Control</span>
+                <span class="tag">Skills &amp; Plugins</span>
                 <span class="tag">Custom Agents</span>
                 <span class="tag">MCP Security</span>
+                <span class="tag">Models</span>
                 <span class="tag">DX Metrics</span>
                 <span class="tag">Governance</span>
             </div>
         </header>
 
         <main role="main">
+            <section aria-labelledby="copilot-app">
+                <div class="section-title" id="copilot-app">
+                    <span>🖥️</span><h2>GitHub Copilot App (2026)</h2>
+                </div>
+                <p style="color:var(--muted); margin-top:0;">Announced at Build 2026, technical preview May 14, generally available June 17, and on every Copilot plan (including Free and Education) since July 7, 2026. The app is the desktop home for agent work on macOS, Windows, and Linux, built on the same Copilot SDK runtime as the CLI and the VS Code Agent Host.</p>
+                <div class="section-grid">
+                    <div class="card">
+                        <h3>What the App Is</h3>
+                        <ul>
+                            <li><a href="https://github.blog/news-insights/product-news/github-copilot-app-the-agent-native-desktop-experience/" target="_blank" rel="noopener noreferrer">The agent-native desktop experience</a> — find, run, steer, and land work across repos</li>
+                            <li><a href="https://github.com/github/app" target="_blank" rel="noopener noreferrer">github/app</a> — downloads, release notes, issues</li>
+                            <li><strong>My Work:</strong> sessions, issues, PRs, and automations across connected repos in one view</li>
+                            <li><strong>Sessions:</strong> start from an issue, PR, or prompt; each local session runs in its own git worktree, cloud sessions run in GitHub-hosted environments</li>
+                            <li><strong>Canvases:</strong> plan, PR, terminal, and browser surfaces you and the agent operate on together</li>
+                            <li><strong>Automations:</strong> repeatable prompts as scheduled or background tasks</li>
+                            <li><strong>Agent Merge:</strong> the agent follows a PR through CI failures, review comments, and merge under conditions you set</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Governance for the App</h3>
+                        <ul>
+                            <li><a href="https://github.blog/changelog/2026-07-27-manage-github-copilot-app-access-with-a-dedicated-policy/" target="_blank" rel="noopener noreferrer">Dedicated access policy</a> — Enabled everywhere (default), Disabled everywhere, or Let organizations decide; separate from the CLI policy</li>
+                            <li><a href="https://github.blog/changelog/2026-07-27-enterprise-managed-settings-now-apply-to-the-github-copilot-app/" target="_blank" rel="noopener noreferrer">Enterprise managed settings</a> — <code>copilot/managed-settings.json</code> in <code>.github-private</code> governs plugins, marketplaces, approval bypass, sandbox policy</li>
+                            <li><a href="https://github.blog/changelog/2026-08-06-mcp-allowlists-in-enterprise-managed-settings/" target="_blank" rel="noopener noreferrer">MCP allowlists</a> — <code>allowedMcpServers</code> / <code>deniedMcpServers</code> enforced in the app, CLI, and VS Code</li>
+                            <li><a href="https://github.blog/changelog/2026-07-14-security-reviews-now-available-in-the-github-copilot-app/" target="_blank" rel="noopener noreferrer">Security reviews in the app</a> — run before you land agent output</li>
+                            <li>Framework tie-in: decide Agent Merge conditions with the <a href="https://github.com/AndreaGriffiths11/pair-to-peer-ai-workflows/blob/main/templates/agent-governance-template.md" target="_blank" rel="noopener noreferrer">agent governance template</a> before switching it on</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Customize: Skills, Plugins, MCP</h3>
+                        <ul>
+                            <li><a href="https://github.blog/changelog/2026-08-25-github-copilot-app-customize-tab-is-generally-available/" target="_blank" rel="noopener noreferrer">Customize tab (GA Aug 25, 2026)</a> — MCP servers, plugins, skills, and canvases in one place</li>
+                            <li><a href="https://github.blog/changelog/2026-08-12-agent-plugins-1-0-in-vs-code-copilot-cli-and-the-copilot-app/" target="_blank" rel="noopener noreferrer">Agent Plugins 1.0</a> — open spec (Aug 6, 2026) from Amazon, Anysphere, Microsoft, OpenAI, Vercel: <code>plugin.json</code> + <code>skills/</code> + <code>mcp.json</code></li>
+                            <li><a href="https://docs.github.com/en/copilot/concepts/agents/about-agent-skills" target="_blank" rel="noopener noreferrer">Agent Skills</a> — <code>SKILL.md</code> folders in <code>.github/skills</code>, <code>.claude/skills</code>, or <code>.agents/skills</code></li>
+                            <li>BYOK model providers, 1M-token context window, model picker with Low/Medium/High reasoning effort</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Copilot SDK &amp; Agent Host</h3>
+                        <ul>
+                            <li><a href="https://github.com/github/copilot-sdk" target="_blank" rel="noopener noreferrer">Copilot SDK</a> — GA June 2, 2026 in Node/TypeScript, Python, Go, .NET, Rust, Java; the runtime behind the app, CLI, and IDE agents</li>
+                            <li>VS Code Agent Host Protocol (July 2026) runs Copilot, Claude, and Codex harnesses in a dedicated process; sessions move between the app, CLI, and editor</li>
+                            <li>Use the SDK when your team needs an internal agent with the same guardrails (custom tools, MCP, approvals) instead of a bespoke orchestration layer</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
             <section aria-labelledby="agentic-ai">
                 <div class="section-title" id="agentic-ai">
                     <span>🧭</span><h2>Agentic AI &amp; Agent Mode</h2>
                 </div>
                 <div class="section-grid">
                     <div class="card">
-                        <h3>Copilot Agent Mode</h3>
+                        <h3>Copilot Cloud Agent &amp; Agent Mode</h3>
                         <ul>
+                            <li><a href="https://github.blog/changelog/2026-04-01-research-plan-and-code-with-copilot-cloud-agent/" target="_blank" rel="noopener noreferrer">Research, plan, and code with Copilot cloud agent</a> — the coding agent renamed Apr 1, 2026; no longer limited to PR workflows</li>
+                            <li><a href="https://github.blog/ai-and-ml/github-copilot/whats-new-with-github-copilot-coding-agent/" target="_blank" rel="noopener noreferrer">What's new</a> — model picker, self-review before opening the PR, built-in security scanning, custom agents, CLI handoff (<code>&amp;</code>)</li>
+                            <li><a href="https://github.blog/changelog/2026-08-03-customize-the-reasoning-level-for-copilot-cloud-agent/" target="_blank" rel="noopener noreferrer">Configurable reasoning level</a> (Aug 2026); agent mode GA in JetBrains (Mar 2026); cloud agent on GitHub Mobile (Apr 2026)</li>
                             <li><a href="https://github.blog/ai-and-ml/github-copilot/mastering-github-copilot-when-to-use-ai-agent-mode/" target="_blank" rel="noopener noreferrer">Mastering GitHub Copilot: when to use agent mode</a></li>
                             <li><a href="https://github.blog/ai-and-ml/github-copilot/5-ways-to-integrate-github-copilot-coding-agent-into-your-workflow/" target="_blank" rel="noopener noreferrer">5 ways to integrate the coding agent</a></li>
-                            <li><a href="https://github.blog/ai-and-ml/github-copilot/a-step-by-step-guide-to-modernizing-java-projects-with-github-copilot-agent-mode/" target="_blank" rel="noopener noreferrer">Modernizing Java with agent mode</a></li>
                             <li><a href="https://github.blog/ai-and-ml/github-copilot/how-github-copilot-and-ai-agents-are-saving-legacy-systems/" target="_blank" rel="noopener noreferrer">Agents rescuing legacy systems</a></li>
                         </ul>
                     </div>
                     <div class="card">
                         <h3>Copilot CLI &amp; Terminal Agents</h3>
                         <ul>
-                            <li><a href="https://github.com/github/copilot-cli" target="_blank" rel="noopener noreferrer">Copilot CLI</a> — terminal-native agentic development</li>
-                            <li><a href="https://github.blog/changelog/2026-01-14-github-copilot-cli-enhanced-agents-context-management-and-new-ways-to-install/" target="_blank" rel="noopener noreferrer">Enhanced agents, context management (Jan 2026)</a></li>
-                            <li>Four sub-agents: Explore, Task, Plan, Code-review with parallel execution</li>
-                            <li>Autopilot mode, <code>/compact</code> context management, <code>--resume</code> sessions</li>
-                            <li>Multi-model: Claude Sonnet 4.5 (default), GPT-5, GPT-4.1, Claude Opus 4.6</li>
+                            <li><a href="https://github.blog/changelog/2026-02-25-github-copilot-cli-is-now-generally-available/" target="_blank" rel="noopener noreferrer">Copilot CLI GA (Feb 25, 2026)</a> — <a href="https://github.com/github/copilot-cli" target="_blank" rel="noopener noreferrer">github/copilot-cli</a></li>
+                            <li><a href="https://github.blog/ai-and-ml/github-copilot/run-multiple-agents-at-once-with-fleet-in-copilot-cli/" target="_blank" rel="noopener noreferrer"><code>/fleet</code></a> — decomposes a plan into parallel subagents (Apr 2026); Plan mode, Autopilot, <code>--plan --mode autopilot</code></li>
+                            <li><a href="https://github.blog/ai-and-ml/github-copilot/github-copilot-cli-combines-model-families-for-a-second-opinion/" target="_blank" rel="noopener noreferrer">Rubber Duck</a> — second opinion from a different model family, on by default</li>
+                            <li><a href="https://github.blog/changelog/2026-06-10-dedicated-security-review-command-now-available-in-copilot-cli/" target="_blank" rel="noopener noreferrer"><code>/security-review</code></a>, <code>/worktree</code> sessions, <code>/permissions</code> approval modes, sandboxes with enterprise-managed policies</li>
+                            <li>Hooks (<code>preToolUse</code> / <code>postToolUse</code>) with OpenTelemetry trace context, repository memory, <code>/plugin</code>, <code>/mcp</code>, <code>/skills</code>, 200K vs. 1M context tiers</li>
+                            <li>Multi-model: Claude Sonnet 5 / Opus 5, GPT-5.6, Gemini 3.6/3.7 Flash, Grok 4.6 (xhigh reasoning), MAI-Code</li>
                         </ul>
                     </div>
                     <div class="card">
@@ -166,23 +219,23 @@
                         </ul>
                     </div>
                     <div class="card">
-                        <h3>Custom Agents &amp; agents.md</h3>
+                        <h3>Custom Agents, Skills &amp; agents.md</h3>
                         <ul>
-                            <li><a href="https://docs.github.com/en/copilot/how-tos/use-copilot-agents/coding-agent/create-custom-agents" target="_blank" rel="noopener noreferrer">Creating custom agents</a> — file-based <code>.agent.md</code> profiles</li>
-                            <li><a href="https://github.blog/ai-and-ml/github-copilot/how-to-write-a-great-agents-md-lessons-from-over-2500-repositories/" target="_blank" rel="noopener noreferrer">How to write a great agents.md</a> — lessons from 2,500+ repos</li>
-                            <li>Scopes: repo (<code>.github/agents</code>), org (<code>.github-private</code>), CLI (<code>~/.copilot/agents</code>)</li>
-                            <li>Shareable across teams with custom prompts, tools, and MCP configs</li>
+                            <li><a href="https://docs.github.com/en/copilot/how-tos/use-copilot-agents/coding-agent/create-custom-agents" target="_blank" rel="noopener noreferrer">Creating custom agents</a> — file-based <code>.agent.md</code> profiles; org and enterprise owners can publish agents org-wide (Aug 2026)</li>
+                            <li><a href="https://github.blog/ai-and-ml/github-copilot/how-to-write-a-great-agents-md-lessons-from-over-2500-repositories/" target="_blank" rel="noopener noreferrer">How to write a great agents.md</a> — lessons from 2,500+ repos; now read by Copilot code review too</li>
+                            <li><a href="https://github.com/github/awesome-copilot/blob/main/docs/README.skills.md" target="_blank" rel="noopener noreferrer">awesome-copilot skills</a> — reusable <code>SKILL.md</code> examples</li>
+                            <li>Scopes: repo (<code>.github/agents</code>, <code>.github/skills</code>), org (<code>.github-private</code>), personal (<code>~/.copilot/agents</code>, <code>~/.copilot/skills</code>)</li>
+                            <li>Package skills + MCP as an <a href="https://github.com/agentplugins/agent-plugins-spec" target="_blank" rel="noopener noreferrer">Agent Plugin</a> to share across Copilot, Codex, Cursor, Kiro, and ChatGPT</li>
                         </ul>
                     </div>
                     <div class="card">
                         <h3>Mission Control &amp; Agent HQ</h3>
                         <ul>
                             <li><a href="https://github.blog/news-insights/company-news/welcome-home-agents/" target="_blank" rel="noopener noreferrer">Introducing Agent HQ</a> — any agent, any way you work</li>
-                            <li>Mission Control: unified command center across GitHub, VS Code, mobile, CLI</li>
-                            <li>Fleet orchestration: assign agents work in parallel, steer mid-task</li>
-                            <li>Agent identity &amp; access management (treat agents like team members)</li>
-                            <li>Integrations: Slack, Linear, Jira, Teams, Azure Boards, Raycast</li>
-                            <li>Third-party agents: Anthropic, OpenAI, Google, Cognition, xAI</li>
+                            <li><a href="https://github.blog/ai-and-ml/github-copilot/how-to-orchestrate-agents-using-mission-control/" target="_blank" rel="noopener noreferrer">How to orchestrate agents using mission control</a> — assign across repos, pick a custom agent, watch session logs, steer mid-run</li>
+                            <li>Mission Control on github.com is the web command center; the Copilot app is its desktop counterpart with local worktrees and canvases</li>
+                            <li><a href="https://github.blog/changelog/2026-04-14-model-selection-for-claude-and-codex-agents-on-github-com/" target="_blank" rel="noopener noreferrer">Model selection for Claude and Codex agents</a> (Apr 2026); third-party agents from Anthropic, OpenAI, Google, Cognition, xAI</li>
+                            <li>Agent identity &amp; access management (treat agents like team members); integrations: Slack, Linear, Jira, Teams, Azure Boards, Raycast</li>
                         </ul>
                     </div>
                 </div>
@@ -212,9 +265,10 @@
                     <div class="card">
                         <h3>Enterprise MCP Controls</h3>
                         <ul>
-                            <li><a href="https://github.blog/changelog/2025-09-12-internal-mcp-registry-and-allowlist-controls-for-vs-code-insiders/" target="_blank" rel="noopener noreferrer">Internal MCP registry &amp; allowlist controls</a></li>
-                            <li>Centrally curated trust boundaries for enterprise MCP servers</li>
-                            <li>Admin policies for which agents and MCP servers developers can use</li>
+                            <li><a href="https://github.blog/changelog/2026-08-06-mcp-allowlists-in-enterprise-managed-settings/" target="_blank" rel="noopener noreferrer">MCP allowlists in enterprise managed settings</a> (Aug 6, 2026) — <code>allowedMcpServers</code> / <code>deniedMcpServers</code>; <a href="https://docs.github.com/en/copilot/reference/mcp-allowlist-enforcement" target="_blank" rel="noopener noreferrer">enforcement reference</a></li>
+                            <li><a href="https://github.blog/changelog/2026-04-16-copilot-cli-supports-custom-registry-based-mcp-allowlists/" target="_blank" rel="noopener noreferrer">Custom-registry MCP allowlists in Copilot CLI</a> (Apr 2026) — "Registry only" mode</li>
+                            <li><a href="https://github.blog/changelog/2025-09-12-internal-mcp-registry-and-allowlist-controls-for-vs-code-insiders/" target="_blank" rel="noopener noreferrer">Internal MCP registry &amp; allowlist controls</a> — centrally curated trust boundaries</li>
+                            <li>Remote MCP OAuth and device-managed settings in the CLI; admin policies for which agents and servers developers can use</li>
                         </ul>
                     </div>
                 </div>
@@ -249,18 +303,30 @@
                     <div class="card">
                         <h3>Agentic Code Review</h3>
                         <ul>
-                            <li>Copilot code review with agentic tool-calling (gathers full project context)</li>
-                            <li>Autonomous PR review capabilities for agent-authored code</li>
-                            <li>Risk-based review tiers: human-authored vs. agent-authored PRs</li>
+                            <li><a href="https://github.blog/changelog/2026-03-05-copilot-code-review-now-runs-on-an-agentic-architecture/" target="_blank" rel="noopener noreferrer">Agentic tool-calling architecture GA</a> (Mar 5, 2026) — gathers repo context as needed</li>
+                            <li><a href="https://github.blog/changelog/2026-06-18-copilot-code-review-agents-md-support-and-ui-improvements/" target="_blank" rel="noopener noreferrer">AGENTS.md support</a>; also reads <code>REVIEW.md</code>, <code>CLAUDE.md</code>, <code>GEMINI.md</code>, and instructions from the PR head branch</li>
+                            <li><a href="https://github.blog/changelog/2026-08-07-copilot-code-review-effort-levels-are-generally-available/" target="_blank" rel="noopener noreferrer">Effort levels GA</a> (Aug 2026); runs behind a firewall by default, configurable separately from cloud agent</li>
+                            <li>Cloud agent self-reviews with Copilot code review before opening a PR; add Rubber Duck for a cross-family second opinion</li>
+                            <li>Risk-based review tiers: human-authored vs. agent-authored PRs (see <a href="https://github.com/AndreaGriffiths11/pair-to-peer-ai-workflows/blob/main/templates/code-quality-gates.md" target="_blank" rel="noopener noreferrer">code quality gates</a>)</li>
                         </ul>
                     </div>
                     <div class="card">
-                        <h3>VS Code Agent Features (Jan 2026)</h3>
+                        <h3>VS Code Agent Host (Aug 2026)</h3>
                         <ul>
-                            <li><a href="https://code.visualstudio.com/updates/v1_109" target="_blank" rel="noopener noreferrer">VS Code v1.109</a> — multi-agent development hub</li>
-                            <li>Claude agent support (public preview) via Claude Agent SDK</li>
-                            <li>Copilot Memory: retains relevant context across interactions</li>
-                            <li>Terminal command sandboxing for agent-executed commands</li>
+                            <li><a href="https://github.blog/changelog/2026-08-31-github-copilot-in-vs-code-august-2026-releases/" target="_blank" rel="noopener noreferrer">August 2026 releases (v1.132–1.135)</a> — external agent sessions from the app or CLI continue in VS Code</li>
+                            <li><a href="https://code.visualstudio.com/updates/v1_135" target="_blank" rel="noopener noreferrer">VS Code v1.135</a> — Rubber Duck (experimental), side-by-side chats, <code>/btw</code> side conversations, prompt timeline, browser element comments</li>
+                            <li>Agent Host Protocol (July 2026): Copilot, Claude, and Codex harnesses in a dedicated process; Copilot agent powered by the Copilot SDK</li>
+                            <li>AI credit usage in the status menu, BYOK models in the Agents window, <code>!</code> terminal commands from chat</li>
+                            <li><a href="https://code.visualstudio.com/updates/v1_109" target="_blank" rel="noopener noreferrer">v1.109 (Jan 2026)</a> — Copilot Memory, terminal sandboxing, multi-agent hub</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Models &amp; Metrics (Sept 2026)</h3>
+                        <ul>
+                            <li><a href="https://github.blog/changelog/2026-07-31-upcoming-august-2026-model-deprecations-in-github-copilot/" target="_blank" rel="noopener noreferrer">Sept 1, 2026 retirements</a> — Gemini 3.1 Pro, Claude Opus 4.5/4.6, Claude Sonnet 4.5/4.6, Raptor Mini (Sonnet 4.6 stays for individual annual plans)</li>
+                            <li>Current lineup: <a href="https://github.blog/changelog/2026-07-24-claude-opus-5-is-now-available-in-github-copilot/" target="_blank" rel="noopener noreferrer">Claude Opus 5</a>, Claude Sonnet 5, GPT-5.6 (Luna/Sol/Terra), GPT-5.4/5.5, Gemini 3.6/3.7 Flash, Grok 4.6, MAI-Code-1.1-Flash</li>
+                            <li><a href="https://github.blog/changelog/2026-06-04-larger-context-windows-and-configurable-reasoning-levels-for-github-copilot/" target="_blank" rel="noopener noreferrer">1M context and Low/Medium/High reasoning effort</a> — match effort to task risk, not habit</li>
+                            <li><a href="https://github.blog/changelog/2026-02-27-copilot-metrics-is-now-generally-available/" target="_blank" rel="noopener noreferrer">Copilot metrics GA</a> and the <a href="https://github.blog/changelog/2026-07-22-new-copilot-usage-metrics-impact-dashboard/" target="_blank" rel="noopener noreferrer">impact dashboard</a> — adoption-phase cohorts, PRs merged per user, merge velocity, cloud agent usage fields</li>
                         </ul>
                     </div>
                 </div>
@@ -332,8 +398,12 @@
                         <li>GitHub Enterprise Research: structured sharing drives ~40% better outcomes.</li>
                         <li>Octoverse 2025: 1.13M repos importing LLM SDKs (+178% YoY); Universe 2025 launched Agent HQ, Mission Control, Custom Copilot Agents.</li>
                         <li>Agent HQ multi-model fleet: Anthropic, OpenAI, Google, Cognition, xAI agents on one platform via Copilot subscription.</li>
-                        <li>Free users get core Mission Control dashboard + basic agent features by Q1 2026.</li>
-                        <li>2,500+ repos with agents.md analyzed — custom agents becoming standard practice.</li>
+                        <li>Copilot app on every plan since July 2026, including Free and Education; Copilot CLI, cloud agent, and the app share one SDK runtime.</li>
+                        <li>2,500+ repos with agents.md analyzed — custom agents and skills becoming standard practice; Agent Plugins 1.0 (Aug 2026) shipped with support from ChatGPT, Codex, Cursor, GitHub Copilot, Kiro, and VS Code.</li>
+                        <li>Stack Overflow surveys: 84% of developers use or plan to use AI tools, 51% daily, but only ~29% trust output accuracy (down from 40%) — the trust gap is the adoption problem to manage.</li>
+                        <li>GitHub Rubber Duck evaluation: Claude Sonnet plus a cross-family reviewer closes ~75% of the gap to Opus alone on hard multi-file tasks — verification beats bigger models for many teams.</li>
+                        <li>Cloud agent retrieval: 2× throughput and 37.6% better retrieval accuracy vs. early 2025; 1M-token context in VS Code, CLI, and the app.</li>
+                        <li>AIDev (arXiv, Feb 2026): first large-scale study of AI coding agent PRs on GitHub — agent PRs need the same review discipline as human PRs, with tighter scope.</li>
                     </ul>
                 </div>
             </section>

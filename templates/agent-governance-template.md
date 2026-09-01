@@ -3,6 +3,7 @@
 ## 1) MCP Server Approval Process
 - Owner: ______________________________
 - Allowed scopes: __Filesystem__ / __Network__ / __Secrets__ / __Tools__ (cross out disallowed)
+- Enterprise allowlist entry (`allowedMcpServers` / `deniedMcpServers` in `copilot/managed-settings.json`): __________________
 - Approval steps:
   - [ ] Security review (mcp-config-scan) completed
   - [ ] Data handling evaluated (PII/PHI?)
@@ -27,9 +28,11 @@
 
 ## 3) Review Workflow for Agent-Generated PRs
 - Required attachments:
-  - [ ] Agent change log (actions, prompts, tools used)
+  - [ ] Agent change log (actions, prompts, tools used, session link)
   - [ ] Tests + results
   - [ ] MCP servers used + scopes
+  - [ ] Agent self-review and security review output (cloud agent / Copilot app / `/security-review`)
+  - [ ] Rubber Duck (cross-model) findings for Medium/High risk diffs
   - [ ] Rollback steps
 - Review path:
   - [ ] Risk classification: Low / Med / High
@@ -56,3 +59,31 @@
 - [ ] Least privilege enforced for each task type
 - [ ] Human approvals captured for elevated actions
 - [ ] Autonomy limited to pre-approved task list
+- [ ] Skills and plugins reviewed like code (pinned versions, marketplace on the allowed list)
+
+## 6) Copilot App, CLI & Enterprise Managed Settings
+- Copilot app access policy: __Enabled everywhere__ / __Disabled everywhere__ / __Let organizations decide__
+- Copilot CLI access policy: __Enabled__ / __Disabled__ (separate from the app policy since July 2026)
+- Managed settings owner (`.github-private` → `copilot/managed-settings.json`): ___________________
+- Policies set:
+  - [ ] MCP allowlist (`allowedMcpServers` / `deniedMcpServers`)
+  - [ ] Allowed plugins and marketplaces (`enabledPlugins`, `extraKnownMarketplaces`)
+  - [ ] Approval-prompt bypass: __allowed__ / __blocked__
+  - [ ] Sandbox policy and proxy enforcement for local sessions
+  - [ ] Model policy reviewed (new models default on for enterprise since Aug 2026)
+- Local session hygiene:
+  - [ ] One session per worktree; no shared working tree between agents
+  - [ ] Cloud sessions only in repos with branch protection
+  - [ ] BYOK providers approved by security
+
+## 7) Agent Merge & Automations
+- Agent Merge is **off** until the review workflow above is in place.
+- When enabled, the agent may (tick what applies per repo):
+  - [ ] Fix failing CI checks
+  - [ ] Respond to review comments
+  - [ ] Merge once required checks and approvals pass
+- Never allowed to merge without a human on: __security__ / __infra__ / __schema__ / __billing__ paths
+- Automations (scheduled or background tasks):
+  - [ ] Each automation has an owner, a prompt in version control, and a max blast radius
+  - [ ] Outputs land as PRs, never direct pushes to protected branches
+  - [ ] Monthly review of automation runs, cost (premium requests), and failures
