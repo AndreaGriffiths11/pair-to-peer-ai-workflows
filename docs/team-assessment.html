@@ -1635,7 +1635,7 @@
                 // Restore UI selections
                 Object.entries(assessmentData).forEach(([category, level]) => {
                     if (level > 0) {
-                        const option = document.querySelector(`[onclick*="${category}, ${level}"]`);
+                        const option = document.querySelector(`[onclick*="${category}', ${level},"]`);
                         if (option) {
                             option.classList.add('selected');
                         }
