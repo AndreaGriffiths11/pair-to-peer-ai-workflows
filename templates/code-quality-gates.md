@@ -18,11 +18,27 @@
 | Agent-Authored Changes (PRs) | Variable | **Agent Review Tier + matching risk level** |
 
 ### Agent Review Tier (additive)
-- [ ] Agent change log included (actions, prompts, tools)
+- [ ] Agent change log included (actions, prompts, tools, session link)
 - [ ] Scope bounded (no unexpected files, secrets, or infra changes)
 - [ ] Tests and acceptance criteria attached to PR
-- [ ] MCP servers/tools listed with permissions and audit trail
+- [ ] Agent self-review (Copilot code review) and security review ran before the PR opened
+- [ ] Copilot code review effort level matches risk (High for Level 3-4 code)
+- [ ] Rubber Duck cross-model second opinion for Medium/High risk diffs
+- [ ] MCP servers/tools listed with permissions and audit trail; all on the enterprise allowlist
+- [ ] Skills/plugins used are pinned and from an approved marketplace
 - [ ] Rollback path documented; human owner assigned
+
+### Agent Merge Conditions
+Agent Merge (Copilot app) can carry a PR through CI, review comments, and merge. Map it to the risk matrix:
+
+| Risk Level | Fix failing CI | Respond to reviews | Merge |
+|------------|----------------|--------------------|-------|
+| Level 1 (docs/config) | Yes | Yes | Yes, after required checks |
+| Level 2 (UI, low risk) | Yes | Yes | Only with a human approval |
+| Level 3 (business logic) | Yes | Draft replies only | No |
+| Level 4 (security/payments/PII) | No | No | No |
+
+Put `AGENTS.md`, `REVIEW.md`, or `.github/copilot-instructions.md` review rules on the PR head branch: Copilot code review reads instructions from the head, not the base.
 
 ## Four-Tier Review Process
 
@@ -156,7 +172,7 @@ coverage_check:
 - Annual evaluation of tools and frameworks
 
 ## MCP Security Considerations
-- Maintain MCP server allowlist with scope per project; expire unused servers.
+- Maintain MCP server allowlist with scope per project; expire unused servers. Enforce it centrally with `allowedMcpServers` / `deniedMcpServers` in enterprise managed settings (applies to the Copilot app, CLI, and VS Code).
 - Run automated config scans (e.g., `mcp-config-scan`) before enabling new servers.
 - Log MCP calls for agent runs; alert on privileged scopes (fs/network/secrets).
 - Require human approval for actions beyond predefined blast radius.

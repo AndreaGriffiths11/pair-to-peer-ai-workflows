@@ -703,7 +703,7 @@
                             <div class="rating-radio"></div>
                             <div class="rating-content">
                                 <div class="rating-level">Level 5: Optimized</div>
-                                <div class="rating-description">Agentic code review with tool-calling, risk tiers for agent-authored PRs, and continuous quality monitoring</div>
+                                <div class="rating-description">Agentic Copilot code review driven by AGENTS.md with effort levels, agent self-review plus cross-model (Rubber Duck) checks, risk tiers for agent-authored PRs, and continuous quality monitoring</div>
                             </div>
                         </div>
                     </div>
@@ -793,7 +793,7 @@
                             <div class="rating-radio"></div>
                             <div class="rating-content">
                                 <div class="rating-level">Level 5: Optimized</div>
-                                <div class="rating-description">Enterprise MCP registry with allowlist controls, automated scans, and approval SLAs</div>
+                                <div class="rating-description">Enterprise managed-settings MCP allowlists (allowed/denied servers) enforced across the Copilot app, CLI, and VS Code, automated scans, and approval SLAs</div>
                             </div>
                         </div>
                     </div>
@@ -838,7 +838,7 @@
                             <div class="rating-radio"></div>
                             <div class="rating-content">
                                 <div class="rating-level">Level 5: Optimized</div>
-                                <div class="rating-description">Custom agent policies via .github/agents, Mission Control identity management, and automated guardrails</div>
+                                <div class="rating-description">Custom agent policies via .github/agents, enterprise managed settings (sandbox, plugin, and approval-bypass policies), Copilot app/CLI access policies, and explicit Agent Merge conditions</div>
                             </div>
                         </div>
                     </div>
@@ -1021,14 +1021,14 @@
                             <div class="rating-radio"></div>
                             <div class="rating-content">
                                 <div class="rating-level">Level 4: Managed</div>
-                                <div class="rating-description">Regular use of agent mode and Copilot CLI with acceptance tests</div>
+                                <div class="rating-description">Regular delegation to Copilot cloud agent and Copilot CLI with acceptance tests and agent self-review</div>
                             </div>
                         </div>
                         <div class="rating-option" onclick="selectRating('agentDelegation', 5, event)">
                             <div class="rating-radio"></div>
                             <div class="rating-content">
                                 <div class="rating-level">Level 5: Optimized</div>
-                                <div class="rating-description">Mission Control fleet orchestration with multi-agent parallel delegation and blast-radius controls</div>
+                                <div class="rating-description">Parallel Copilot app sessions in isolated worktrees, Agent Merge with explicit conditions, automations, and blast-radius controls</div>
                             </div>
                         </div>
                     </div>
@@ -1037,7 +1037,7 @@
                 <!-- Copilot Spaces Adoption -->
                 <div class="assessment-item">
                     <div class="item-header">
-                        <div class="item-title">Copilot Spaces Adoption</div>
+                        <div class="item-title">Shared Context (Spaces, Skills &amp; AGENTS.md)</div>
                         <div class="item-weight">10% Weight</div>
                     </div>
                     <div class="rating-scale">
@@ -1045,35 +1045,35 @@
                             <div class="rating-radio"></div>
                             <div class="rating-content">
                                 <div class="rating-level">Level 1: Initial</div>
-                                <div class="rating-description">No shared context or Spaces in use</div>
+                                <div class="rating-description">No shared context: no Spaces, AGENTS.md, or skills</div>
                             </div>
                         </div>
                         <div class="rating-option" onclick="selectRating('copilotSpaces', 2, event)">
                             <div class="rating-radio"></div>
                             <div class="rating-content">
                                 <div class="rating-level">Level 2: Developing</div>
-                                <div class="rating-description">Occasional use for debugging or demos</div>
+                                <div class="rating-description">Occasional Spaces use; an AGENTS.md exists but is stale</div>
                             </div>
                         </div>
                         <div class="rating-option" onclick="selectRating('copilotSpaces', 3, event)">
                             <div class="rating-radio"></div>
                             <div class="rating-content">
                                 <div class="rating-level">Level 3: Defined</div>
-                                <div class="rating-description">Spaces used for shared prompts and context</div>
+                                <div class="rating-description">Spaces plus a maintained AGENTS.md give agents and code review shared context</div>
                             </div>
                         </div>
                         <div class="rating-option" onclick="selectRating('copilotSpaces', 4, event)">
                             <div class="rating-radio"></div>
                             <div class="rating-content">
                                 <div class="rating-level">Level 4: Managed</div>
-                                <div class="rating-description">Standardized Spaces per workflow with owners</div>
+                                <div class="rating-description">Standardized Spaces, SKILL.md skills, and instructions per workflow with named owners</div>
                             </div>
                         </div>
                         <div class="rating-option" onclick="selectRating('copilotSpaces', 5, event)">
                             <div class="rating-radio"></div>
                             <div class="rating-content">
                                 <div class="rating-level">Level 5: Optimized</div>
-                                <div class="rating-description">Spaces integrated into delivery pipelines and reviews</div>
+                                <div class="rating-description">Skills packaged as Agent Plugins and shared org-wide; context feeds cloud agent, code review, and the Copilot app automatically</div>
                             </div>
                         </div>
                     </div>
@@ -1255,14 +1255,14 @@
                             <div class="rating-radio"></div>
                             <div class="rating-content">
                                 <div class="rating-level">Level 4: Managed</div>
-                                <div class="rating-description">Copilot CLI sub-agents and Mission Control for reliable multi-agent workflows</div>
+                                <div class="rating-description">Copilot CLI /fleet subagents and Copilot app parallel sessions for reliable multi-agent workflows</div>
                             </div>
                         </div>
                         <div class="rating-option" onclick="selectRating('agentOrchestration', 5, event)">
                             <div class="rating-radio"></div>
                             <div class="rating-content">
                                 <div class="rating-level">Level 5: Optimized</div>
-                                <div class="rating-description">Fleet orchestration with third-party agents (Anthropic, OpenAI, etc.), custom agents, and automated fallbacks</div>
+                                <div class="rating-description">Fleet orchestration across Copilot, Claude, and Codex harnesses (Agent HQ, VS Code Agent Host), custom agents, cross-model verification, and automated fallbacks</div>
                             </div>
                         </div>
                     </div>
@@ -1307,7 +1307,7 @@
                             <div class="rating-radio"></div>
                             <div class="rating-content">
                                 <div class="rating-level">Level 5: Optimized</div>
-                                <div class="rating-description">MCP Apps, centralized allowlist governance, and continuous security reviews</div>
+                                <div class="rating-description">Team authors MCP servers and Agent Plugins, works within centralized allowlists, and runs continuous security reviews</div>
                             </div>
                         </div>
                     </div>
@@ -1635,7 +1635,7 @@
                 // Restore UI selections
                 Object.entries(assessmentData).forEach(([category, level]) => {
                     if (level > 0) {
-                        const option = document.querySelector(`[onclick*="${category}, ${level}"]`);
+                        const option = document.querySelector(`[onclick*="${category}', ${level},"]`);
                         if (option) {
                             option.classList.add('selected');
                         }

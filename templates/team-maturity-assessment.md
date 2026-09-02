@@ -41,6 +41,26 @@
 
 **Score: ___/5**
 
+### MCP Server Governance (Weight: 10%)
+**Current State Assessment:**
+- [ ] **Level 1:** No approval process for MCP servers
+- [ ] **Level 2:** Ad-hoc approvals, no scope review
+- [ ] **Level 3:** Documented approval process with `mcp-config-scan` before enablement
+- [ ] **Level 4:** Allowlist with scopes, expiry dates, and logging per project
+- [ ] **Level 5:** Enterprise managed-settings MCP allowlists (allowed/denied servers) enforced across the Copilot app, CLI, and VS Code, automated scans, and approval SLAs
+
+**Score: ___/5**
+
+### Agent Permissions & Guardrails (Weight: 10%)
+**Current State Assessment:**
+- [ ] **Level 1:** Agents run without defined boundaries
+- [ ] **Level 2:** Manual guardrails, inconsistent enforcement
+- [ ] **Level 3:** Documented scopes and review for agent-authored changes
+- [ ] **Level 4:** Risk tiers, approval workflows, and telemetry for agents
+- [ ] **Level 5:** Custom agent policies via `.github/agents`, enterprise managed settings (sandbox, plugin, and approval-bypass policies), Copilot app/CLI access policies, and explicit Agent Merge conditions
+
+**Score: ___/5**
+
 ## Dimension 2: Experience-Focused Metrics (35% of total score)
 
 ### Developer Satisfaction (Weight: 10%)  
@@ -70,6 +90,26 @@
 - [ ] **Level 3:** Structured assessment of AI fluency and dependency balance
 - [ ] **Level 4:** Comprehensive learning paths with progression tracking
 - [ ] **Level 5:** Personalized AI skill development with career integration
+
+**Score: ___/5**
+
+### Agent Delegation Trust (Weight: 10%)
+**Current State Assessment:**
+- [ ] **Level 1:** Uncomfortable delegating to agents
+- [ ] **Level 2:** Delegation only for trivial tasks
+- [ ] **Level 3:** Delegation with documented criteria and reviews
+- [ ] **Level 4:** Regular delegation to Copilot cloud agent and Copilot CLI with acceptance tests and agent self-review
+- [ ] **Level 5:** Parallel Copilot app sessions in isolated worktrees, Agent Merge with explicit conditions, automations, and blast-radius controls
+
+**Score: ___/5**
+
+### Shared Context: Spaces, Skills & AGENTS.md (Weight: 10%)
+**Current State Assessment:**
+- [ ] **Level 1:** No shared context: no Spaces, `AGENTS.md`, or skills
+- [ ] **Level 2:** Occasional Spaces use; an `AGENTS.md` exists but is stale
+- [ ] **Level 3:** Spaces plus a maintained `AGENTS.md` give agents and code review shared context
+- [ ] **Level 4:** Standardized Spaces, `SKILL.md` skills, and instructions per workflow with named owners
+- [ ] **Level 5:** Skills packaged as Agent Plugins and shared org-wide; context feeds cloud agent, code review, and the Copilot app automatically
 
 **Score: ___/5**
 
@@ -105,15 +145,37 @@
 
 **Score: ___/5**
 
+### Agent Orchestration Skills (Weight: 10%)
+**Current State Assessment:**
+- [ ] **Level 1:** No coordinated use of multiple agents
+- [ ] **Level 2:** Ad-hoc chaining of agents without playbooks
+- [ ] **Level 3:** Documented handoffs and triggers between agents
+- [ ] **Level 4:** Copilot CLI `/fleet` subagents and Copilot app parallel sessions for reliable multi-agent workflows
+- [ ] **Level 5:** Fleet orchestration across Copilot, Claude, and Codex harnesses (Agent HQ, VS Code Agent Host), custom agents, cross-model verification, and automated fallbacks
+
+**Score: ___/5**
+
+### MCP Literacy (Weight: 10%)
+**Current State Assessment:**
+- [ ] **Level 1:** Unfamiliar with MCP capabilities
+- [ ] **Level 2:** Basic awareness of MCP registry/servers
+- [ ] **Level 3:** Team can evaluate and configure MCP servers
+- [ ] **Level 4:** MCP capabilities mapped to workflows with enterprise registry and safeguards
+- [ ] **Level 5:** Team authors MCP servers and Agent Plugins, works within centralized allowlists, and runs continuous security reviews
+
+**Score: ___/5**
+
 ## Scoring & Interpretation
 
 ### Calculate Your Scores
-```
-Standards-First Score = (Governance×10% + Code Review×15% + Security×15%) × 40%
-Experience Metrics Score = (Dev Satisfaction×10% + Productivity×15% + Learning×10%) × 35%  
-AI Fluency Score = (Training×10% + Knowledge Mgmt×8% + Innovation×7%) × 25%
+Each dimension is a weighted average of its items (weights are normalized within the dimension, matching the interactive tool in `docs/team-assessment.html`):
 
-Total Maturity Score = Standards-First + Experience Metrics + AI Fluency
+```
+Standards-First = weighted avg of (Governance 10, Code Review 15, Security 15, MCP Governance 10, Agent Guardrails 10)
+Experience Metrics = weighted avg of (Dev Satisfaction 10, Productivity 15, Learning 10, Agent Delegation 10, Shared Context 10)
+AI Fluency = weighted avg of (Training 10, Knowledge Mgmt 8, Innovation 7, Agent Orchestration 10, MCP Literacy 10)
+
+Total Maturity Score = Standards-First × 40% + Experience Metrics × 35% + AI Fluency × 25%
 ```
 
 ### Maturity Level Interpretation

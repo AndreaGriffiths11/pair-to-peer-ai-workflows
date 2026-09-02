@@ -177,7 +177,7 @@
                 </div>
 
                 <div class="question">
-                    <div class="question-text">6. I feel confident delegating routine tasks to AI agents (e.g., Copilot coding agent)</div>
+                    <div class="question-text">6. I feel confident delegating routine tasks to AI agents (e.g., Copilot cloud agent or a Copilot app session)</div>
                     <div class="rating-scale">
                         <div class="rating-option" onclick="setRating(6, 1)">1<br><small>Strongly Disagree</small></div>
                         <div class="rating-option" onclick="setRating(6, 2)">2<br><small>Disagree</small></div>
@@ -188,7 +188,7 @@
                 </div>
 
                 <div class="question">
-                    <div class="question-text">7. My team has clear guidelines for when to use agent mode vs. edit mode vs. chat</div>
+                    <div class="question-text">7. My team has clear guidelines for when to use agent mode vs. edit mode vs. delegating to a cloud agent</div>
                     <div class="rating-scale">
                         <div class="rating-option" onclick="setRating(7, 1)">1<br><small>Strongly Disagree</small></div>
                         <div class="rating-option" onclick="setRating(7, 2)">2<br><small>Disagree</small></div>
@@ -274,7 +274,7 @@
                 </div>
 
                 <div class="question">
-                    <div class="question-text">14. I understand how MCP servers extend AI capabilities in our workflow</div>
+                    <div class="question-text">14. I understand how MCP servers, skills, and plugins extend AI capabilities in our workflow</div>
                     <div class="rating-scale">
                         <div class="rating-option" onclick="setRating(14, 1)">1<br><small>Strongly Disagree</small></div>
                         <div class="rating-option" onclick="setRating(14, 2)">2<br><small>Disagree</small></div>
@@ -500,7 +500,7 @@
                 </div>
 
                 <div class="question">
-                    <div class="question-text">31. We have a shared understanding of tasks that are appropriate for autonomous agents</div>
+                    <div class="question-text">31. We have a shared understanding of tasks that are appropriate for autonomous agents (including what Agent Merge may do without a human)</div>
                     <div class="rating-scale">
                         <div class="rating-option" onclick="setRating(31, 1)">1<br><small>Strongly Disagree</small></div>
                         <div class="rating-option" onclick="setRating(31, 2)">2<br><small>Disagree</small></div>
@@ -893,7 +893,7 @@
             }
 
             if (responses[7] && responses[7] <= 2) {
-                redFlags.push("Agent mode guidance missing: unclear when to use agent vs. edit/chat");
+                redFlags.push("Agent mode guidance missing: unclear when to use agent mode vs. edit mode vs. cloud delegation");
             }
 
             if (responses[30] && responses[30] <= 2) {
@@ -901,7 +901,7 @@
             }
 
             if (responses[14] && responses[14] <= 2) {
-                redFlags.push("MCP literacy gap: team cannot evaluate server capabilities safely");
+                redFlags.push("MCP/skills literacy gap: team cannot evaluate server, skill, or plugin capabilities safely");
             }
             
             if (redFlags.length > 0) {

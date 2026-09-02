@@ -14,7 +14,9 @@ This template helps teams document and share AI learning experiences, following 
 ## Context
 **Date:** [YYYY-MM-DD]
 **Team Member:** [Name]
-**AI Tool Used:** [Tool name and model]
+**AI Tool Used:** [Tool name and model, e.g., Copilot app + Claude Sonnet 5, Copilot CLI + GPT-5.6]
+**Surface:** [Copilot app session / cloud agent / Copilot CLI / IDE agent mode / edit mode]
+**Learning Category:** [Agent Mode vs. Edit Mode / Agent Delegation / MCP Integration / Multi-Agent Orchestration / Parallel Sessions & Worktrees / Cross-Model Review (Rubber Duck) / Skills & Plugins]
 **Task Type:** [Feature/Bug Fix/Refactor/Learning]
 **Complexity Level:** [Simple/Medium/Complex]
 **Implementation Week:** [Week X of AI adoption - important for 11-week productivity benchmark]
@@ -34,7 +36,8 @@ This template helps teams document and share AI learning experiences, following 
 
 **Approach 1:**
 - **Prompt Strategy:** [Exact prompt or approach description]
-- **AI Tool Configuration:** [Model, temperature, settings]
+- **AI Tool Configuration:** [Model, reasoning effort, custom agent, skills/plugins, MCP servers]
+- **Verification Used:** [Agent self-review / security review / Rubber Duck second opinion / human review]
 - **Result:** [What happened - success/partial/failure]
 - **Quality Score:** [1-5 based on CARE framework]
 - **Context Management:** [How we handled the context window limitations]

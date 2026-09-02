@@ -16,8 +16,8 @@ START: New Development Task
 │     └─ NO → [AI-FIRST] High suitability for AI generation
 │
 └─ Task Assessment:
-   ├─ Agent suitability? (clear criteria, low blast radius, MCP tools available)
-   │   ├─ YES → **AGENT-DELEGATED** (Copilot coding agent)
+   ├─ Agent suitability? (clear criteria, low blast radius, AGENTS.md + tests, MCP tools on the allowlist)
+   │   ├─ YES → **AGENT-DELEGATED** (Copilot cloud agent, Copilot app session, or CLI /fleet)
    │   └─ NO → Continue
    ├─ Task Complexity:
    │   ├─ Simple/Repetitive (boilerplate, CRUD, tests) → AI-FIRST
@@ -32,10 +32,12 @@ START: New Development Task
 | **Code Complexity** | Simple patterns, boilerplate | Standard business logic | Repetitive tasks with clear acceptance | Novel algorithms, complex architecture |
 | **Security Risk** | Low (UI, docs, tests) | Medium (business logic) | Guarded scopes, low blast radius | High (auth, payments, crypto) |
 | **Team Experience** | Senior devs who can review | Mixed experience teams | Confident in reviewing agent output | Junior devs learning concepts |
-| **Context Available** | Similar code exists in codebase | Some existing patterns | Playbook + tests ready for agent | No precedent or patterns |
-| **Time Constraints** | Tight deadlines, standard work | Balanced delivery timeline | Async/background acceptable | Learning/exploration priority |
-| **Agent Autonomy Risk** | N/A | Low autonomy with supervision | Scoped autonomy with kill-switches | Requires real-time human judgment |
-| **MCP Integration** | Optional | Helpful | MCP servers provide tools/context | Not applicable |
+| **Context Available** | Similar code exists in codebase | Some existing patterns | AGENTS.md + skills + tests ready for agent | No precedent or patterns |
+| **Time Constraints** | Tight deadlines, standard work | Balanced delivery timeline | Async via Copilot app session, cloud agent, or CLI /fleet | Learning/exploration priority |
+| **Agent Autonomy Risk** | N/A | Low autonomy with supervision | Scoped autonomy, sandbox policy, kill-switches | Requires real-time human judgment |
+| **MCP Integration** | Optional | Helpful | MCP servers on the enterprise allowlist | Not applicable |
+| **Tooling** | Copilot completions, next edit suggestions | Copilot chat, agent mode, Spaces | Copilot app sessions, cloud agent, CLI /fleet, custom agents | IDE + manual workflows |
+| **Verification** | Tests + Copilot code review | Rubber Duck second opinion + human review | Agent self-review, security review, Agent Merge conditions | Pair review + design review |
 
 ## Risk Assessment Checklist
 
@@ -53,12 +55,16 @@ START: New Development Task
 - [ ] Do we have existing test coverage for similar functionality? (If no, add testing requirements)
 - [ ] Will this code be modified frequently? (If yes, ensure human understanding)
 
-**Agent-Delegated Acceptance (Copilot coding agent):**
+**Agent-Delegated Acceptance (Copilot cloud agent, Copilot app, or CLI):**
 - [ ] Clear success criteria and rollback plan
-- [ ] Blast radius bounded (scoped repo/actions, no secrets)
-- [ ] MCP/context ready (tools, datasets, configs)
-- [ ] Human checkpoint on PR with agent-authored change log
-- [ ] Telemetry/alerts for long-running or autonomous actions
+- [ ] Blast radius bounded (scoped repo/actions, no secrets, sandbox policy applied)
+- [ ] Session isolated in its own worktree or cloud environment (Copilot app / `/worktree`)
+- [ ] Context ready: `AGENTS.md`, relevant `SKILL.md` skills, MCP servers on the allowlist
+- [ ] Model and reasoning effort chosen for the task (higher effort for debugging/architecture, lower for routine work)
+- [ ] Agent self-review and `/security-review` (or app security review) run before the PR opens
+- [ ] Human checkpoint on PR with agent-authored change log; Rubber Duck second opinion for non-trivial diffs
+- [ ] Agent Merge conditions decided up front (fix CI only? respond to reviews? merge?) — default to "fix CI, do not merge"
+- [ ] Telemetry/alerts for long-running or autonomous actions (hooks with trace context, session logs)
 
 ## Quality Thresholds by Scenario
 

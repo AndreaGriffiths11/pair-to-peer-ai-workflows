@@ -39,11 +39,19 @@
 24. "I receive adequate support when AI tools don't work as expected" (1-5)
 25. "Our AI workflow integrates well with existing processes" (1-5)
 
+### Agent Delegation & Governance
+26. "I feel confident delegating routine tasks to AI agents (e.g., Copilot cloud agent or a Copilot app session)" (1-5)
+27. "My team has clear guidelines for when to use agent mode vs. edit mode vs. delegating to a cloud agent" (1-5)
+28. "I can evaluate whether an agent-generated PR meets our quality standards" (1-5)
+29. "I understand how MCP servers, skills, and plugins extend AI capabilities in our workflow" (1-5)
+30. "Our team has agreed-on practices for reviewing agent-authored code" (1-5)
+31. "We have a shared understanding of tasks that are appropriate for autonomous agents (including what Agent Merge may do without a human)" (1-5)
+
 ### Open Response Questions
-26. **What's your most significant AI success story from the past month?**
-27. **What's your biggest frustration or challenge with AI tools?**
-28. **What AI capability or improvement would have the highest impact on your work?**
-29. **How has your relationship with AI tools changed over the past quarter?**
+32. **What's your most significant AI success story from the past month?**
+33. **What's your biggest frustration or challenge with AI tools?**
+34. **What AI capability or improvement would have the highest impact on your work?**
+35. **How has your relationship with AI tools changed over the past quarter?**
 
 ## Scoring and Analysis Framework
 
@@ -53,6 +61,7 @@
 - Learning Velocity: Questions 11-15
 - Quality Confidence: Questions 16-20
 - Team Process: Questions 21-25
+- Agent Delegation & Governance: Questions 26-31
 
 **Health Indicators:**
 - **Healthy Range:** 3.5-4.5 average per category
@@ -63,6 +72,8 @@
 - AI Integration high (>4.0) but Skill Balance low (<3.0) = Over-dependence risk
 - Quality Confidence below 3.0 = Security/quality risk
 - Learning Velocity declining over multiple months = Skill development stagnation
+- Q27 or Q31 at 2 or below = Agent guidance gap (unclear when to delegate and what Agent Merge may do)
+- Q29 at 2 or below = MCP/skills literacy gap (team cannot evaluate server, skill, or plugin capabilities safely)
 
 ## Action Response Framework
 

@@ -124,7 +124,7 @@
                     </div>
                     <div class="form-group">
                         <label class="form-label">AI Tool Used</label>
-                        <input type="text" class="form-input" id="aiTool" placeholder="e.g., Copilot CLI, Claude, ChatGPT">
+                        <input type="text" class="form-input" id="aiTool" placeholder="e.g., Copilot app, Copilot CLI, cloud agent, Claude Code">
                     </div>
                     <div class="form-group">
                         <label class="form-label">Task Type</label>
@@ -165,6 +165,18 @@
                     <div class="checkbox-group">
                         <div class="checkbox" onclick="toggleCheckbox('cat-multi-agent')"></div>
                         <label>Multi-Agent Orchestration</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <div class="checkbox" onclick="toggleCheckbox('cat-parallel-sessions')"></div>
+                        <label>Parallel Sessions &amp; Worktrees (Copilot app)</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <div class="checkbox" onclick="toggleCheckbox('cat-cross-model-review')"></div>
+                        <label>Cross-Model Review (Rubber Duck)</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <div class="checkbox" onclick="toggleCheckbox('cat-skills-plugins')"></div>
+                        <label>Skills &amp; Plugins</label>
                     </div>
                 </div>
 
@@ -308,7 +320,7 @@
                     </div>
                     <div class="form-group">
                         <label class="form-label">AI Tool</label>
-                        <input type="text" class="form-input" id="quickTool" placeholder="e.g., Claude">
+                        <input type="text" class="form-input" id="quickTool" placeholder="e.g., Copilot app">
                     </div>
                     <div class="form-group">
                         <label class="form-label">Task Type</label>
@@ -333,6 +345,18 @@
                     <div class="checkbox-group">
                         <div class="checkbox" onclick="toggleCheckbox('cat-multi-agent')"></div>
                         <label>Multi-Agent Orchestration</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <div class="checkbox" onclick="toggleCheckbox('cat-parallel-sessions')"></div>
+                        <label>Parallel Sessions &amp; Worktrees (Copilot app)</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <div class="checkbox" onclick="toggleCheckbox('cat-cross-model-review')"></div>
+                        <label>Cross-Model Review (Rubber Duck)</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <div class="checkbox" onclick="toggleCheckbox('cat-skills-plugins')"></div>
+                        <label>Skills &amp; Plugins</label>
                     </div>
                 </div>
 
@@ -637,7 +661,10 @@
                 'cat-agent-mode': 'Agent Mode vs. Edit Mode',
                 'cat-agent-delegation': 'Agent Delegation',
                 'cat-mcp-integration': 'MCP Integration',
-                'cat-multi-agent': 'Multi-Agent Orchestration'
+                'cat-multi-agent': 'Multi-Agent Orchestration',
+                'cat-parallel-sessions': 'Parallel Sessions & Worktrees (Copilot app)',
+                'cat-cross-model-review': 'Cross-Model Review (Rubber Duck)',
+                'cat-skills-plugins': 'Skills & Plugins'
             };
             return Object.entries(labels).map(([key, label]) => {
                 return '- [' + (checkboxes[key] ? 'x' : ' ') + '] ' + label;
